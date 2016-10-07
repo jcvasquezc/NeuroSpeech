@@ -18,5 +18,20 @@ The list of the third party software that must be installed previous to Neuro--S
 - ffmpeg: a solution to record, convert and stream audio and video. Available at http://ffmpeg.org/download.html
 
 To execute Neuro-Speech, please go to the folder Release, and then click in the icon of PDTool.exe. Then the main is displayed
-markdown
+
 ![Image](doc/Main.PNG)
+
+
+## Authors
+
+* **Juan Camilo Vasquez-Correa** - *Initial work* - [PurpleBooth](https://github.com/jcvasquezc)
+
+* **Juan Rafael Orozco-Aroyave**
+
+* **Jesús Francisco Vargas Bonilla**
+
+* **Elmar Nöth**
+
+## License
+
+This project is licensed under the  GNU GENERAL PUBLIC License - see the [LICENSE.md](LICENSE.md) file for details
