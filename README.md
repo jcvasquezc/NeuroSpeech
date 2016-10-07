@@ -24,7 +24,7 @@ To execute Neuro-Speech, please go to the folder Release, and then click in the 
 
 ## Authors
 
-* **Juan Camilo Vasquez-Correa** - *Initial work* - [PurpleBooth](https://github.com/jcvasquezc)
+* **Juan Camilo Vasquez-Correa** - [jcvasquezc](https://github.com/jcvasquezc)
 
 * **Juan Rafael Orozco-Aroyave**
 
