@@ -1,0 +1,8 @@
+python--> Ananconda
+	  fastdtw (sudo pip install fastdtw)
+	  statsmodel (http://statsmodels.sourceforge.net/install.html)
+
+
+others--> Praat (sudo apt-get install praat)
+      --> ffmpeg
+
