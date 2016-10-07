@@ -13,10 +13,10 @@ Finally a medical report can be generated, which describes the different speech 
 Neuro--Speech is a software platform designed in C++, which runs python scripts in background for the speech analysis. The software uses some third party software that can be freely downloaded and installed for the correct operation of Neuro-Speech.
 The list of the third party software that must be installed previous to Neuro--Speech is as follows:
 
-- Ananconda: Python environment. It can be installed from \\ \url{https://www.continuum.io/downloads}
-- Praat: software for speech analysis. Available at \\ \url{http://www.fon.hum.uva.nl/praat/}
-- ffmpeg: a solution to record, convert and stream audio and video. Available at \\ \url{http://ffmpeg.org/download.html}
+- Ananconda: Python environment. It can be installed from https://www.continuum.io/downloads
+- Praat: software for speech analysis. Available at http://www.fon.hum.uva.nl/praat/
+- ffmpeg: a solution to record, convert and stream audio and video. Available at http://ffmpeg.org/download.html
 
 To execute Neuro-Speech, please go to the folder Release, and then click in the icon of PDTool.exe. Then the main is displayed
 
-![Image](https://github.com/jcvasquezc/NeuroSpeech/tree/master/doc/Main.PNG?raw=true)
+![Image](https://github.com/jcvasquezc/NeuroSpeech/tree/master/doc/Main.PNG)
