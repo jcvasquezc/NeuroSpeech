@@ -17,7 +17,7 @@ The list of the third party software that must be installed previous to Neuro--S
 - Praat: software for speech analysis. Available at http://www.fon.hum.uva.nl/praat/
 - ffmpeg: a solution to record, convert and stream audio and video. Available at http://ffmpeg.org/download.html
 
-To execute Neuro-Speech, please go to the folder Release, and then click in the icon of PDTool.exe. Then the main is displayed
+To execute Neuro-Speech, please go to the folder src/Release, and then click in the icon of PDTool.exe. Then the main window is displayed
 
 ![Image](doc/Main.PNG)
 
