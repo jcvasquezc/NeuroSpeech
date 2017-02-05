@@ -1,8 +1,13 @@
-python--> Ananconda
+python--> numpy (sudo apt-get install python-numpy)
+	  scipy (sudo apt-get install python-scipy)
 	  fastdtw (sudo pip install fastdtw)
+	  matplotlib (sudo apt-get install python-matplotlib)
+	  urllib2
+	  tkinter (sudo apt-get install python-tk)
 	  statsmodel (http://statsmodels.sourceforge.net/install.html)
+	  cPickle or pickle
 
+c++-->	  openGL
 
 others--> Praat (sudo apt-get install praat)
       --> ffmpeg
-

@@ -65,9 +65,9 @@ def phonationVowels(audio, path_base):
     if len(t)!=len(data_audio):
         t=np.arange(1.0/fs, float(len(data_audio))/fs, 1.0/fs)
     print(len(t), len(data_audio))
-    plt.plot(t, data_audio, 'c')
-    plt.ylabel('Audio Amplitude')
-    plt.xlabel('Time (s)')
+    plt.plot(t, data_audio, 'k')
+    plt.ylabel('Amplitude', fontsize=14)
+    plt.xlabel('Time (s)', fontsize=14)
     plt.xlim([0, t[-1]])
     plt.grid(True)
     plt.subplot(212)
@@ -78,17 +78,18 @@ def phonationVowels(audio, path_base):
     if len(t2)!=len(F0):
         t2=np.arange(1.0/fsp, float(len(F0))/fsp, 1.0/fsp)
 
-    plt.plot(t2, F0, color='c', linewidth=2.0)
-    plt.xlabel('Time (s)')
-    plt.ylabel('Fundamental frequency (Hz)')
+    plt.plot(t2, F0, color='k', linewidth=2.0)
+    plt.xlabel('Time (s)', fontsize=14)
+    plt.ylabel('Frequency (Hz)', fontsize=14)
     plt.ylim([0,np.max(F0)+10])
     plt.xlim([0, t[-1]])    
     plt.grid(True)
     #plt.show()
     plt.savefig(path_base+'phonation1.png')
+    plt.savefig(path_base+'phonation1.pdf')
     dataradar=np.asarray([mjitter, mshimmer, apq, ppq])
     dataradar[np.isnan(dataradar)]=1000
-    plot_radar(dataradar, np.asarray([1.20, 6.30, 7.70, 0.43]), ['Jitter', 'Shimmer', 'APQ', 'PPQ'], 'Phonation', path_base+'phonation2.png')    
+    plot_radar(dataradar, np.asarray([1.20, 6.30, 7.70, 0.43]), ['Jitter', 'Shimmer', 'APQ', 'PPQ'], '', path_base+'phonation2.png')    
     return F0, mjitter, mshimmer, apq, ppq, mlogE, mcd  
 
 

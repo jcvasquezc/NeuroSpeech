@@ -48,7 +48,7 @@ def articulationVowels(audioA, audioE, audioI, audioO, audioU, path_base):
     plt.fill([mF1a, mF1i, mF1u, mF1a], [mF2a, mF2i, mF2u, mF2a], linewidth=3, color='#00FF00', alpha=0.5)
 
     plt.xlim([100, 900])
-    plt.ylim([200,2400])
+    plt.ylim([200,3000])
     plt.xlabel('Formant 1 (Hz)')
     plt.ylabel('Formant 2 (Hz)')    
     #plt.legend()
@@ -66,7 +66,7 @@ def articulationVowels(audioA, audioE, audioI, audioO, audioU, path_base):
 
     plt.legend(bbox_to_anchor=(1.3, 1))
     plt.xlim([100, 900])
-    plt.ylim([200,2400])
+    plt.ylim([200,3000])
     plt.yticks([])
     plt.xlabel('Formant 1 (Hz)')
     #plt.show()    

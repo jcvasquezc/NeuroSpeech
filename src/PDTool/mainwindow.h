@@ -10,6 +10,7 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
+//class MainWindowSpanish;
 class MainWindow;
 }
 class QAudioRecorder;
@@ -39,11 +40,12 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_5_toggled(bool checked);
     void on_pushButton_6_toggled(bool checked);
-    QString get_name(int rec_flag, QString folder);
+    QString get_name(int rec_flag, QString folder, bool save);
     QVector<double> readWavFile(QString fileName);
     QVector<double> readFormants(QString nameFile);
 
 //int rawToWav(QString rawfn, QString wavfn, long frequency);
+    bool fileExists(QString path);
 
     void on_pushButton_4_clicked();
     void on_pushButton_3_clicked();
@@ -59,12 +61,14 @@ private slots:
 
     void on_pushButton_8_clicked();
 
+
     void on_pushButton_6_clicked();
 
     void on_pushButton_9_clicked();
 
 private:
     void clearAudioLevels();
+    //Ui::MainWindowSpanish *ui;
     Ui::MainWindow *ui;
     Dialogb *dialogb;
     QAudioRecorder *audioRecorder;
@@ -96,6 +100,7 @@ private:
     int flagCuted=0;
     float contAxes;
     float WAavg, DTWavg;
+    int contfile;
     QVector<float> xaxiscut;
    // QFile destinationFile;
 };

@@ -103,7 +103,7 @@ def plot_radar(df, ref, use_attributes, title, namefig):
     for data, color, pokemon in zip(datas, colors, use_pokemons):
         radar.plot(data, color = color, label = pokemon, linewidth=2.0)
         radar.fill(data, alpha = 0.1, color = color)
-        radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=17)
+        radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=21)
     plt.title(title, fontsize=20)
     #plt.show()    
     plt.savefig(namefig)
@@ -124,6 +124,6 @@ else:
         data=np.loadtxt(sys.argv[j+1])
         featradar.append(data[0])
         featradar.append(data[1])
-        names.append(['WA'+str(j+1)])
-        names.append(['DTW'+str(j+1)])
-    plot_radar(np.asarray(featradar), np.ones(len(np.asarray(featradar))), names, 'Intelligibility', sys.argv[1].replace('feat1.txt', 'intelligibility.png'))
+        names.append('WA'+str(j+1))
+        names.append('DTW'+str(j+1))
+    plot_radar(np.asarray(featradar), np.ones(len(np.asarray(featradar))), names, '', sys.argv[1].replace('feat1.txt', 'intelligibility.png'))

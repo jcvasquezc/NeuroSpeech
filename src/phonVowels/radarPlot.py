@@ -103,6 +103,6 @@ def plot_radar(df, ref, use_attributes, title, namefig):
     for data, color, pokemon in zip(datas, colors, use_pokemons):
         radar.plot(data, color = color, label = pokemon, linewidth=2.0)
         radar.fill(data, alpha = 0.1, color = color)
-        radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=17)
+        radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=20)
     plt.title(title, fontsize=20)
     plt.savefig(namefig)

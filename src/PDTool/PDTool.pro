@@ -24,7 +24,9 @@ HEADERS  += mainwindow.h \
     qcustomplot.h \
     qaudiolevel.h \
     definitions.h \
-    make_wav.h
+    make_wav.h \
+    strings.h
 
 FORMS    += mainwindow.ui \
-    dialogb.ui
+    dialogb.ui \
+    mainwindowSpanish.ui

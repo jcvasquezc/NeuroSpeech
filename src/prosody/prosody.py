@@ -72,8 +72,8 @@ def prosody(audio, path_base):
     if len(t)!=len(data_audio):
         t=np.arange(1.0/fs, float(len(data_audio))/fs, 1.0/fs)
     print(len(t), len(data_audio))
-    plt.plot(t, data_audio, 'g')
-    plt.ylabel('Audio Amplitude')
+    plt.plot(t, data_audio, 'k')
+    plt.ylabel('Amplitude')
     plt.xlabel('Time (s)')
     plt.xlim([0, t[-1]])
     plt.grid(True)
@@ -82,9 +82,9 @@ def prosody(audio, path_base):
     print(fsp)
     t2=np.arange(0.0, t[-1], 1.0/fsp)
     print(len(t2), len(F0))
-    if len(t2)!=len(F0):
-        t2=np.arange(1.0/fsp, t[-1], 1.0/fsp)
-    plt.plot(t2, F0, color='g', linewidth=2.0)
+    if len(t2)>len(F0):
+        t2=t2[0:len(F0)]
+    plt.plot(t2, F0, color='k', linewidth=2.0)
     plt.xlabel('Time (s)')
     plt.ylabel('F0 (Hz)')
     plt.ylim([0,np.max(F0)+10])
@@ -96,7 +96,7 @@ def prosody(audio, path_base):
     if len(t3)!=len(logE):
         t3=np.arange(1.0/fse, t[-1], 1.0/fse)
     print(len(t3), len(logE))
-    plt.plot(t3, logE, color='g', linewidth=2.0)
+    plt.plot(t3, logE, color='k', linewidth=2.0)
     plt.xlabel('Time (s)')
     plt.ylabel('Energy')
     plt.ylim([0,np.max(logE)+5])
@@ -104,7 +104,7 @@ def prosody(audio, path_base):
     plt.grid(True)
     #plt.show()
     plt.savefig(path_base+'prosody.png')
-    
+    plt.savefig(path_base+'prosody.pdf')
     
     dataradar=np.asarray([np.std(F0[F0!=0]), 10*np.log10(np.mean(logE)), 10*np.log10(np.std(logE)), 10*np.log10(np.max(logE)), Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs])
     refh=np.asarray([39, 9.4, 10.8, 18.8, 2.5, 521, 347, 0.6, 547, 271])

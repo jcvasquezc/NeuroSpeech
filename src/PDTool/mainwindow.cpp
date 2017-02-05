@@ -11,7 +11,9 @@
 #include "qaudiolevel.h"
 #include "definitions.h"
 #include "make_wav.h"
+#include "strings.h"
 #include <stdio.h>
+#include <QFileInfo>
 static qreal getPeakValue(const QAudioFormat &format);
 static QVector<qreal> getBufferLevels(const QAudioBuffer &buffer);
 
@@ -19,11 +21,10 @@ template <class T>
 static QVector<qreal> getBufferLevels(const T *buffer, int frames, int channels);
 
 
-
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+  ui(new Ui::MainWindow)
+
 {
 
     ui->setupUi(this);
@@ -51,7 +52,6 @@ MainWindow::MainWindow(QWidget *parent) :
     customPlot = new QCustomPlot();
     customPlot_2 = new QCustomPlot();
     customPlot_3 = new QCustomPlot();
-    //audioProbe = new QAudioProbe();
 
     QLinearGradient plotGradient;
     plotGradient.setStart(0, 0);
@@ -72,95 +72,87 @@ MainWindow::MainWindow(QWidget *parent) :
 
     contAxes =0;
     xaxiscut={0,0};
-    QPixmap pix("../PDTool/button1.png");
+    QPixmap pix(button1);
     QIcon icon(pix);
     ui->pushButton->setIcon(icon);
     ui->pushButton->setIconSize(pix.size());
 
-    QPixmap pix2("../PDTool/button2.png");
+    QPixmap pix2(button2);
     QIcon icon2(pix2);
     ui->pushButton_2->setIcon(icon2);
     ui->pushButton_2->setIconSize(pix2.size());
 
-    QPixmap pix3("../PDTool/button3.png");
+    QPixmap pix3(button3);
     QIcon icon3(pix3);
     ui->pushButton_3->setIcon(icon3);
     ui->pushButton_3->setIconSize(pix3.size());
 
-    QPixmap pix4("../PDTool/button4.png");
+    QPixmap pix4(button4);
     QIcon icon4(pix4);
     ui->pushButton_4->setIcon(icon4);
     ui->pushButton_4->setIconSize(pix4.size());
 
-    QPixmap pix9("../PDTool/button5.png");
+    QPixmap pix9(button5);
     QIcon icon9(pix9);
     ui->pushButton_9->setIcon(icon9);
     ui->pushButton_9->setIconSize(pix9.size());
 
-    QPixmap pixlogo("../PDTool/Logo.png");
+    QPixmap pixlogo(logo);
     ui->label_68->setPixmap(pixlogo);
 
-    QPixmap pix5("../PDTool/button5rec.png");
+    QPixmap pix5(button5rec);
     QIcon icon5(pix5);
     ui->pushButton_5->setIcon(icon5);
     ui->pushButton_5->setIconSize(QSize(71,71));
     ui->pushButton_5->setCheckable(true);
 
-    QPixmap pix6("../PDTool/button6play.png");
+    QPixmap pix6(button6play);
     QIcon icon6(pix6);
     ui->pushButton_6->setIcon(icon6);
     ui->pushButton_6->setIconSize(QSize(71,71));
     ui->pushButton_6->setCheckable(true);
 
+
+    ui->tabWidget->setTabText(1, phonation);
+    ui->tabWidget->setTabText(2, articulation);
+    ui->tabWidget->setTabText(3, prosody);
+    ui->tabWidget->setTabText(4, intelligibility);
+    ui->tabWidget->setTabText(5, evaluation);
+    ui->label->setText(nameP);
+    ui->label_2->setText(Lastname);
+    ui->pushButton_7->setText(playExample);
+    ui->pushButton_8->setText(createReport);
+
+    ui->label_7->setText(energyLab);
+    ui->label_81->setText(vRateLab);
+    ui->label_82->setText(avgVoicedLab);
+    ui->label_83->setText(stdVoicedLab);
+    ui->label_84->setText(silRateLab);
+    ui->label_85->setText(avgSilLab);
+    ui->label_86->setText(stdSilLab);
+    ui->label_87->setText(avgF0Lab);
+    ui->label_88->setText(stdF0Lab);
+    ui->label_89->setText(maxF0Lab);
+    ui->label_90->setText(avgEnLab);
+    ui->label_91->setText(stdEnLab);
+    ui->label_92->setText(maxEnLab);
+    ui->label_35->setText(readsent);
+    ui->label_36->setText(predsent);
+    ui->label_121->setText(respCap);
+    ui->label_124->setText(LipsMov);
+    ui->label_126->setText(PalMov);
+    ui->label_128->setText(LarMov);
+    ui->label_131->setText(TongueVel);
+    ui->label_134->setText(intelligibility);
+    ui->label_142->setText(mfdasc);
+    ui->label_144->setText(updrssc);
+
+
+
+
     QStringList list;
-    list<<"/A/"<<"/E/"<<"/I/"<<"/O/"<<"/U/"<<"Modulated Vowels"<<"Pa-Ta-Ka"<<"Pa-Ka-Ta"<<"Pe-Ta-Ka"<<"Pa"<<"Ta"<<
-            "Ka"<<"Words"<<"sentence 1"<<"sentence 2"<<"sentence 3"<<"sentence 4"<<"sentence 5"<<"sentence 6"<<
-            "sentence 7"<<"sentence 8"<<"sentence 9"<<"sentence 10"<<"Read Text"<<"Monologue";
+    list<<listTasks;
 
-    /*QString task1="/A/";
-    QString task13="/E/";
-    QString task2="/I/";
-    QString task14="/O/";
-    QString task3="/U/";
-    QString task20="Modulated Vowels";
-    QString task4="Pa-Ta-Ka";
-    QString task15="Pa-Ka-Ta";
-    QString task16="Pe-Ta-Ka";
-    QString task17="Pa";
-    QString task18="Ta";
-    QString task18="Ka";
-    QString task19="Words";
-    QString task5="sentence 1";
-    QString task6="sentence 2";
-    QString task7="sentence 3";
-    QString task8="sentence 4";
-    QString task9="sentence 5";
-    QString task10="sentence 6";
-    QString task21="sentence 7";
-    QString task22="sentence 8";
-    QString task23="sentence 9";
-    QString task24="sentence 10";
-    QString task11="Readtext";
-    QString task12="Monologue";
-
-    QStringList list;
-    list <<task1;
-    list.append(task13);
-    list.append(task2);
-    list.append(task14);
-    list.append(task3);
-    list.append(task20);
-
-    list.append(task4);
-    list.append(task5);
-    list.append(task6);
-    list.append(task7);
-    list.append(task8);
-    list.append(task9);
-    list.append(task10);
-    list.append(task11);
-    list.append(task12);
-*/
     ui->listWidget->addItems(list);
 
 
@@ -202,8 +194,6 @@ MainWindow::MainWindow(QWidget *parent) :
     if (remove("../prosody3.png")!=0){perror("error deleting file");}
     if (remove("../test.wav")!=0){perror("error deleting file");}
 
-
-
 }
 
 MainWindow::~MainWindow()
@@ -211,7 +201,6 @@ MainWindow::~MainWindow()
     delete ui;
     delete audioRecorder;
     delete probe;
-    //delete audioProbe;
 }
 
 
@@ -237,12 +226,11 @@ void MainWindow::removeAllGraphs()
   ui->customPlot->graph()->setData(xmain,ymain);
   ui->customPlot->xAxis->setRange(0, (double)xmain.size()/fs);
   ui->customPlot->yAxis->setRange(-1, 1);
-  ui->customPlot->xAxis->setLabel("Time (sec)");
-  ui->customPlot->yAxis->setLabel("Amplitude");
+  ui->customPlot->xAxis->setLabel(xaxistime);
+  ui->customPlot->yAxis->setLabel(yaxisA);
   ui->customPlot->setBackground(plotGradient);
   pen.setColor(QColor(0,120,0));
   ui->customPlot->graph()->setPen(pen);
-
   ui->customPlot->replot();
   contAxes=0;
 }
@@ -258,7 +246,6 @@ void MainWindow::mouseDoubleClick(QMouseEvent *event)
    double b=xrange.lower-m*55;
    xt[0]=m*(double)p.x()+b;
    xt[1]=xt[0];
-
 
    contAxes++;
    if (contAxes==1){
@@ -289,9 +276,7 @@ void MainWindow::mouseDoubleClick(QMouseEvent *event)
        cmd.start(comandcut);
        cmd.waitForFinished(-1);
        flagCuted=1;
-      // write_wav(, BUF_SIZE, buffer, fs);
    }
-   //if (contAxes>2){contAxes=0;}
    ;
 }
 
@@ -322,7 +307,7 @@ void MainWindow::on_pushButton_clicked()
     QString path_base=current_path+"/../phonVowels/";
 
     if ((flagCuted==0) && (!QDir(path_patient).exists() || path_patient=="")){
-        ls = QFileDialog::getOpenFileNames(this, "Choose file of vowel /A/", "", "Audio-Files(*.wav)");
+        ls = QFileDialog::getOpenFileNames(this, chooseA, "", "Audio-Files(*.wav)");
         va=ls[0];
     }
     else if (flagCuted==1){va=current_path+"/../test.wav"; }
@@ -333,13 +318,11 @@ void MainWindow::on_pushButton_clicked()
     if (flagCuted==1){flagCuted=0;}
     file_2play=va;
 
-
-    QString comandpv="python "+path_base+"phonVowels.py "+va+" "+path_base+"featf0.txt "+path_base+"feat.txt "+path_base;
+    QString comandpv="python "+path_base+phonScript+va+" "+path_base+"featf0.txt "+path_base+"feat.txt "+path_base;
     cmd.start(comandpv);
     cmd.waitForFinished(-1);
 
     qDebug() << comandpv;
-
 
     QVector<double> y=readWavFile(va);
     QVector<double> x((int)y.size());
@@ -352,30 +335,32 @@ void MainWindow::on_pushButton_clicked()
     ui->customPlot_2->graph()->setData(x,y);
     ui->customPlot_2->xAxis->setRange(0, (double)x.size()/fs);
     ui->customPlot_2->yAxis->setRange(-1, 1);
-    ui->customPlot_2->xAxis->setLabel("Time (sec)");
-    ui->customPlot_2->yAxis->setLabel("Amplitude");
+    ui->customPlot_2->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_2->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_2->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_2->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_2->xAxis->setLabel(xaxistime);
+    ui->customPlot_2->yAxis->setLabel(yaxisA);
     ui->customPlot_2->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot_2->graph()->setPen(pen);
-
     ui->customPlot_2->replot();
-
     ui->customPlot_2->savePng(current_path+"/../phonation1.png");
-
-
-
 
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x,y);
     ui->customPlot->xAxis->setRange(0, (double)x.size()/fs);
     ui->customPlot->yAxis->setRange(-1, 1);
-    ui->customPlot->xAxis->setLabel("Time (sec)");
-    ui->customPlot->yAxis->setLabel("Amplitude");
+    ui->customPlot->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->xAxis->setLabel(xaxistime);
+    ui->customPlot->yAxis->setLabel(yaxisA);
     ui->customPlot->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot->graph()->setPen(pen);
-
     ui->customPlot->replot();
     xmain=x;
     ymain=y;
@@ -388,9 +373,11 @@ void MainWindow::on_pushButton_clicked()
     if (!fileF0.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
     int nframes=0;
+    double maxF0=0;
     while (!fileF0.atEnd()) {
         QString line = fileF0.readLine();
         F0.append(line.toDouble());
+        if (line.toDouble()>maxF0){maxF0=line.toDouble();}
         time.append((double)nframes/100);
         nframes++;
     }
@@ -399,13 +386,16 @@ void MainWindow::on_pushButton_clicked()
     ui->customPlot_3->addGraph();
     ui->customPlot_3->graph()->setData(time,F0);
     ui->customPlot_3->xAxis->setRange(0, (double)x.size()/fs);
-    ui->customPlot_3->yAxis->setRange(0, 250);
-    ui->customPlot_3->xAxis->setLabel("Time (sec)");
-    ui->customPlot_3->yAxis->setLabel("Fundamental Frequency (Hz)");
+    ui->customPlot_3->yAxis->setRange(0, maxF0+5);
+    ui->customPlot_3->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->xAxis->setLabel(xaxistime);
+    ui->customPlot_3->yAxis->setLabel(yaxisfreq);
     ui->customPlot_3->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot_3->graph()->setPen(pen);
-
     ui->customPlot_3->replot();
     ui->customPlot_3->savePng(current_path+"/../phonation2.png");
     QList<QString> feat;
@@ -423,13 +413,11 @@ void MainWindow::on_pushButton_clicked()
     QString APQ=feat[2];
     QString PPQ=feat[3];
     QString logE=feat[4];
-    //QString CD=feat[5];
     ui->label_8->setText(jitter);
     ui->label_9->setText(shimmer);
     ui->label_10->setText(APQ);
     ui->label_11->setText(PPQ);
     ui->label_12->setText(logE);
-    //ui->label_13->setText(CD);
 
     if (jitter.toDouble()>jitterref){
          ui->label_8->setPalette(sample_palette);
@@ -455,36 +443,6 @@ void MainWindow::on_pushButton_clicked()
     ui->radarPhon->setPixmap(QPixmap( path_base+"phonation2.png" ) );
     ui->radarPhon->setScaledContents(true);
     ui->radarPhon->show();
-    //sample_label->setAutoFillBackground(true);
-
-//sample_label->setText("What ever text");
-
-
-
- /*   QVector<double> x1;
-    QVector<double> x2;
-
-    QFile fileatr(path_base+"atractor.txt");
-    if (!fileatr.open(QIODevice::ReadOnly | QIODevice::Text))
-        return;
-    QStringList list;
-    while (!fileatr.atEnd()) {
-        QString line = fileatr.readLine();
-        list=line.split(' ');
-        QString x1str=list[0];
-        x1.append(x1str.toDouble());
-        QString x2str=list[1];
-        x2.append(x2str.toDouble());
-    }
-
-    ui->customPlot_4->addGraph();
-    ui->customPlot_4->graph()->setData(x1,x2);
-    ui->customPlot_4->xAxis->setRange(-1, 1);
-    ui->customPlot_4->yAxis->setRange(-1, 1);
-    ui->customPlot_4->xAxis->setLabel("x[t]");
-    ui->customPlot_4->yAxis->setLabel("x[t+tau]");
-    ui->customPlot_4->replot();
-    */
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -505,12 +463,12 @@ void MainWindow::on_pushButton_2_clicked()
     QString current_path=QDir::currentPath();
     if (flagCuted==0){
     if (!QDir(path_patient).exists() || path_patient==""){
-        lsa = QFileDialog::getOpenFileNames(this, "Choose file of vowel /A/", "", "Audio-Files(*.wav)");
-        lse = QFileDialog::getOpenFileNames(this, "Choose file of vowel /E/", "", "Audio-Files(*.wav)");
-        lsi = QFileDialog::getOpenFileNames(this, "Choose file of vowel /I/", "", "Audio-Files(*.wav)");
-        lso = QFileDialog::getOpenFileNames(this, "Choose file of vowel /O/", "", "Audio-Files(*.wav)");
-        lsu = QFileDialog::getOpenFileNames(this, "Choose file of vowel /U/", "", "Audio-Files(*.wav)");
-        lsm = QFileDialog::getOpenFileNames(this, "Choose file of continuous speech", "", "Audio-Files(*.wav)");
+        lsa = QFileDialog::getOpenFileNames(this, chooseA, "", "Audio-Files(*.wav)");
+        lse = QFileDialog::getOpenFileNames(this, chooseE, "", "Audio-Files(*.wav)");
+        lsi = QFileDialog::getOpenFileNames(this, chooseI, "", "Audio-Files(*.wav)");
+        lso = QFileDialog::getOpenFileNames(this, chooseO, "", "Audio-Files(*.wav)");
+        lsu = QFileDialog::getOpenFileNames(this, chooseU, "", "Audio-Files(*.wav)");
+        lsm = QFileDialog::getOpenFileNames(this, choosecont, "", "Audio-Files(*.wav)");
         va=lsa[0];
         ve=lse[0];
         vi=lsi[0];
@@ -543,8 +501,12 @@ void MainWindow::on_pushButton_2_clicked()
     ui->customPlot->graph()->setData(xt,y);
     ui->customPlot->xAxis->setRange(0, (double)xt.size()/fs);
     ui->customPlot->yAxis->setRange(-1, 1);
-    ui->customPlot->xAxis->setLabel("Time (sec)");
-    ui->customPlot->yAxis->setLabel("Amplitude");
+    ui->customPlot->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->xAxis->setLabel(xaxistime);
+    ui->customPlot->yAxis->setLabel(yaxisA);
     ui->customPlot->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot->graph()->setPen(pen);
@@ -555,7 +517,7 @@ void MainWindow::on_pushButton_2_clicked()
     namemain=monologue;
 
     QString path_base=current_path+"/../artVowels/";
-    QString comandpv="python "+path_base+"artVowels.py "+va+" "+ve+" "+vi+" "+vo+" "+vu+" "+path_base+"Fa.txt "+path_base+"Fe.txt "+path_base+"Fi.txt "+path_base+"Fo.txt "+path_base+"Fu.txt "+path_base+"feat.txt "+path_base;
+    QString comandpv="python "+path_base+artVowelsScript+va+" "+ve+" "+vi+" "+vo+" "+vu+" "+path_base+"Fa.txt "+path_base+"Fe.txt "+path_base+"Fi.txt "+path_base+"Fo.txt "+path_base+"Fu.txt "+path_base+"feat.txt "+path_base;
     qDebug()<< comandpv;
     cmd.start(comandpv);
     cmd.waitForFinished(-1);
@@ -573,7 +535,6 @@ void MainWindow::on_pushButton_2_clicked()
 
     QList<QString> feat;
     QFile filefeat(path_base+"feat.txt");
-    //qDebug() << "filefeat: " << path_base+"feat.txt";
     if (!filefeat.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
     while (!filefeat.atEnd()) {
@@ -595,56 +556,43 @@ void MainWindow::on_pushButton_2_clicked()
     QString mF1u=feat[11];
     QString mF2u=feat[12];
 
-
     ui->label_23->setText(mF1a);
     ui->label_17->setText(mF2a);
     ui->label_25->setText(mF1i);
     ui->label_16->setText(mF2i);
     ui->label_18->setText(mF1u);
     ui->label_20->setText(mF2u);
-
-
     ui->label_28->setText(VSA);
     ui->label_29->setText(VPA);
     ui->label_31->setText(FCR);
 
-
     if (VSA.toDouble()>vsau  || VSA.toDouble()<vsad){
         ui->label_28->setPalette(sample_palette);
     }
-
     if (VPA.toDouble()>vpau  || VPA.toDouble()<vpad){
         ui->label_29->setPalette(sample_palette);
     }
-
     if (FCR.toDouble()>fcru  || FCR.toDouble()<fcrd){
         ui->label_31->setPalette(sample_palette);
     }
-
     if (mF1a.toDouble()>f1au  || mF1a.toDouble()<f1ad){
         ui->label_23->setPalette(sample_palette);
     }
-
     if (mF2a.toDouble()>f2au  || mF2a.toDouble()<f2ad){
         ui->label_17->setPalette(sample_palette);
     }
-
     if (mF1i.toDouble()>f1iu  || mF1i.toDouble()<f1id){
         ui->label_25->setPalette(sample_palette);
     }
-
     if (mF2i.toDouble()>f2iu  || mF2i.toDouble()<f2id){
         ui->label_16->setPalette(sample_palette);
     }
-
     if (mF1u.toDouble()>f1uu  || mF1u.toDouble()<f1ud){
         ui->label_18->setPalette(sample_palette);
     }
-
     if (mF2u.toDouble()>f2uu  || mF2u.toDouble()<f2ud){
         ui->label_20->setPalette(sample_palette);
     }
-
     QVector<double> F1;
     double F1ad=mF1a.toDouble();
     double F1id=mF1i.toDouble();
@@ -656,19 +604,17 @@ void MainWindow::on_pushButton_2_clicked()
     double F2ud=mF2u.toDouble();
     F2={F2ad, F2id, F2ud, F2ad, F2id};
 
-
-
-
-
-
     ui->customPlot_4->legend->setVisible(true);
     ui->customPlot_4->clearGraphs();
     ui->customPlot_4->addGraph();
-
     ui->customPlot_4->xAxis->setRange(0, 1000);
     ui->customPlot_4->yAxis->setRange(0, 3000);
-    ui->customPlot_4->xAxis->setLabel("Formant 1(Hz)");
-    ui->customPlot_4->yAxis->setLabel("Formant 2 (Hz)");
+    ui->customPlot_4->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_4->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_4->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_4->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_4->xAxis->setLabel(xaxisF1);
+    ui->customPlot_4->yAxis->setLabel(yaxisF2);
     ui->customPlot_4->graph()->setData(F1a,F2a);
     ui->customPlot_4->graph(0)->setName("/A/");
     pen.setColor(QColor(255,0,0));
@@ -690,29 +636,21 @@ void MainWindow::on_pushButton_2_clicked()
     ui->customPlot_4->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 10));
     ui->customPlot_4->graph()->setPen(pen);
     ui->customPlot_4->legend->setVisible(false);
-
     ui->customPlot_4->addGraph();
     ui->customPlot_4->graph()->setData({F1ad, F1id},{F2ad, F2id});
     pen.setColor(QColor(0,0,0));
     ui->customPlot_4->graph()->setPen(pen);
-
     ui->customPlot_4->addGraph();
     ui->customPlot_4->graph()->setData({F1id, F1ud},{F2id, F2ud});
     pen.setColor(QColor(0,0,0));
     ui->customPlot_4->graph()->setPen(pen);
-
     ui->customPlot_4->addGraph();
     ui->customPlot_4->graph()->setData({F1ud, F1ad},{F2ud, F2ad});
     pen.setColor(QColor(0,0,0));
     ui->customPlot_4->graph()->setPen(pen);
     ui->customPlot_4->setBackground(plotGradient);
-
     ui->customPlot_4->replot();
-
-
-
     ui->customPlot_4->savePng(current_path+"/../articulation1.png");
-
 
     double F1ed=mF1e.toDouble();
     double F1od=mF1o.toDouble();
@@ -725,15 +663,18 @@ void MainWindow::on_pushButton_2_clicked()
     ui->customPlot_5->addGraph();
     ui->customPlot_5->xAxis->setRange(0, 1000);
     ui->customPlot_5->yAxis->setRange(0, 3000);
-    ui->customPlot_5->xAxis->setLabel("Formant 1(Hz)");
-    ui->customPlot_5->yAxis->setLabel("Formant 2 (Hz)");
+    ui->customPlot_5->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_5->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_5->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_5->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_5->xAxis->setLabel(xaxisF1);
+    ui->customPlot_5->yAxis->setLabel(yaxisF2);
     ui->customPlot_5->graph()->setData(F1a,F2a);
     ui->customPlot_5->graph(0)->setName("/A/");
     pen.setColor(QColor(255,0,0));
     ui->customPlot_5->graph()->setLineStyle(QCPGraph::lsNone);
     ui->customPlot_5->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 10));
     ui->customPlot_5->graph()->setPen(pen);
-
     ui->customPlot_5->addGraph();
     ui->customPlot_5->graph()->setData(F1e,F2e);
     pen.setColor(QColor(255,255,0));
@@ -748,7 +689,6 @@ void MainWindow::on_pushButton_2_clicked()
     ui->customPlot_5->graph()->setLineStyle(QCPGraph::lsNone);
     ui->customPlot_5->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 10));
     ui->customPlot_5->graph()->setPen(pen);
-
     ui->customPlot_5->addGraph();
     ui->customPlot_5->graph(3)->setName("/O/");
     ui->customPlot_5->graph()->setData(F1o,F2o);
@@ -756,7 +696,6 @@ void MainWindow::on_pushButton_2_clicked()
     ui->customPlot_5->graph()->setLineStyle(QCPGraph::lsNone);
     ui->customPlot_5->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 10));
     ui->customPlot_5->graph()->setPen(pen);
-
     ui->customPlot_5->addGraph();
     ui->customPlot_5->graph()->setData(F1u,F2u);
     ui->customPlot_5->graph(4)->setName("/U/");
@@ -764,7 +703,6 @@ void MainWindow::on_pushButton_2_clicked()
     ui->customPlot_5->graph()->setLineStyle(QCPGraph::lsNone);
     ui->customPlot_5->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 10));
     ui->customPlot_5->graph()->setPen(pen);
-
     ui->customPlot_5->addGraph();
     ui->customPlot_5->graph()->setData({F1ad, F1ed},{F2ad, F2ed});
     pen.setColor(QColor(0,0,0));
@@ -787,22 +725,18 @@ void MainWindow::on_pushButton_2_clicked()
     ui->customPlot_5->graph()->setPen(pen);
     ui->customPlot_5->legend->setVisible(false);
     ui->customPlot_5->setBackground(plotGradient);
-
     ui->customPlot_5->replot();
-
 
     current_path=QDir::currentPath();
     path_base=current_path+"/../artCont/";
-    comandpv="python "+path_base+"artCont.py "+monologue+" "+path_base+"feat.txt "+path_base;
+    comandpv="python "+path_base+artContScript+monologue+" "+path_base+"feat.txt "+path_base;
     qDebug()<< comandpv;
-
     cmd.start(comandpv);
     cmd.waitForFinished(-1);
 
     ui->radarArt->setPixmap(QPixmap( path_base+"articulation.png" ) );
     ui->radarArt->setScaledContents(true);
     ui->radarArt->show();
-
 
     QVector<double> BBE;
     QFile fileF(path_base+"feat.txt");
@@ -820,32 +754,28 @@ void MainWindow::on_pushButton_2_clicked()
         BBEofs.append(BBE[nb+75]);
         x.append(nb+1);
     }
-     ui->customPlot_6->clearGraphs();
+    ui->customPlot_6->clearGraphs();
     ui->customPlot_6->legend->setVisible(true);
     ui->customPlot_6->addGraph();
     ui->customPlot_6->xAxis->setRange(0, 23);
     ui->customPlot_6->yAxis->setRange(0, 12);
-    ui->customPlot_6->xAxis->setLabel("Number of bark band");
-    ui->customPlot_6->yAxis->setLabel("log-Energy");
+    ui->customPlot_6->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_6->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_6->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_6->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_6->xAxis->setLabel(xaxisBBE);
+    ui->customPlot_6->yAxis->setLabel(yaxislogE);
     ui->customPlot_6->graph(0)->setDataValueError(x, BBEonm, BBEons);
     ui->customPlot_6->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::black, 1.5), QBrush(Qt::white), 9));
     ui->customPlot_6->graph(0)->setPen(QPen(QColor(0, 120, 0), 2));
-
-    //ui->customPlot_6->graph(0)->setLineStyle(QCPGraph::lsStepCenter);
-    //ui->customPlot_6->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, Qt::blue, Qt::white, 7));
     ui->customPlot_6->graph(0)->setErrorType(QCPGraph::etValue);
-    ui->customPlot_6->graph(0)->setName("Onset");
+    ui->customPlot_6->graph(0)->setName(Onset);
     ui->customPlot_6->addGraph();
     ui->customPlot_6->graph(1)->setDataValueError(x, BBEofm, BBEofs);
     ui->customPlot_6->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::red, 1.5), QBrush(Qt::white), 9));
     ui->customPlot_6->graph(1)->setPen(QPen(QColor(0, 180, 0), 2));
-
-
-    //ui->customPlot_6->graph(1)->setLineStyle(QCPGraph::lsStepCenter);
-    //ui->customPlot_6->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, Qt::red, Qt::white, 7));
     ui->customPlot_6->graph(1)->setErrorType(QCPGraph::etValue);
-    ui->customPlot_6->graph(1)->setName("Offset");
-
+    ui->customPlot_6->graph(1)->setName(Offset);
 
     QVector<double> Ticks;
     QVector<QString> Labels;
@@ -857,17 +787,10 @@ void MainWindow::on_pushButton_2_clicked()
     ui->customPlot_6->xAxis->setAutoTickLabels(false);
     ui->customPlot_6->xAxis->setTickVector(Ticks);
     ui->customPlot_6->xAxis->setTickVectorLabels(Labels);
-
     ui->customPlot_6->setBackground(plotGradient);
-
-
-
     ui->customPlot_6->replot();
-
     ui->customPlot_6->savePng(current_path+"/../articulation2.png");
     xrange=ui->customPlot->xAxis->range();
-
-
 }
 
 
@@ -888,7 +811,6 @@ return Formant;
 
 void MainWindow::on_pushButton_5_toggled(bool checked)
 {
-
     QLinearGradient plotGradient;
     plotGradient.setStart(0, 0);
     plotGradient.setFinalStop(0, 350);
@@ -898,7 +820,6 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
     ui->customPlot->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot->replot();
-
 
     QDateTime c_date(QDateTime::currentDateTime());
     QString c_datestr=c_date.toString("yyyy_MM_dd");
@@ -911,28 +832,15 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
         QDir().mkdir(path_patient);
     }
 
-    QString name=get_name(current_row, path_patient);
-    //QString name2=name.replace(QString("wav"), QString("raw"));
     if (checked){
-        //QPixmap pix5("../PDTool/button5stop.png");
-        //QIcon icon5(pix5);
-        //ui->pushButton_5->setIcon(icon5);
-        //ui->pushButton_5->setIconSize(QSize(71,71));
-
-        //opendialogb();
-        // destinationFile.setFileName(name);
-        // destinationFile.open( QIODevice::WriteOnly | QIODevice::Truncate );
-
-        // audio->start(&destinationFile);
+        QString name=get_name(current_row, path_patient, true);
         QStringList codecName=audioRecorder->supportedAudioCodecs();
         qDebug() <<codecName;
         QStringList inputs=audioRecorder->audioInputs();
         if (audioRecorder->state() == QMediaRecorder::StoppedState) {
             QAudioEncoderSettings settings;
-            //qDebug() << audioRecorder->audioInputs();
             audioRecorder->setAudioInput(inputs[0]);
             settings.setCodec("audio/pcm");
-            //settings.setCodec(codecName[0]);
             settings.setSampleRate(fs);
             settings.setBitRate(16);
             settings.setChannelCount(1);
@@ -942,65 +850,49 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
             audioRecorder->setEncodingSettings(settings, QVideoEncoderSettings(),"audio/x-wav");
             audioRecorder->setContainerFormat("audio/x-wav");
             audioRecorder->setOutputLocation(QUrl::fromLocalFile(name));
-
             audioRecorder->record();
-
         }
 
     }
     else{
-            //QPixmap pix5("../PDTool/button5rec.png");
-            //QIcon icon5(pix5);
-            //ui->pushButton_5->setIcon(icon5);
-            //ui->pushButton_5->setIconSize(QSize(71,71));
-
-            audioRecorder->stop();
-            //name="/home/camilo/Camilo/Parkinson/PDTool/data/2016_05_05vasquezcamilo/A.wav";
-            QVector<double> y=readWavFile(name);
-            file_2play=name;
-            QVector<double> x((int)y.size());
-            for (int i=0; i<(int)y.size(); i++)
-            {
+        QString name=get_name(current_row, path_patient, false);
+        audioRecorder->stop();
+        QVector<double>y=readWavFile(name);
+        file_2play=name;
+        QVector<double> x((int)y.size());
+        int contSat=0;
+        for (int i=0; i<(int)y.size(); i++){
               x[i] = ((double)i)/fs;
-            }
-             ui->customPlot->clearGraphs();
-            ui->customPlot->addGraph();
-            ui->customPlot->graph()->setData(x,y);
-            ui->customPlot->xAxis->setRange(0, (double)x.size()/fs);
-            ui->customPlot->yAxis->setRange(-1, 1);
-            ui->customPlot->xAxis->setLabel("Time (sec)");
-            ui->customPlot->yAxis->setLabel("Amplitude");
-            ui->customPlot->graph()->setPen(pen);
-            ui->customPlot->replot();
-            xmain=x;
-            ymain=y;
-
+              if (y[i]>0.9){
+                  contSat++;
+              }
         }
+
+        ui->customPlot->clearGraphs();
+        ui->customPlot->addGraph();
+        ui->customPlot->graph()->setData(x,y);
+        ui->customPlot->xAxis->setRange(0, (double)x.size()/fs);
+        ui->customPlot->yAxis->setRange(-1, 1);
+        ui->customPlot->xAxis->setLabel(xaxistime);
+        ui->customPlot->yAxis->setLabel(yaxisA);
+        ui->customPlot->graph()->setPen(pen);
+        ui->customPlot->replot();
+        xmain=x;
+        ymain=y;
+        if(contSat>(int)(y.size()*0.2)){
+            QMessageBox::information(
+                    this,
+                    tr("Neuro-Speech"),
+                    tr(repeat) );
+        }
+
+    }
     xrange=ui->customPlot->xAxis->range();
-
 }
-
-
 
 
 void MainWindow::on_pushButton_6_toggled(bool checked)
 {   if (checked){int a=1;};
-    /*
-    if (checked){
-        QPixmap pix6("/home/camilo/Camilo/Parkinson/PDTool/src/PDTool/button6pause.png");
-        QIcon icon6(pix6);
-        ui->pushButton_6->setIcon(icon6);
-        ui->pushButton_6->setIconSize(QSize(71,71));
-        player->setMedia(QUrl::fromLocalFile(file_2play));
-        player->setVolume(50);
-        player->play();
-    }
-    else{
-            QPixmap pix6("/home/camilo/Camilo/Parkinson/PDTool/src/PDTool/button6play.png");
-            QIcon icon6(pix6);
-            ui->pushButton_6->setIcon(icon6);
-            ui->pushButton_6->setIconSize(QSize(71,71));
-        }*/
 }
 
 
@@ -1009,24 +901,21 @@ void MainWindow::on_pushButton_4_clicked()
     QProcess cmd;
     QStringList ls1, ls2, ls3, ls4, ls5, ls6, ls7, ls8, ls9, ls10, lrt;
     QString sent1, sent2, sent3, sent4, sent5, sent6, sent7, sent8, sent9, sent10, readtext;
-
     QString current_path=QDir::currentPath();
     QString path_base=current_path+"/../intelligibility/";
 
-
     if (!QDir(path_patient).exists() || path_patient=="") {
-        ls1 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 1 (Mi Casa)", "", "Audio-Files(*.wav)");
-        ls2 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 2 (Omar)", "", "Audio-Files(*.wav)");
-        ls3 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 3 (Laura)", "", "Audio-Files(*.wav)");
-        ls4 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 4 (Los libros)", "", "Audio-Files(*.wav)");
-        ls5 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 5 (Rosita)", "", "Audio-Files(*.wav)");
-        ls6 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 6 (Luisa)", "", "Audio-Files(*.wav)");
-        ls7 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 7 (Viste las noticias)", "", "Audio-Files(*.wav)");
-        ls8 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 8 (Juan)", "", "Audio-Files(*.wav)");
-        ls9 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 9 (Estoy muy triste)", "", "Audio-Files(*.wav)");
-        ls10 = QFileDialog::getOpenFileNames(this, "Choose file of sentence 10 (Estoy muy preocupado)", "", "Audio-Files(*.wav)");
-
-        lrt = QFileDialog::getOpenFileNames(this, "Choose file of Read text", "", "Audio-Files(*.wav)");
+        ls1 = QFileDialog::getOpenFileNames(this, chooses1, "", "Audio-Files(*.wav)");
+        ls2 = QFileDialog::getOpenFileNames(this, chooses2, "", "Audio-Files(*.wav)");
+        ls3 = QFileDialog::getOpenFileNames(this, chooses3, "", "Audio-Files(*.wav)");
+        ls4 = QFileDialog::getOpenFileNames(this, chooses4, "", "Audio-Files(*.wav)");
+        ls5 = QFileDialog::getOpenFileNames(this, chooses5, "", "Audio-Files(*.wav)");
+        ls6 = QFileDialog::getOpenFileNames(this, chooses6, "", "Audio-Files(*.wav)");
+        ls7 = QFileDialog::getOpenFileNames(this, chooses7, "", "Audio-Files(*.wav)");
+        ls8 = QFileDialog::getOpenFileNames(this, chooses8, "", "Audio-Files(*.wav)");
+        ls9 = QFileDialog::getOpenFileNames(this, chooses9, "", "Audio-Files(*.wav)");
+        ls10 = QFileDialog::getOpenFileNames(this,chooses10, "", "Audio-Files(*.wav)");
+        lrt = QFileDialog::getOpenFileNames(this, choosesRT, "", "Audio-Files(*.wav)");
         sent1=ls1[0];
         sent2=ls2[0];
         sent3=ls3[0];
@@ -1046,64 +935,51 @@ void MainWindow::on_pushButton_4_clicked()
         sent4=path_patient+"/sent4.wav";
         sent5=path_patient+"/sent5.wav";
         sent6=path_patient+"/sent6.wav";
+        sent7=path_patient+"/sent7.wav";
+        sent8=path_patient+"/sent8.wav";
+        sent9=path_patient+"/sent9.wav";
+        sent10=path_patient+"/sent10.wav";
         readtext=path_patient+"/Readtext.wav";
     }
-
-
     file_2play=readtext;
-
-    QString comand1="python "+path_base+"intelligibility.py "+sent1+" "+path_base+"mi_casa.txt "+path_base+"pred1.txt "+path_base+"feat1.txt es_CO";
+    QString comand1="python "+path_base+intScript+sent1+" "+path_base+"mi_casa.txt "+path_base+"pred1.txt "+path_base+"feat1.txt es_CO";
     qDebug() << comand1;
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+sent2+" "+path_base+"omar.txt "+path_base+"pred2.txt "+path_base+"feat2.txt es_CO";
+    comand1="python "+path_base+intScript+sent2+" "+path_base+"omar.txt "+path_base+"pred2.txt "+path_base+"feat2.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+sent3+" "+path_base+"laura.txt "+path_base+"pred3.txt "+path_base+"feat3.txt es_CO";
+    comand1="python "+path_base+intScript+sent3+" "+path_base+"laura.txt "+path_base+"pred3.txt "+path_base+"feat3.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+sent4+" "+path_base+"loslibros.txt "+path_base+"pred4.txt "+path_base+"feat4.txt es_CO";
+    comand1="python "+path_base+intScript+sent4+" "+path_base+"loslibros.txt "+path_base+"pred4.txt "+path_base+"feat4.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+sent5+" "+path_base+"rosita.txt "+path_base+"pred5.txt "+path_base+"feat5.txt es_CO";
+    comand1="python "+path_base+intScript+sent5+" "+path_base+"rosita.txt "+path_base+"pred5.txt "+path_base+"feat5.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+sent6+" "+path_base+"luisa.txt "+path_base+"pred6.txt "+path_base+"feat6.txt es_CO";
+    comand1="python "+path_base+intScript+sent6+" "+path_base+"luisa.txt "+path_base+"pred6.txt "+path_base+"feat6.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+sent7+" "+path_base+"viste.txt "+path_base+"pred7.txt "+path_base+"feat7.txt es_CO";
+    comand1="python "+path_base+intScript+sent7+" "+path_base+"viste.txt "+path_base+"pred7.txt "+path_base+"feat7.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+sent8+" "+path_base+"juan.txt "+path_base+"pred8.txt "+path_base+"feat8.txt es_CO";
+    comand1="python "+path_base+intScript+sent8+" "+path_base+"juan.txt "+path_base+"pred8.txt "+path_base+"feat8.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+sent9+" "+path_base+"triste.txt "+path_base+"pred9.txt "+path_base+"feat9.txt es_CO";
+    comand1="python "+path_base+intScript+sent9+" "+path_base+"triste.txt "+path_base+"pred9.txt "+path_base+"feat9.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+sent10+" "+path_base+"preocupado.txt "+path_base+"pred10.txt "+path_base+"feat10.txt es_CO";
+    comand1="python "+path_base+intScript+sent10+" "+path_base+"preocupado.txt "+path_base+"pred10.txt "+path_base+"feat10.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-    comand1="python "+path_base+"intelligibility.py "+readtext+" "+path_base+"readtext.txt "+path_base+"pred11.txt "+path_base+"feat11.txt es_CO";
+    comand1="python "+path_base+intScript+readtext+" "+path_base+"readtext.txt "+path_base+"pred11.txt "+path_base+"feat11.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-
-    comand1="python "+path_base+"intelligibilityRadar.py "+path_base+"feat1.txt "+path_base+"feat2.txt "+path_base+"feat3.txt "+path_base+"feat4.txt "+path_base+"feat5.txt "+path_base+"feat6.txt "+path_base+"feat7.txt "+path_base+"feat8.txt "+path_base+"feat9.txt "+path_base+"feat10.txt "+path_base+"feat11.txt";
+    comand1="python "+path_base+intScript+path_base+"feat1.txt "+path_base+"feat2.txt "+path_base+"feat3.txt "+path_base+"feat4.txt "+path_base+"feat5.txt "+path_base+"feat6.txt "+path_base+"feat7.txt "+path_base+"feat8.txt "+path_base+"feat9.txt "+path_base+"feat10.txt "+path_base+"feat11.txt";
     qDebug() << comand1;
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-
-
 
     QStringList predicted;
     QStringList WA, DTW;
@@ -1137,7 +1013,6 @@ void MainWindow::on_pushButton_4_clicked()
         }
 
     }
-
     ui->label_34->setText(predicted[0]);
     ui->label_44->setText(predicted[1]);
     ui->label_47->setText(predicted[2]);
@@ -1149,8 +1024,6 @@ void MainWindow::on_pushButton_4_clicked()
     ui->label_151->setText(predicted[8]);
     ui->label_157->setText(predicted[9]);
     ui->label_61->setText(predicted[10]+'\r'+predicted[11]+'\r'+predicted[12]+'\r'+predicted[13]);
-
-qDebug() << "Predicciones OK ";
     ui->label_38->setText(WA[0]);
     ui->label_41->setText(WA[1]);
     ui->label_45->setText(WA[2]);
@@ -1163,7 +1036,6 @@ qDebug() << "Predicciones OK ";
     ui->label_152->setText(WA[8]);
     ui->label_155->setText(WA[9]);
     ui->label_63->setText(WA[10]);
-qDebug() << "WA OK ";
     ui->label_40->setText(DTW[0]);
     ui->label_42->setText(DTW[1]);
     ui->label_46->setText(DTW[2]);
@@ -1175,7 +1047,6 @@ qDebug() << "WA OK ";
     ui->label_153->setText(DTW[8]);
     ui->label_158->setText(DTW[9]);
     ui->label_64->setText(DTW[10]);
-qDebug() << "DTW OK ";
     WAavg=0;
     DTWavg=0;
     for  (int cj=0;cj<11;cj++){
@@ -1185,16 +1056,10 @@ qDebug() << "DTW OK ";
 
     WAavg=WAavg/11;
     DTWavg=DTWavg/11;
-qDebug() << "AVG OK ";
-
     ui->radarInt->setPixmap(QPixmap( path_base+"intelligibility.png" ) );
     ui->radarInt->setScaledContents(true);
     ui->radarInt->show();
-
-
 }
-
-
 
 void MainWindow::on_pushButton_3_clicked()
 {
@@ -1215,7 +1080,7 @@ void MainWindow::on_pushButton_3_clicked()
 
     if (flagCuted==0){
     if (!QDir(path_patient).exists() || path_patient==""){
-        ls = QFileDialog::getOpenFileNames(this, "Choose file to analyze/", "", "Audio-Files(*.wav)");
+        ls = QFileDialog::getOpenFileNames(this, choosecont, "", "Audio-Files(*.wav)");
         va=ls[0];
     }
     else{
@@ -1225,17 +1090,14 @@ void MainWindow::on_pushButton_3_clicked()
     if (flagCuted==1){flagCuted=0;}
 
     file_2play=va;
-    QString comandpv="python "+path_base+"prosody.py "+va+" "+path_base+"featf0.txt "+ path_base+"featEnergy.txt "+path_base+"feat.txt "+path_base;
+    QString comandpv="python "+path_base+prosScript+va+" "+path_base+"featf0.txt "+ path_base+"featEnergy.txt "+path_base+"feat.txt "+path_base;
     cmd.start(comandpv);
     cmd.waitForFinished(-1);
 
     qDebug() << comandpv;
-
-
     QVector<double> y=readWavFile(va);
     QVector<double> x((int)y.size());
-    for (int i=0; i<(int)y.size(); i++)
-    {
+    for (int i=0; i<(int)y.size(); i++){
       x[i] = ((double)i)/fs;
     }
      ui->customPlot_7->clearGraphs();
@@ -1243,20 +1105,20 @@ void MainWindow::on_pushButton_3_clicked()
     ui->customPlot_7->graph()->setData(x,y);
     ui->customPlot_7->xAxis->setRange(0, (double)x.size()/fs);
     ui->customPlot_7->yAxis->setRange(-1, 1);
-    ui->customPlot_7->xAxis->setLabel("Time (sec)");
-    ui->customPlot_7->yAxis->setLabel("Amplitude");
+    ui->customPlot_7->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_7->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_7->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_7->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_7->xAxis->setLabel(xaxistime);
+    ui->customPlot_7->yAxis->setLabel(yaxisA);
     ui->customPlot_7->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot_7->graph()->setPen(pen);
-
     ui->customPlot_7->replot();
-
     ui->customPlot_7->savePng(current_path+"/../prosody1.png");
-
     ui->radarPros->setPixmap(QPixmap( path_base+"prosodyradar.png" ) );
     ui->radarPros->setScaledContents(true);
     ui->radarPros->show();
-
 
     QList<QString> feat;
     QFile filefeat(path_base+"feat.txt");
@@ -1267,7 +1129,6 @@ void MainWindow::on_pushButton_3_clicked()
         QString line = filefeat.readLine();
         feat.append(line);
     }
-
     QVector<double> F0;
     QVector<double> time;
     QFile fileF0(path_base+"featf0.txt");
@@ -1283,17 +1144,20 @@ void MainWindow::on_pushButton_3_clicked()
         nframes++;
     }
     qDebug() << "Nframes: " << nframes;
-     ui->customPlot_8->clearGraphs();
+    ui->customPlot_8->clearGraphs();
     ui->customPlot_8->addGraph();
     ui->customPlot_8->graph()->setData(time,F0);
     ui->customPlot_8->xAxis->setRange(0, (double)x.size()/fs);
     ui->customPlot_8->yAxis->setRange(0, mmF0.toDouble());
-    ui->customPlot_8->xAxis->setLabel("Time (sec)");
-    ui->customPlot_8->yAxis->setLabel("Fundamental Frequency (Hz)");
+    ui->customPlot_8->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_8->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_8->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_8->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_8->xAxis->setLabel(xaxistime);
+    ui->customPlot_8->yAxis->setLabel(yaxisfreq);
     ui->customPlot_8->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot_8->graph()->setPen(pen);
-
     ui->customPlot_8->replot();
     ui->customPlot_8->savePng(current_path+"/../prosody2.png");
 
@@ -1311,35 +1175,32 @@ void MainWindow::on_pushButton_3_clicked()
         nframes++;
     }
     qDebug() << "Nframes: " << nframes;
-     ui->customPlot_9->clearGraphs();
+    ui->customPlot_9->clearGraphs();
     ui->customPlot_9->addGraph();
     ui->customPlot_9->graph()->setData(timeEn,logE);
     ui->customPlot_9->xAxis->setRange(0, (double)x.size()/fs);
     ui->customPlot_9->yAxis->setRange(0, qPow(10, 0.1*mmlogE.toDouble()));
-    ui->customPlot_9->xAxis->setLabel("Time (sec)");
-    ui->customPlot_9->yAxis->setLabel("Energy");
+    ui->customPlot_9->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_9->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_9->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_9->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_9->xAxis->setLabel(xaxistime);
+    ui->customPlot_9->yAxis->setLabel(yaxislogE);
     ui->customPlot_9->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot_9->graph()->setPen(pen);
-
     ui->customPlot_9->replot();
-
     ui->customPlot_9->savePng(current_path+"/../prosody3.png");
-
-
     QString mF0=feat[0];
     QString sF0=feat[1];
-
     QString mlogE=feat[3];
     QString slogE=feat[4];
-
     QString Vrate=feat[6];
     QString avgdurv=feat[7];
     QString stddurv=feat[8];
     QString Silrate=feat[9];
     QString avgdurs=feat[10];
     QString stddurs=feat[11];
-
     ui->label_69->setText(Vrate);
     ui->label_70->setText(avgdurv);
     ui->label_71->setText(stddurv);
@@ -1352,16 +1213,13 @@ void MainWindow::on_pushButton_3_clicked()
     ui->label_78->setText(mlogE);
     ui->label_79->setText(slogE);
     ui->label_80->setText(mmlogE);
-
-
-
     ui->customPlot->clearGraphs();
     ui->customPlot->addGraph();
     ui->customPlot->graph()->setData(x,y);
     ui->customPlot->xAxis->setRange(0, (double)x.size()/fs);
     ui->customPlot->yAxis->setRange(-1, 1);
-    ui->customPlot->xAxis->setLabel("Time (sec)");
-    ui->customPlot->yAxis->setLabel("Amplitude");
+    ui->customPlot->xAxis->setLabel(xaxistime);
+    ui->customPlot->yAxis->setLabel(yaxisA);
     ui->customPlot->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot->graph()->setPen(pen);
@@ -1374,58 +1232,51 @@ void MainWindow::on_pushButton_3_clicked()
     sample_palette.setColor(QPalette::Window, Qt::white);
     sample_palette.setColor(QPalette::WindowText, Qt::red);
 
-
     if (mF0.toDouble()>avgf0u  || mF0.toDouble()<avgf0d){
         ui->label_75->setPalette(sample_palette);
     }
-
     if (sF0.toDouble()>stdf0u  || sF0.toDouble()<stdf0d){
         ui->label_76->setPalette(sample_palette);
     }
-
     if (mmF0.toDouble()>maxf0u  || mmF0.toDouble()<maxf0d){
         ui->label_77->setPalette(sample_palette);
     }
-
     if (mlogE.toDouble()>avgEu  || mlogE.toDouble()<avgEd){
         ui->label_78->setPalette(sample_palette);
     }
-
     if (slogE.toDouble()>stdEu  || slogE.toDouble()<stdEd){
         ui->label_79->setPalette(sample_palette);
     }
-
     if (mmlogE.toDouble()>maxEu  || mmlogE.toDouble()<maxEd){
         ui->label_80->setPalette(sample_palette);
     }
-
     if (Vrate.toDouble()>Vrateu  || Vrate.toDouble()<Vrated){
         ui->label_69->setPalette(sample_palette);
     }
-
     if (avgdurv.toDouble()>avgdurVu  || avgdurv.toDouble()<avgdurVd){
         ui->label_70->setPalette(sample_palette);
     }
-
     if (stddurv.toDouble()>stddurVu  || stddurv.toDouble()<stddurVd){
         ui->label_71->setPalette(sample_palette);
     }
-
     if (Silrate.toDouble()>Srateu  || Silrate.toDouble()<Srated){
         ui->label_72->setPalette(sample_palette);
     }
-
     if (avgdurs.toDouble()>avgdurSu  || avgdurs.toDouble()<avgdurSd){
         ui->label_73->setPalette(sample_palette);
     }
-
     if (stddurs.toDouble()>stddurSu  || stddurs.toDouble()<stddurSd){
         ui->label_74->setPalette(sample_palette);
     }
 }
 
+bool MainWindow::fileExists(QString path) {
+    QFileInfo check_file(path);
+    // check if file exists and if yes: Is it really a file and no directory?
+    return check_file.exists() && check_file.isFile();
+}
 
-QString MainWindow::get_name(int rec_flag, QString folder){
+QString MainWindow::get_name(int rec_flag, QString folder, bool save){
     QString name="";
     switch (rec_flag){
     case 0:
@@ -1504,6 +1355,26 @@ QString MainWindow::get_name(int rec_flag, QString folder){
         name=folder+"/Monologue.wav";
         break;
     }
+    QString contS;
+    if (save){
+        contfile=1;
+
+        while(fileExists(name))
+        {
+          if (contfile>1){
+                name.replace("_"+contS.number(contfile-1)+".wav", "_"+contS.number(contfile)+".wav");
+          }
+          else{
+                name.replace(".wav", "_"+contS.number(contfile)+".wav");
+          }
+          contfile++;
+        }
+    }
+    else{
+        if ((contfile)>1)
+            name.replace(".wav", "_"+contS.number(contfile-1)+".wav");
+    }
+    qDebug() << name;
     return name;
 }
 
@@ -1585,7 +1456,6 @@ QVector<double> MainWindow::readWavFile(QString fileName){
     analyzeHeaderDS.readRawData(dataHeader,4); // "data" header
     analyzeHeaderDS >> dataSize; // Data Size
 
-
     // Print the header
     qDebug() << "WAV File Header read:";
     qDebug() << "File Type: " << QString::fromUtf8(fileType);
@@ -1627,24 +1497,18 @@ QVector<double> MainWindow::readWavFile(QString fileName){
     }
 
     return y;
-
-
 }
-
 
 void MainWindow::updateProgress(qint64 duration)
 {
     if (audioRecorder->error() != QMediaRecorder::NoError || duration < 2000)
         return;
-
     ui->statusBar->showMessage(tr("Recorded %1 sec").arg(duration / 1000));
 }
-
 
 void MainWindow::updateStatus(QMediaRecorder::Status status)
 {
     QString statusMessage;
-
     switch (status) {
     case QMediaRecorder::RecordingStatus:
         statusMessage = tr("Recording to %1").arg(audioRecorder->actualLocation().toString());
@@ -1660,15 +1524,14 @@ void MainWindow::updateStatus(QMediaRecorder::Status status)
     default:
         break;
     }
-
     if (audioRecorder->error() == QMediaRecorder::NoError)
         ui->statusBar->showMessage(statusMessage);
 }
 
 void MainWindow::onStateChanged(QMediaRecorder::State state)
-{        QPixmap pix5("../PDTool/button5stop.png");
+{        QPixmap pix5(button5stop);
          QIcon icon5(pix5);
-         QPixmap pix6("../PDTool/button5rec.png");
+         QPixmap pix6(button5rec);
          QIcon icon6(pix6);
     switch (state) {
     case QMediaRecorder::RecordingState:
@@ -1845,7 +1708,7 @@ QList<QString> feat;
     QString APQ=feat[2];
     QString PPQ=feat[3];
     QString logE=feat[4];
-QList<QString> featartv;
+    QList<QString> featartv;
     QString featuresArtVowels=current_path+"/../artVowels/feat.txt";
     QFile filefeaturesArtVowels(featuresArtVowels);
     if (!filefeaturesArtVowels.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -1854,7 +1717,7 @@ QList<QString> featartv;
          line = filefeaturesArtVowels.readLine();
         featartv.append(line);
     }
-filefeaturesArtVowels.close();
+    filefeaturesArtVowels.close();
     QString VSA=featartv[0];
     QString FCR=featartv[1];
     QString VPA=featartv[2];
@@ -1868,10 +1731,8 @@ filefeaturesArtVowels.close();
     QString mF2o=featartv[10];
     QString mF1u=featartv[11];
     QString mF2u=featartv[12];
-
-
     QString featuresProsody=current_path+"/../prosody/feat.txt";
-QList<QString> featpros;
+    QList<QString> featpros;
     QFile filefeatprosody(featuresProsody);
     if (!filefeatprosody.open(QIODevice::ReadOnly | QIODevice::Text))
         return -3;
@@ -1879,25 +1740,19 @@ QList<QString> featpros;
          line = filefeatprosody.readLine();
         featpros.append(line);
     }
-filefeatprosody.close();
+    filefeatprosody.close();
     QString mF0=featpros[0];
     QString sF0=featpros[1];
-
     QString mlogE=featpros[3];
     QString slogE=featpros[4];
-
     QString Vrate=featpros[6];
     QString avgdurv=featpros[7];
     QString stddurv=featpros[8];
     QString Silrate=featpros[9];
     QString avgdurs=featpros[10];
     QString stddurs=featpros[11];
-
-
-
-
     QString Predicted=current_path+"/../evaluation/predmFDA.txt";
-QList<QString> Predictedlist;
+    QList<QString> Predictedlist;
     QFile filePred(Predicted);
     if (!filePred.open(QIODevice::ReadOnly | QIODevice::Text))
         return -4;
@@ -1908,30 +1763,24 @@ QList<QString> Predictedlist;
 
 
 
-filePred.close();
 
+    filePred.close();
 
-
-  //const int highQualityDPI = 300;
   QDir::setCurrent(QCoreApplication::applicationDirPath());
 
   QFile  htmlFile (inputhtml);
   if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)){
       return -5;
   }
-
   QString htmlContent;
   QStringList htmlContentLines;
   QTextStream in(&htmlFile);
-   // htmlContent=in.readAll();
-//htmlFile.close();
 
     while (!in.atEnd()) {
         line = in.readLine();
         htmlContentLines.append(line);
         qDebug() <<line;
     }
-
 
 htmlContentLines[1].replace("Logo.png", current_path+"/../PDTool/Logo.png");
 htmlContentLines[10].replace("phonation1.png", current_path+"/../phonVowels/phonation1.png");
@@ -1942,17 +1791,13 @@ htmlContentLines[183].replace("prosody1.png", current_path+"/../prosody/prosody.
 htmlContentLines[183].replace("prosody2.png", current_path+"/../prosody/prosodyradar.png");
 htmlContentLines[308].replace("intelligibility.png", current_path+"/../intelligibility/intelligibility.png");
 htmlContentLines[445].replace("prediction.png", current_path+"/../evaluation/prediction.png");
-
-
-htmlContentLines[5].replace("Nombre:", "Nombre:"+namePatient);
-htmlContentLines[6].replace("Apellido:", "Apellido:"+lastPatient);
+htmlContentLines[5].replace("Fist Name:", "First Name:"+namePatient);
+htmlContentLines[6].replace("Last Name:", "Last Name:"+lastPatient);
 htmlContentLines[26].replace('-', jitter);
 htmlContentLines[37].replace('-', shimmer);
 htmlContentLines[48].replace('-', APQ);
 htmlContentLines[59].replace('-', PPQ);
 htmlContentLines[70].replace('-', logE);
-
-
 htmlContentLines[96].replace('-', mF1a);
 htmlContentLines[107].replace('-', mF2a);
 htmlContentLines[118].replace('-', mF1i);
@@ -1961,14 +1806,10 @@ htmlContentLines[140].replace('-', mF1u);
 htmlContentLines[151].replace('-', mF2u);
 htmlContentLines[162].replace('-', VSA);
 htmlContentLines[173].replace('-', FCR);
-
-
 htmlContentLines[199].replace('-', Vrate);
 htmlContentLines[210].replace('-', avgdurv);
 htmlContentLines[221].replace('-', stddurv);
 htmlContentLines[232].replace('-', Silrate);
-
-
 htmlContentLines[243].replace('-', avgdurs);
 htmlContentLines[254].replace('-', stddurs);
 htmlContentLines[265].replace('-', mlogE);
@@ -1978,8 +1819,6 @@ htmlContentLines[298].replace('-', sF0);
 QString waavgstr, dtwavgstr;
 htmlContentLines[324].replace('-', waavgstr.setNum(WAavg));
 htmlContentLines[335].replace('-', dtwavgstr.setNum(DTWavg));
-
-
 htmlContentLines[360].replace('-', Predictedlist[1]);
 htmlContentLines[371].replace('-', Predictedlist[2]);
 htmlContentLines[382].replace('-', Predictedlist[3]);
@@ -1988,19 +1827,13 @@ htmlContentLines[404].replace('-', Predictedlist[5]);
 htmlContentLines[415].replace('-', Predictedlist[6]);
 htmlContentLines[426].replace('-', Predictedlist[0]);
 htmlContentLines[437].replace('-', Predictedlist[7]);
-
-
-
 htmlContent=htmlContentLines.join('\n');
   QTextDocument *document = new QTextDocument();
   document->setHtml(htmlContent);
-
   QPrinter printer(QPrinter::HighResolution);
   printer.setPageSize(QPrinter::A4);
   printer.setOutputFormat(QPrinter::PdfFormat);
-
   printer.setOutputFileName(otputfile);
-
   document->print(&printer);
   htmlFile.close();
   delete document;
@@ -2010,9 +1843,8 @@ htmlContent=htmlContentLines.join('\n');
 void MainWindow::on_pushButton_8_clicked()
 {
     QString current_path=QDir::currentPath();
-
-    QString fileName= QFileDialog::getSaveFileName(this, tr("Generate Report"), "reporte.pdf", tr("Documents (*.pdf)"));
-    int a=printpdf(current_path+"/../reporteNeuroSpeech.htm", fileName);
+    QString fileName= QFileDialog::getSaveFileName(this, tr("Generate Report"), "report.pdf", tr("Documents (*.pdf)"));
+    int a=printpdf(current_path+report, fileName);
     qDebug()<<a;
 }
 
@@ -2032,7 +1864,7 @@ void MainWindow::on_pushButton_9_clicked()
     QProcess cmd;
     if (flagCuted==0){
     if (!QDir(path_patient).exists() || path_patient==""){
-     ls = QFileDialog::getOpenFileNames(this, "Choose file to analyze/", "", "Audio-Files(*.wav)");
+     ls = QFileDialog::getOpenFileNames(this, choosecont, "", "Audio-Files(*.wav)");
      va=ls[0];
     }
     else{
@@ -2043,8 +1875,6 @@ void MainWindow::on_pushButton_9_clicked()
     if (flagCuted==1){flagCuted=0;}
 
     file_2play=va;
-
-
     QLinearGradient plotGradient;
     plotGradient.setStart(0, 0);
     plotGradient.setFinalStop(0, 350);
@@ -2065,27 +1895,23 @@ void MainWindow::on_pushButton_9_clicked()
     ui->customPlot->graph()->setData(xt,y);
     ui->customPlot->xAxis->setRange(0, (double)xt.size()/fs);
     ui->customPlot->yAxis->setRange(-1, 1);
-    ui->customPlot->xAxis->setLabel("Time (sec)");
-    ui->customPlot->yAxis->setLabel("Amplitude");
+    ui->customPlot->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot->xAxis->setLabel(xaxistime);
+    ui->customPlot->yAxis->setLabel(yaxisA);
     ui->customPlot->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot->graph()->setPen(pen);
-
     ui->customPlot->replot();
     xmain=xt;
     ymain=y;
     namemain=va;
 
-
-
-
-
-    QString comandpv="python "+path_base+"predictmFDA.py "+path_base+' '+va;
+    QString comandpv="python "+path_base+mfdaScript+path_base+' '+va;
     cmd.start(comandpv);
     cmd.waitForFinished(-1);
-
-    qDebug() << comandpv;
-
 
     QString predicted=path_base+"/predmFDA.txt";
     QList<QString> feat;
@@ -2096,7 +1922,6 @@ void MainWindow::on_pushButton_9_clicked()
          line = filepred.readLine();
         feat.append(line);
     }
-
     ui->label_140->setText(feat[0]);
     ui->label_119->setText(feat[1]);
     ui->label_123->setText(feat[2]);
@@ -2105,12 +1930,9 @@ void MainWindow::on_pushButton_9_clicked()
     ui->label_133->setText(feat[5]);
     ui->label_135->setText(feat[6]);
     ui->label_145->setText(feat[7]);
-
     ui->evalmFDA->setPixmap(QPixmap( path_base+"prediction.png" ) );
     ui->evalmFDA->setScaledContents(true);
     ui->evalmFDA->show();
-
-
 }
 
 void MainWindow::on_pushButton_7_clicked()
@@ -2123,7 +1945,5 @@ void MainWindow::on_pushButton_7_clicked()
     player->setMedia(QUrl::fromLocalFile(file_play));
     player->setVolume(50);
     player->play();
-
-
 
 }

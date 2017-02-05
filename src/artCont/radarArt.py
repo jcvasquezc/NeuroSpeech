@@ -28,12 +28,12 @@ class RaderChart():
     def __init__(self, fig, variables, ranges, n_ordinate_levels = 6):
         angles = np.arange(0, 360, 360./len(variables))
 
-        axes = [fig.add_axes([0.1,0.1,0.8,0.8],polar = True, label = "axes{}".format(i)) for i in range(len(variables))]
-        _, text = axes[0].set_thetagrids(angles, labels = variables, fontsize=17)
+        axes = [fig.add_axes([0.1,0.1,0.75,0.75],polar = True, label = "axes{}".format(i)) for i in range(len(variables))]
+        _, text = axes[0].set_thetagrids(angles, labels = variables, fontsize=16)
         
-        #for txt, angle in zip(text, angles):
-            #txt.set_rotation(angle - 90)
-        
+        for txt, angle in zip(text, angles):
+            txt.set_rotation(angle)
+            
         for ax in axes[1:]:
             ax.patch.set_visible(False)
             ax.xaxis.set_visible(False)
@@ -105,11 +105,11 @@ def plot_radar(df, refh, refl, use_attributes, title, namefig):
         if bg=='#FFFFFF':
             radar.plot(data, color = color, linewidth=2.0)
             radar.fill(data, alpha = 1, color = bg)
-            radar.legend(bbox_to_anchor=(1.1, 1.1))
+            radar.legend(bbox_to_anchor=(1.2, 1.2), fontsize=21)
         else:
             radar.plot(data, color = color, label = pokemon, linewidth=2.0)
             radar.fill(data, alpha = 0.5, color = bg)
-            radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=17)
+            radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=24)
     plt.title(title, fontsize=20)
     #plt.show()    
     plt.savefig(namefig)

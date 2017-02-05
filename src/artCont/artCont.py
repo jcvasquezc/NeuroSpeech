@@ -13,6 +13,7 @@ import math
 from radarArt import *
 
 def artCont(audio, path_base):
+    print(audio)
     fs, data_audio=read(audio)
     size_frameS=0.04*float(fs)
     size_stepS=0.02*float(fs)
@@ -41,9 +42,29 @@ def artCont(audio, path_base):
     names1=['BBE_on'+str(k) for k in range(1,23)]
     names2=['BBE_off'+str(k) for k in range(1,23)]
     names=np.hstack((names1, names2))
-    plot_radar(np.power(10, 0.1*dataradar), np.power(10, 0.1*refh), np.power(10, 0.1*refl), names, 'Articulation', path_base+'articulation.png')    
+    """
+    segmentsOn80, fs=decode_Texgrid(path_base+'vuv.txt', audio, 'Onset', win_trans=0.08)
+    print(segmentsOn80)
+    print(len(segmentsOn80))
+    if len(segmentsOn80)>2:    
+        segmentsOn80=segmentsOn80[1:-2]
+        onsetSeg=np.vstack(segmentsOn80)
+        print(onsetSeg.shape)
+        transavg=np.mean(onsetSeg, 0)
+    else:
+        transavg=np.asarray(segmentsOn80[0])
 
-    
+    plt.figure()
+    Spectrum, freqs, t, im =plt.specgram(transavg, NFFT=512, Fs=16000, noverlap=160)  
+    plt.imshow(Spectrum, extent=[1, 180, 8000, 1], aspect='auto',
+                   vmax=abs(Spectrum).max(), vmin=-abs(Spectrum).max())
+    plt.xlabel("Time [ms]", fontsize=22)
+    plt.ylabel("Frequency [Hz]", fontsize=22)
+    namefig=path_base+'stftTrans.png'
+    plt.savefig(namefig)
+    """
+    plot_radar(np.power(10, 0.1*dataradar), np.power(10, 0.1*refh), np.power(10, 0.1*refl), names, '', path_base+'articulation.png')    
+
 #define BBEonmeref QVector<double>  [7.86, 8.57, 8.47, 8.05, 7.69, 7.32, 6.95, 6.56, 6.20, 6.02, 5.93, 5.85, 5.79, 5.78, 5.71, 5.48, 5.24, 5.05, 4.71, 4.54, 4.48, 3.44]
 #define BBEoffmeref QVector<double> [0.84, 1.04, 1.19, 1.42, 1.60, 1.69, 1.68, 1.60, 1.57, 1.55, 1.55, 1.55, 1.56, 1.56, 1.56, 1.51, 1.45, 1.41, 1.28, 1.22, 1.18, 1.19]
 #define BBEonstref QVector<double>  [8.15, 9.07, 9.01, 8.58, 8.20, 7.73, 7.27, 6.80, 6.35, 6.07, 5.95, 5.83, 5.70, 5.66, 5.58, 5.31, 5.04, 4.83, 4.53, 4.37, 4.32, 3.46]
@@ -168,6 +189,7 @@ def decode_Texgrid(file_textgrid, file_audio, type_segm, win_trans=0.04):
             segments.append(data_audio[int(finVal-win_trans*fs):int(finVal+win_trans*fs)])
         else:
             segments.append(data_audio[inicioVal:finVal])
+    print(len(segments))
     return segments, fs
 
 def extractTrans(segments, fs, size_frameS, size_stepS, nB, nfft=2048):

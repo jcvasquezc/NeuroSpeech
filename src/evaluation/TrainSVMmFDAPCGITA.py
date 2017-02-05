@@ -35,11 +35,9 @@ elif subtask=='i': # intelligibility
 
 
 feat1file='C:\Users\elmon\Dropbox/Parkinson/PDTool/exp_predmFDA/Features/art_ddk1.txt'
-featGCCAfile='C:/Users/elmon/Desktop/work/ICASSP_2017_GCCA/Features/PCGITAGCCA/GCCA2art_ddk1.txt'
 
 
 feat1=np.loadtxt(feat1file)
-featGCCA=np.loadtxt(featGCCAfile)
 
 #Features=np.hstack((feat1, featGCCA))
 Features=feat1
