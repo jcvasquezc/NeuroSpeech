@@ -66,6 +66,16 @@ private slots:
 
     void on_pushButton_9_clicked();
 
+    void on_pushButton_10_clicked();
+
+    void on_radioButton_1_clicked();
+
+    void on_radioButton_2_clicked();
+
+    void on_radioButton_4_clicked();
+
+    void on_radioButton_3_clicked();
+
 private:
     void clearAudioLevels();
     //Ui::MainWindowSpanish *ui;
@@ -99,8 +109,10 @@ private:
     QString file_2play;
     int flagCuted=0;
     float contAxes;
-    float WAavg, DTWavg;
+    float WAavg=0, DTWavg=0;
     int contfile;
+    boolean ref_female=true;
+    boolean ref_male=false;
     QVector<float> xaxiscut;
    // QFile destinationFile;
 };

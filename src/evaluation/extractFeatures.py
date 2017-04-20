@@ -31,8 +31,8 @@ def decodeFormants(fileTxt):
         line1=datam[end_line1[ji]+1:end_line1[ji+1]]
         cond=(line1=='3' or line1=='4' or line1=='5')
         if (cond): 
-            F1.append(float(datam[end_line1[ji+1]+1:end_line1[ji+2]]))
-            F2.append(float(datam[end_line1[ji+3]+1:end_line1[ji+4]]))
+            F1.append(float(datam[int(end_line1[ji+1]+1):int(end_line1[ji+2])]))
+            F2.append(float(datam[int(end_line1[ji+3]+1):int(end_line1[ji+4])]))
         ji=ji+1
     F1=np.asarray(F1)
     F2=np.asarray(F2)
@@ -138,7 +138,7 @@ def fftsolp(x,nfft):
      y = y[:,0] 
      
      y = np.fft.fft(y,nfft)
-     y = (y[0:nfft/2+1])
+     y = (y[0:int(nfft/2+1)])
      return y
 
     
@@ -171,7 +171,7 @@ def extractTrans(segments, fs, size_frameS, size_stepS, nB, nfft=2048):
         if (len(segments[j])>size_frameS):
             nF=int((len(segments[j])/size_frameS)/overlap)-1
             for iF in range(nF):
-                frames.append(np.hamming(size_frameS)*segments[j][iF*size_stepS:iF*size_stepS+size_frameS])
+                frames.append(np.hamming(size_frameS)*segments[j][int(iF*size_stepS):int(iF*size_stepS+size_frameS)])
                     
     BarkEn=np.zeros((len(frames),nB)) 
     for j in range(len(frames)):    
@@ -204,7 +204,7 @@ def extractFeatures(file_audio, path_base):
     MFCCcoef=np.zeros((nF,Nmfcc)) 
 
     for l in range(nF):
-        data_frame=data_audio[int(l*size_stepS):(l*size_stepS+size_frameS)]
+        data_frame=data_audio[int(l*size_stepS):int(l*size_stepS+size_frameS)]
         data_frame=data_frame*np.hamming(len(data_frame))
         MFCCcoef[l,:]=mfcc(data_frame,fs,float(sizeframe)/1000,float(sizeframe)/2000,Nmfcc)
 

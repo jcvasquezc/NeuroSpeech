@@ -10,13 +10,15 @@ import matplotlib.pyplot as plt
 import sys
 # Taken from https://www.kaggle.com/wenxuanchen/d/abcsds/pokemon/pokemon-visualization-radar-chart-t-sne
 
-TYPE_LIST = ['Reference','Patient']
+TYPE_LIST = ['Reference High', 'Reference Low', 'Patient']
 
-COLOR_LIST = ['#F95643', '#53AFFE']
+COLOR_LIST = ['#F95643', '#FFFFFF', '#53AFFE']
 
 # The colors are copied from this script: https://www.kaggle.com/ndrewgele/d/abcsds/pokemon/visualizing-pok-mon-stats-with-seaborn
 # The colors look reasonable in this map: For example, Green for Grass, Red for Fire, Blue for Water...
 COLOR_MAP = dict(zip(TYPE_LIST, COLOR_LIST))
+
+
 
 
 # A radar chart example: http://datascience.stackexchange.com/questions/6084/how-do-i-create-a-complex-radar-chart
@@ -33,7 +35,8 @@ class RaderChart():
         
         #for txt, angle in zip(text, angles):
             #txt.set_rotation(angle - 90)
-        
+        fig.patch.set_visible(False)
+
         for ax in axes[1:]:
             ax.patch.set_visible(False)
             ax.xaxis.set_visible(False)
@@ -45,7 +48,8 @@ class RaderChart():
             grid_label = ['']+[str(int(x)) for x in grid[1:]]
             ax.set_rgrids(grid, labels = [], angle = angles[i])
             ax.set_ylim(*ranges[i])
-        
+            ax.set_yticks([])
+            ax.set_yticklabels([])        
         self.angle = np.deg2rad(np.r_[angles, angles[0]])
         self.ranges = ranges
         self.ax = axes[0]
@@ -82,7 +86,7 @@ def select_color(types):
 
 
 
-def plot_radar(df, ref, use_attributes, title, namefig):
+def plot_radar(df, refl, refh, use_attributes, title, namefig):
     #df = np.asarray([0.60, 4.88, 4.96, 0.40])
     #ref= np.asarray([1.20, 6.30, 7.70, 0.43])
     # In this order, 
@@ -91,22 +95,48 @@ def plot_radar(df, ref, use_attributes, title, namefig):
     # Attack and Defense, Sp. Atk and Sp. Def will show on opposite positions
     #use_attributes = ['Jitter', 'Shimmer', 'APQ', 'PPQ']
     # choose the pokemons you like
-    use_pokemons = ['Reference','Patient']
+    use_pokemons = ['Reference', 'Patient', 'Reference Low']
+    
+    refhplot=np.ones(len(df))*105
+    reflplot=np.ones(len(df))*80
+
+    print(df)
+    print(refl)
+    print(refh)
+    refln=refl*50+50
+    print(refln)
+    refhn=refh*50+50
+    print(refhn)
+    dfn=np.asarray([50+50*(df[f]) for f in range(len(df))])
+    print(dfn)
+    datas = [refhplot, dfn, reflplot] 
+    dfn[np.where(dfn<=0)[0]]=2**-20
+    #ranges = [[2**-20, max([max(dfn), max(refhplot)])+20] for attr in range(len(use_attributes))]
+    ranges = [[2**-20, 105] for attr in range(len(use_attributes))]
+    
     
     #df_plot = df[df['Name'].map(lambda x:x in use_pokemons)==True]
-    datas = [ref, df] 
-    ranges = [[2**-20, max([df[attr], ref[attr]])] for attr in range(len(use_attributes))]
-    colors = ['#53AFFE', '#8ED752'] 
+    datas = [refhplot, dfn, reflplot] 
+    colorsbg = ['#53AFFE', '#8ED752', '#FFFFFF']
+
+    #ranges = [[2**-20, max([df[attr], ref[attr]])] for attr in range(len(use_attributes))]
+    colors = ['#53AFFE', '#8ED752', '#53AFFE']
     
     fig = plt.figure(figsize=(7, 7))
     radar = RaderChart(fig, use_attributes, ranges, len(df))
-    for data, color, pokemon in zip(datas, colors, use_pokemons):
-        radar.plot(data, color = color, label = pokemon, linewidth=2.0)
-        radar.fill(data, alpha = 0.1, color = color)
-        radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=21)
+    for data, color, bg, pokemon in zip(datas, colors, colorsbg, use_pokemons):
+        if bg=='#FFFFFF':
+            radar.plot(data, color = color, linewidth=2.0)
+            radar.fill(data, alpha = 1, color = bg)
+            radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=21)
+        else:
+            radar.plot(data, color = color, label = pokemon, linewidth=2.0)
+            radar.fill(data, alpha = 0.5, color = bg)
+            radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=21)
     plt.title(title, fontsize=20)
     #plt.show()    
     plt.savefig(namefig)
+    plt.savefig(namefig.replace('.png', '.pdf'))
 
 
 
@@ -126,4 +156,4 @@ else:
         featradar.append(data[1])
         names.append('WA'+str(j+1))
         names.append('DTW'+str(j+1))
-    plot_radar(np.asarray(featradar), np.ones(len(np.asarray(featradar))), names, '', sys.argv[1].replace('feat1.txt', 'intelligibility.png'))
+    plot_radar(np.asarray(featradar), 0.8*np.ones(len(np.asarray(featradar))), np.ones(len(np.asarray(featradar))), names, '', sys.argv[1].replace('feat1.txt', 'intelligibility.png'))

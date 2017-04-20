@@ -38,17 +38,19 @@ class RaderChart():
             ax.patch.set_visible(False)
             ax.xaxis.set_visible(False)
             ax.grid('off')
-        
+
         for i, ax in enumerate(axes):
             grid = np.linspace(*ranges[i], num = n_ordinate_levels)
             
             grid_label = ['']+[str(int(x)) for x in grid[1:]]
             ax.set_rgrids(grid, labels = grid_label, angle = angles[i])
             ax.set_ylim(*ranges[i])
-        
+            ax.set_yticks([])
+            ax.set_yticklabels([])
         self.angle = np.deg2rad(np.r_[angles, angles[0]])
         self.ranges = ranges
         self.ax = axes[0]
+        
 
     def plot(self, data, *args, **kw):
         sdata = _scale_data(data, self.ranges)
@@ -93,9 +95,27 @@ def plot_radar(df, ref, use_attributes, title, namefig):
     # choose the pokemons you like
     use_pokemons = ['Referencia','Paciente']
     
+    
+    
+    
+    
+
+    refhplot=np.ones(len(df))*100
+    reflplot=np.ones(len(df))*50
+
+    refhn=(ref-min(ref))/(max(ref)-min(ref))*50+50
+    print(refhn)
+    dfn=np.asarray([50+50*(df[f])/(ref[f]) for f in range(len(df))])
+    print(dfn)
+    datas = [refhplot, dfn, reflplot] 
+    dfn[np.where(dfn<0)[0]]=0
+    ranges = [[2**-20, max([max(dfn), max(refhplot)])+20] for attr in range(len(use_attributes))]
+    
+    
+    
     #df_plot = df[df['Name'].map(lambda x:x in use_pokemons)==True]
-    datas = [ref, df] 
-    ranges = [[2**-20, max([df[attr], ref[attr]])] for attr in range(len(use_attributes))]
+    datas = [refhplot, dfn] 
+    #ranges = [[2**-20, max([df[attr], ref[attr]])] for attr in range(len(use_attributes))]
     colors = ['#53AFFE', '#8ED752'] 
     
     fig = plt.figure(figsize=(7, 7))

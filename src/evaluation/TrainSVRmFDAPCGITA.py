@@ -20,11 +20,11 @@ LabelsTrainAll.append([31,32,47,38,27,29,33,29,15,13,21,39,35,37,27,31,33,17,13,
 LabelsTrainAll.append([31,32,47,38,27,29,33,29,15,13,23,32,35,39,25,29,21,13,13,41,25,29,27,25,33,15,25,39,41,23,37,39,29,27,25,29,32,23,13,21,25,29,34,33,25,33,25,17,23,25,11,11,21,12,12,9,16,7,21,19,17,17,19,16,15,20,17,5,14,19,12,13,19,15,21,27,11,13,16,13,23,13,23,16,8,9,17,21,17,17,14,11,10,17,17,12,7,1,3,13]) # I
 medians=[np.median([LabelsTrainAll[0][im], LabelsTrainAll[1][im]]) for im in range(100)]        
 labels=np.asarray(medians)
-
+"""
 labels=np.asarray([28,19,52, 32, 28, 30, 29, 41, 38, 43, 6, 61, 28, 44, 50, 30, 42, 20, 14, 92, 53, 21, 13, 19, 75, 40, 30, 19, 23, 40, 9, 67, 15, 54, 51, 71, 40, 40, 53, 28, 38, 57, 23, 33, 30, 53, 45, 65, 21, 29])
 labelshc=np.zeros(50)
 labels=np.hstack((labels, labelshc))    
-
+"""
 
 feat1file='C:/Users/elmon/Desktop/work/ICASSP_2017_GCCA/Features/PCGITA/art_ddk1.txt'
 featGCCAfile='C:/Users/elmon/Desktop/work/ICASSP_2017_GCCA/Features/PCGITAGCCA/GCCA2art_ddk1.txt'
@@ -49,15 +49,15 @@ labelspred=svrt.predict(Features)
 sp, p=spearmanr(labels, labelspred)
 print('Spearman Correlation:'+str(sp))
 
-fileSVR='C:/Users/elmon/Dropbox/Parkinson/PDTool/src/evaluation/SVRtrainedUPDRS.obj'
-filest='C:/Users/elmon/Dropbox/Parkinson/PDTool/src/evaluation/scalerUPDRS.obj'
+fileSVR='C:/Users/elmon/Dropbox/Parkinson/PDTool/src/evaluation/SVRtrained.obj'
+filest='C:/Users/elmon/Dropbox/Parkinson/PDTool/src/evaluation/scaler.obj'
 
-fid=open(fileSVR, 'w')
+fid=open(fileSVR, 'wb')
 cp.dump(svrt, fid)
 
 fid.close()
 
-fid2=open(filest, 'w')
+fid2=open(filest, 'wb')
 cp.dump(st, fid2)
 
 fid2.close()

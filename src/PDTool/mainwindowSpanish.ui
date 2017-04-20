@@ -32,7 +32,7 @@
      <string notr="true">background-color: rgb(230, 230, 230);</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">

@@ -3,7 +3,7 @@
 
 #endif
 
-#define spanish
+#define english
 
 #ifdef english
 
@@ -12,6 +12,7 @@
 #define button3    "../PDTool/button3.png"
 #define button4    "../PDTool/button4.png"
 #define button5    "../PDTool/button5.png"
+#define button7    "../PDTool/button7.png"
 #define button5stop "../PDTool/button5stop.png"
 #define logo       "../PDTool/Logo.png"
 #define button5rec "../PDTool/button5rec.png"
@@ -20,6 +21,7 @@
 #define xaxistime  "Time (sec)"
 #define yaxisA     "Amplitude"
 #define yaxisfreq  "Frequency (Hz)"
+#define yaxissemi  "Frequency (semitones)"
 #define xaxisF1    "Formant 1(Hz)"
 #define yaxisF2    "Formant 2(Hz)"
 #define xaxisBBE   "Number of the Bark band"
@@ -47,6 +49,7 @@
 #define repeat     "Please repeat this recording"
 #define phonation  "Phonation"
 #define articulation  "Articulation"
+#define DDK         "DDK"
 #define prosody    "Prosody"
 #define intelligibility  "Intelligibility"
 #define evaluation  "Evaluation"
@@ -61,6 +64,7 @@
 #define silRateLab  "Silence Rate (1/s)"
 #define avgSilLab   "Avg. Dur. Silence (ms)"
 #define stdSilLab   "Std. Dur. Silence (ms)"
+#define degreeU     "degree U(%)"
 #define avgF0Lab    "Avg. F0 (Hz)"
 #define stdF0Lab    "Std. F0 (Hz)"
 #define maxF0Lab    "Max. F0 (Hz)"
@@ -80,7 +84,9 @@
 #define artVowelsScript "artVowels.py "
 #define artContScript "artCont.py "
 #define intScript   "intelligibility.py "
+#define intradar    "intelligibilityRadar.py "
 #define prosScript "prosody.py "
+#define ddkScript  "DDK.py "
 #define mfdaScript "predictmFDA.py "
 
 
@@ -93,6 +99,7 @@
 #define button3    "../PDTool/button3Spanish.png"
 #define button4    "../PDTool/button4Spanish.png"
 #define button5    "../PDTool/button5Spanish.png"
+#define button7    "../PDTool/button7Spanish.png"
 #define button5stop "../PDTool/button5stop.png"
 #define logo       "../PDTool/Logo.png"
 #define button5rec "../PDTool/button5rec.png"
@@ -101,10 +108,13 @@
 #define xaxistime  "Tiempo (s)"
 #define yaxisA     "Amplitud"
 #define yaxisfreq  "Frecuencia (Hz)"
+#define yaxissemi  "Frequencia (semitonos)"
+
 #define xaxisF1    "Formante 1(Hz)"
 #define yaxisF2    "Formante 2(Hz)"
 #define xaxisBBE   "Número de banda de Bark"
 #define yaxislogE  "Energia (dB)"
+#define degreeU    "segm. sordo U(%)"
 #define chooseA    "Seleccione un archivo de la vocal /A/"
 #define chooseE    "Seleccione un archivo de la vocal /E/"
 #define chooseI    "Seleccione un archivo de la vocal /I/"
@@ -128,6 +138,7 @@
 #define repeat     "Por favor repita esta grabación"
 #define phonation  "Fonación"
 #define articulation  "Articulación"
+#define DDK         "DDK"
 #define prosody    "Prosodia"
 #define intelligibility  "Inteligibilidad"
 #define evaluation  "Evaluación"
@@ -161,7 +172,9 @@
 #define artVowelsScript "artVowelsSpanish.py "
 #define artContScript "artCont.py "
 #define intScript   "intelligibility.py "
+#define intradar    "intelligibilityRadar.py "
 #define prosScript "prosodySpanish.py "
+#define ddkScript  "DDKSpanish.py "
 #define mfdaScript "predictmFDASpanish.py "
 
 #endif

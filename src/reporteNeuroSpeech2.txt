@@ -1,0 +1,457 @@
+<!-- #######  YAY, I AM THE SOURCE EDITOR! #########-->
+<center><img src="Logo.png" alt="" width="650" height="76" /></center>
+<h1 style="color: #000000;">&nbsp;</h1>
+<h2 style="color: #000000;"><span style="color: #000000;">1. Patient</span></h2>
+<ul>
+<li>
+<p>Fist Name:</p>
+</li>
+<li>
+<p>Last Name:</p>
+</li>
+</ul>
+<h2 style="color: #000000;"><span style="color: #000000;">2. Phonation Analysis</span></h2>
+<center><img src="phonation1.png" alt="" width="500" height="300" /><img src="phonation2.png" alt="" width="300" height="300/" /></center>
+<p>&nbsp;</p>
+<table class="editorDemoTable" style="height: 250px;" width="515">
+<thead>
+<tr>
+<td>
+<h3>Feature</h3>
+</td>
+<td>
+<h3>Value</h3>
+</td>
+<td>
+<h3>Reference</h3>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>Jitter (%)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0.00&rarr;&nbsp;1.20</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Shimmer (%)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>2.80&rarr;&nbsp;6.30</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>APQ</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>3.10&rarr;&nbsp;7.70</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>PPQ</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0.00&rarr;&nbsp;0.43&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Energy (dB)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>12.70&rarr;&nbsp;17.20</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2>&nbsp;<span style="color: #000000;">2. Articulation Analysis</span></h2>
+<center><img src="articulation1.png" alt="" width="500" height="250" /><img src="articulation2.png" alt="" width="300" height="300" /></center>
+<p>&nbsp;</p>
+<table class="editorDemoTable" style="height: 263px;" width="509">
+<thead>
+<tr>
+<td>
+<h3>Feature</h3>
+</td>
+<td>
+<h3>Value</h3>
+</td>
+<td>
+<h3>Reference </h3>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>F1/a/ (Hz)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>643&rarr;&nbsp;908</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>F2/a/ (Hz)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>1160&rarr;&nbsp;1510</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>F1/i/ (Hz)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>275&rarr;&nbsp;470</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>F2/i/ (Hz)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>2100&rarr;&nbsp;2550&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>F1/u/ (Hz)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>350&rarr;&nbsp;490</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>F2/u/ (Hz)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>600&rarr;&nbsp;1600</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>VSA (Hz2)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>534000&rarr;&nbsp;1073000</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>FCR</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0.84&rarr;&nbsp;1.27</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2>&nbsp;<span style="color: #000000;">3. Prosody Analysis</span></h2>
+<center><img src="prosody1.png" alt="" width="400" height="400" /><img src="prosody2.png" alt="" width="300" height="300" /></center>
+<p>&nbsp;</p>
+<table class="editorDemoTable" style="height: 337px;" width="515">
+<thead>
+<tr>
+<td>Feature</td>
+<td>Value</td>
+<td>Reference </td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>Voiced Rate (1/s)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>1.7&rarr;&nbsp;2.5</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Avg. Dur. Voiced (ms)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>292&rarr;&nbsp;521</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Std. Dur. Voiced (ms)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>209&rarr;&nbsp;347</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Silence Rate (1/s)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0.3&rarr;&nbsp;0.6&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Avg. Dur. Silence (ms)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>211&rarr;&nbsp;547</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Std. Dur. Silence (ms)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>6&rarr;&nbsp;271</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Avg. Energy (dB)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>7.0&rarr;&nbsp;9.4</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Std. Energy (dB)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>16.9&rarr;&nbsp;18.8</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Avg. F0 (Hz)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>142&rarr;&nbsp;229</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Std. F0 (Hz)</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>22&rarr;&nbsp;38</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2>&nbsp;<span style="color: #000000;">4. Intelligibility Analysis</span></h2>
+<center><img src="intelligibility.png" alt="" width="300" height="300" /></center>
+<p>&nbsp;</p>
+<table class="editorDemoTable" style="height: 59px;" width="513">
+<thead>
+<tr>
+<td>Feature</td>
+<td>Value</td>
+<td>Reference </td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>Word Accuracy</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0.85&rarr;&nbsp;1.0</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Sim DTW</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0.9&rarr;&nbsp;1.0</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2>&nbsp;<span style="color: #000000;">5. Dysarthria Level (m-FDA)</span></h2>
+<table class="editorDemoTable" style="height: 239px;" width="517">
+<thead>
+<tr>
+<td>Feature</td>
+<td>Value</td>
+<td>Reference</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>Respiration capability</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0&rarr;&nbsp;4</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Lips movement</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0&rarr;&nbsp;4</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Palate movement</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0&rarr;&nbsp;4</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Larinx movement</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0&rarr;&nbsp;4</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Tongue velocity</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0&rarr;&nbsp;4</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Intelligibility</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0&rarr;&nbsp;4</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Total m-FDA</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0&rarr;&nbsp;52</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Total MDS-UPDRS-III</p>
+</td>
+<td>
+<p>-</p>
+</td>
+<td>
+<p>0&rarr;&nbsp;128</p>
+</td>
+</tr>
+</tbody>
+</table>
+<center><img src="prediction.png" alt="" width="600" height="300" /></center>
+<p>&nbsp;</p>

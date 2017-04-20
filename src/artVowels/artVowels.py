@@ -71,7 +71,7 @@ def articulationVowels(audioA, audioE, audioI, audioO, audioU, path_base):
     plt.xlabel('Formant 1 (Hz)')
     #plt.show()    
     plt.savefig(path_base+'articulation1.png')
-    
+    plt.savefig(path_base+'articulation1.pdf')
     return F1a, F1e, F1i, F1o, F1u, F2a, F2e, F2i, F2o, F2u, VSA, VAI, VPA
 
     

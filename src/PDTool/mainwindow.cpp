@@ -97,6 +97,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_9->setIcon(icon9);
     ui->pushButton_9->setIconSize(pix9.size());
 
+
+    QPixmap pix10(button7);
+    QIcon icon10(pix10);
+    ui->pushButton_10->setIcon(icon10);
+    ui->pushButton_10->setIconSize(pix10.size());
+
     QPixmap pixlogo(logo);
     ui->label_68->setPixmap(pixlogo);
 
@@ -117,13 +123,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidget->setTabText(2, articulation);
     ui->tabWidget->setTabText(3, prosody);
     ui->tabWidget->setTabText(4, intelligibility);
-    ui->tabWidget->setTabText(5, evaluation);
+    ui->tabWidget->setTabText(6, evaluation);
+    ui->tabWidget->setTabText(5, DDK);
     ui->label->setText(nameP);
     ui->label_2->setText(Lastname);
     ui->pushButton_7->setText(playExample);
     ui->pushButton_8->setText(createReport);
 
-    ui->label_7->setText(energyLab);
+    //ui->label_7->setText(energyLab);
+    ui->label_13->setText(degreeU);
     ui->label_81->setText(vRateLab);
     ui->label_82->setText(avgVoicedLab);
     ui->label_83->setText(stdVoicedLab);
@@ -149,6 +157,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+    ui->radioButton_1->setChecked(true);
+    QCheckBox *checkBox = new QCheckBox(tr("Ind&ependent checkbox"));
+    checkBox->setChecked(true);
+
+    ui->radioButton_4->setChecked(true);
+    QCheckBox *checkBox2 = new QCheckBox(tr("Ind&ependent checkbox"));
+    checkBox2->setChecked(true);
 
     QStringList list;
     list<<listTasks;
@@ -413,34 +428,53 @@ void MainWindow::on_pushButton_clicked()
     QString APQ=feat[2];
     QString PPQ=feat[3];
     QString logE=feat[4];
+    QString degU=feat[6];
+    QString varF0=feat[7];
     ui->label_8->setText(jitter);
     ui->label_9->setText(shimmer);
     ui->label_10->setText(APQ);
     ui->label_11->setText(PPQ);
-    ui->label_12->setText(logE);
+    //ui->label_12->setText(logE);
+    ui->label_14->setText(degU);
+    ui->label_184->setText(varF0);
 
-    if (jitter.toDouble()>jitterref){
-         ui->label_8->setPalette(sample_palette);
+    if (ref_female){
+        if (jitter.toDouble()>jitterref_f){ui->label_8->setPalette(sample_palette);}
+        if (shimmer.toDouble()>shimmerrefu_f  || shimmer.toDouble()<shimmerrefd_f){ui->label_9->setPalette(sample_palette);}
+        if (APQ.toDouble()>APQrefu_f  || APQ.toDouble()<APQrefd_f){ui->label_10->setPalette(sample_palette);}
+        if (PPQ.toDouble()>PPQrefu_f  || PPQ.toDouble()<PPQrefd_f){ui->label_11->setPalette(sample_palette);}
+        //if (logE.toDouble()>logErefu_f  || logE.toDouble()<logErefd_f){ui->label_12->setPalette(sample_palette);}
+        if (degU.toDouble()>degUrefu_f  || degU.toDouble()<degUrefd_f){ui->label_14->setPalette(sample_palette);}
+        if (varF0.toDouble()>varf0refu_f  || varF0.toDouble()<varf0refd_f){ui->label_14->setPalette(sample_palette);}
+        ui->label_93->setText(QString{ "0.00->%1" }.arg( jitterref_f));
+        ui->label_94->setText(QString{ "%1->%2" }.arg( shimmerrefd_f).arg(shimmerrefu_f));
+        ui->label_95->setText(QString{ "%1->%2" }.arg( APQrefd_f).arg(APQrefu_f));
+        ui->label_96->setText(QString{ "%1->%2" }.arg( PPQrefd_f).arg(PPQrefu_f));
+        //ui->label_97->setText(QString{ "%1->%2" }.arg( logErefd_f).arg(logErefu_f));
+        ui->label_181->setText(QString{ "%1->%2" }.arg( degUrefd_f).arg(degUrefu_f));
+        ui->label_183->setText(QString{ "%1->%2" }.arg( varf0refd_f).arg(varf0refu_f));
+    }
+    else{
+        if (jitter.toDouble()>jitterref_m){ui->label_8->setPalette(sample_palette);}
+        if (shimmer.toDouble()>shimmerrefu_m  || shimmer.toDouble()<shimmerrefd_m){ui->label_9->setPalette(sample_palette);}
+        if (APQ.toDouble()>APQrefu_m  || APQ.toDouble()<APQrefd_m){ui->label_10->setPalette(sample_palette);}
+        if (PPQ.toDouble()>PPQrefu_m  || PPQ.toDouble()<PPQrefd_m){ui->label_11->setPalette(sample_palette);}
+       // if (logE.toDouble()>logErefu_m  || logE.toDouble()<logErefd_m){ui->label_12->setPalette(sample_palette);}
+        if (degU.toDouble()>degUrefu_m  || degU.toDouble()<degUrefd_m){ui->label_14->setPalette(sample_palette);}
+        if (varF0.toDouble()>varf0refu_m  || varF0.toDouble()<varf0refd_m){ui->label_14->setPalette(sample_palette);}
+        ui->label_93->setText(QString{ "0.00->%1" }.arg( jitterref_m));
+        ui->label_94->setText(QString{ "%1->%2" }.arg( shimmerrefd_m).arg(shimmerrefu_m));
+        ui->label_95->setText(QString{ "%1->%2" }.arg( APQrefd_m).arg(APQrefu_m));
+        ui->label_96->setText(QString{ "%1->%2" }.arg( PPQrefd_m).arg(PPQrefu_m));
+       // ui->label_97->setText(QString{ "%1->%2" }.arg( logErefd_m).arg(logErefu_m));
+        ui->label_181->setText(QString{ "%1->%2" }.arg( degUrefd_m).arg(degUrefu_m));
+        ui->label_183->setText(QString{ "%1->%2" }.arg( varf0refd_m).arg(varf0refu_m));
     }
 
-    if (shimmer.toDouble()>shimmerrefu  || shimmer.toDouble()<shimmerrefd){
-        ui->label_9->setPalette(sample_palette);
-   }
-
-    if (APQ.toDouble()>APQrefu  || APQ.toDouble()<APQrefd){
-        ui->label_10->setPalette(sample_palette);
-   }
-
-    if (PPQ.toDouble()>PPQrefu  || PPQ.toDouble()<PPQrefd){
-        ui->label_11->setPalette(sample_palette);
-   }
-
-    if (logE.toDouble()>logErefu  || logE.toDouble()<logErefd){
-        ui->label_12->setPalette(sample_palette);
-   }
-
     xrange=ui->customPlot->xAxis->range();
-    ui->radarPhon->setPixmap(QPixmap( path_base+"phonation2.png" ) );
+    if (ref_female){ui->radarPhon->setPixmap(QPixmap( path_base+"phonation2female.png" ) );}
+    if (ref_male){ui->radarPhon->setPixmap(QPixmap( path_base+"phonation2male.png" ) );}
+
     ui->radarPhon->setScaledContents(true);
     ui->radarPhon->show();
 }
@@ -566,33 +600,52 @@ void MainWindow::on_pushButton_2_clicked()
     ui->label_29->setText(VPA);
     ui->label_31->setText(FCR);
 
-    if (VSA.toDouble()>vsau  || VSA.toDouble()<vsad){
-        ui->label_28->setPalette(sample_palette);
+
+
+    if (ref_female){
+        if (VSA.toDouble()>vsau_f  || VSA.toDouble()<vsad_f){ui->label_28->setPalette(sample_palette);}
+        if (FCR.toDouble()>fcru_f  || FCR.toDouble()<fcrd_f){ui->label_31->setPalette(sample_palette);}
+        if (VPA.toDouble()>vpau_f  || VPA.toDouble()<vpad_f){ui->label_29->setPalette(sample_palette);}
+        if (mF1a.toDouble()>f1au_f  || mF1a.toDouble()<f1ad_f){ui->label_23->setPalette(sample_palette);}
+        if (mF2a.toDouble()>f2au_f  || mF2a.toDouble()<f2ad_f){ui->label_17->setPalette(sample_palette);}
+        if (mF1i.toDouble()>f1iu_f  || mF1i.toDouble()<f1id_f){ui->label_25->setPalette(sample_palette);}
+        if (mF2i.toDouble()>f2iu_f  || mF2i.toDouble()<f2id_f){ui->label_16->setPalette(sample_palette);}
+        if (mF1u.toDouble()>f1uu_f  || mF1u.toDouble()<f1ud_f){ui->label_18->setPalette(sample_palette);}
+        if (mF2u.toDouble()>f2uu_f  || mF2u.toDouble()<f2ud_f){ui->label_20->setPalette(sample_palette);}
+        ui->label_104->setText(QString{ "%1->%2" }.arg( vsad_f).arg(vsau_f));
+        ui->label_106->setText(QString{ "%1->%2" }.arg( fcrd_f).arg(fcru_f));
+        ui->label_105->setText(QString{ "%1->%2" }.arg( vpad_f).arg(vpau_f));
+        ui->label_98->setText(QString{ "%1->%2" }.arg( f1ad_f).arg(f1au_f));
+        ui->label_99->setText(QString{ "%1->%2" }.arg( f2ad_f).arg(f2au_f));
+        ui->label_100->setText(QString{ "%1->%2" }.arg( f1id_f).arg(f1iu_f));
+        ui->label_101->setText(QString{ "%1->%2" }.arg( f2id_f).arg(f2iu_f));
+        ui->label_102->setText(QString{ "%1->%2" }.arg( f1ud_f).arg(f1uu_f));
+        ui->label_103->setText(QString{ "%1->%2" }.arg( f2ud_f).arg(f2uu_f));
+
+
     }
-    if (VPA.toDouble()>vpau  || VPA.toDouble()<vpad){
-        ui->label_29->setPalette(sample_palette);
+    else{
+        if (VSA.toDouble()>vsau_m  || VSA.toDouble()<vsad_m){ui->label_28->setPalette(sample_palette);}
+        if (FCR.toDouble()>fcru_m  || FCR.toDouble()<fcrd_m){ui->label_31->setPalette(sample_palette);}
+        if (VPA.toDouble()>vpau_m  || VPA.toDouble()<vpad_m){ui->label_29->setPalette(sample_palette);}
+        if (mF1a.toDouble()>f1au_m  || mF1a.toDouble()<f1ad_m){ui->label_23->setPalette(sample_palette);}
+        if (mF2a.toDouble()>f2au_m  || mF2a.toDouble()<f2ad_m){ui->label_17->setPalette(sample_palette);}
+        if (mF1i.toDouble()>f1iu_m  || mF1i.toDouble()<f1id_m){ui->label_25->setPalette(sample_palette);}
+        if (mF2i.toDouble()>f2iu_m  || mF2i.toDouble()<f2id_m){ui->label_16->setPalette(sample_palette);}
+        if (mF1u.toDouble()>f1uu_m  || mF1u.toDouble()<f1ud_m){ui->label_18->setPalette(sample_palette);}
+        if (mF2u.toDouble()>f2uu_m  || mF2u.toDouble()<f2ud_m){ui->label_20->setPalette(sample_palette);}
+        ui->label_104->setText(QString{ "%1->%2" }.arg( vsad_m).arg(vsau_m));
+        ui->label_106->setText(QString{ "%1->%2" }.arg( fcrd_m).arg(fcru_m));
+        ui->label_105->setText(QString{ "%1->%2" }.arg( vpad_m).arg(vpau_m));
+        ui->label_98->setText(QString{ "%1->%2" }.arg( f1ad_m).arg(f1au_m));
+        ui->label_99->setText(QString{ "%1->%2" }.arg( f2ad_m).arg(f2au_m));
+        ui->label_100->setText(QString{ "%1->%2" }.arg( f1id_m).arg(f1iu_m));
+        ui->label_101->setText(QString{ "%1->%2" }.arg( f2id_m).arg(f2iu_m));
+        ui->label_102->setText(QString{ "%1->%2" }.arg( f1ud_m).arg(f1uu_m));
+        ui->label_103->setText(QString{ "%1->%2" }.arg( f2ud_m).arg(f2uu_m));
     }
-    if (FCR.toDouble()>fcru  || FCR.toDouble()<fcrd){
-        ui->label_31->setPalette(sample_palette);
-    }
-    if (mF1a.toDouble()>f1au  || mF1a.toDouble()<f1ad){
-        ui->label_23->setPalette(sample_palette);
-    }
-    if (mF2a.toDouble()>f2au  || mF2a.toDouble()<f2ad){
-        ui->label_17->setPalette(sample_palette);
-    }
-    if (mF1i.toDouble()>f1iu  || mF1i.toDouble()<f1id){
-        ui->label_25->setPalette(sample_palette);
-    }
-    if (mF2i.toDouble()>f2iu  || mF2i.toDouble()<f2id){
-        ui->label_16->setPalette(sample_palette);
-    }
-    if (mF1u.toDouble()>f1uu  || mF1u.toDouble()<f1ud){
-        ui->label_18->setPalette(sample_palette);
-    }
-    if (mF2u.toDouble()>f2uu  || mF2u.toDouble()<f2ud){
-        ui->label_20->setPalette(sample_palette);
-    }
+
+
     QVector<double> F1;
     double F1ad=mF1a.toDouble();
     double F1id=mF1i.toDouble();
@@ -734,7 +787,12 @@ void MainWindow::on_pushButton_2_clicked()
     cmd.start(comandpv);
     cmd.waitForFinished(-1);
 
-    ui->radarArt->setPixmap(QPixmap( path_base+"articulation.png" ) );
+    if(ref_female){
+        ui->radarArt->setPixmap(QPixmap( path_base+"articulationfemale.png" ) );
+    }
+    else{
+        ui->radarArt->setPixmap(QPixmap( path_base+"articulationmale.png" ) );
+    }
     ui->radarArt->setScaledContents(true);
     ui->radarArt->show();
 
@@ -976,7 +1034,7 @@ void MainWindow::on_pushButton_4_clicked()
     comand1="python "+path_base+intScript+readtext+" "+path_base+"readtext.txt "+path_base+"pred11.txt "+path_base+"feat11.txt es_CO";
     cmd.start(comand1);
     cmd.waitForFinished(-1);
-    comand1="python "+path_base+intScript+path_base+"feat1.txt "+path_base+"feat2.txt "+path_base+"feat3.txt "+path_base+"feat4.txt "+path_base+"feat5.txt "+path_base+"feat6.txt "+path_base+"feat7.txt "+path_base+"feat8.txt "+path_base+"feat9.txt "+path_base+"feat10.txt "+path_base+"feat11.txt";
+    comand1="python "+path_base+intradar+path_base+"feat1.txt "+path_base+"feat2.txt "+path_base+"feat3.txt "+path_base+"feat4.txt "+path_base+"feat5.txt "+path_base+"feat6.txt "+path_base+"feat7.txt "+path_base+"feat8.txt "+path_base+"feat9.txt "+path_base+"feat10.txt "+path_base+"feat11.txt";
     qDebug() << comand1;
     cmd.start(comand1);
     cmd.waitForFinished(-1);
@@ -1013,6 +1071,10 @@ void MainWindow::on_pushButton_4_clicked()
         }
 
     }
+
+    qDebug() <<predicted;
+    qDebug() <<WA;
+    qDebug() <<DTW;
     ui->label_34->setText(predicted[0]);
     ui->label_44->setText(predicted[1]);
     ui->label_47->setText(predicted[2]);
@@ -1023,7 +1085,11 @@ void MainWindow::on_pushButton_4_clicked()
     ui->label_150->setText(predicted[7]);
     ui->label_151->setText(predicted[8]);
     ui->label_157->setText(predicted[9]);
-    ui->label_61->setText(predicted[10]+'\r'+predicted[11]+'\r'+predicted[12]+'\r'+predicted[13]);
+    if (predicted.size()==14){
+    ui->label_61->setText(predicted[10]+'\r'+predicted[11]+'\r'+predicted[12]+'\r'+predicted[13]);}
+    else {
+            ui->label_61->setText(predicted[10]+'\r'+predicted[11]+'\r'+predicted[12]);
+    }
     ui->label_38->setText(WA[0]);
     ui->label_41->setText(WA[1]);
     ui->label_45->setText(WA[2]);
@@ -1056,6 +1122,12 @@ void MainWindow::on_pushButton_4_clicked()
 
     WAavg=WAavg/11;
     DTWavg=DTWavg/11;
+    qDebug() <<QString{ "%1" }.arg( WAavg);
+    qDebug() <<QString{ "%1" }.arg( DTWavg);
+
+    ui->label_190->setText(QString{ "%1" }.arg( WAavg));
+    ui->label_191->setText(QString{ "%1" }.arg( DTWavg));
+    qDebug() <<path_base;
     ui->radarInt->setPixmap(QPixmap( path_base+"intelligibility.png" ) );
     ui->radarInt->setScaledContents(true);
     ui->radarInt->show();
@@ -1201,6 +1273,7 @@ void MainWindow::on_pushButton_3_clicked()
     QString Silrate=feat[9];
     QString avgdurs=feat[10];
     QString stddurs=feat[11];
+    QString varf0semi=feat[12];
     ui->label_69->setText(Vrate);
     ui->label_70->setText(avgdurv);
     ui->label_71->setText(stddurv);
@@ -1210,6 +1283,7 @@ void MainWindow::on_pushButton_3_clicked()
     ui->label_75->setText(mF0);
     ui->label_76->setText(sF0);
     ui->label_77->setText(mmF0);
+    ui->label_187->setText(varf0semi);
     ui->label_78->setText(mlogE);
     ui->label_79->setText(slogE);
     ui->label_80->setText(mmlogE);
@@ -1232,42 +1306,76 @@ void MainWindow::on_pushButton_3_clicked()
     sample_palette.setColor(QPalette::Window, Qt::white);
     sample_palette.setColor(QPalette::WindowText, Qt::red);
 
-    if (mF0.toDouble()>avgf0u  || mF0.toDouble()<avgf0d){
-        ui->label_75->setPalette(sample_palette);
+
+    if (ref_female){
+        if (mF0.toDouble()>avgf0u_f  || mF0.toDouble()<avgf0d_f){ui->label_75->setPalette(sample_palette);}
+        if (sF0.toDouble()>stdf0u_f  || sF0.toDouble()<stdf0d_f){ui->label_76->setPalette(sample_palette);}
+        if (mmF0.toDouble()>maxf0u_f  || mmF0.toDouble()<maxf0d_f){ui->label_77->setPalette(sample_palette);}
+        if (mlogE.toDouble()>avgEu_f  || mlogE.toDouble()<avgEd_f){ui->label_78->setPalette(sample_palette);}
+        if (slogE.toDouble()>stdEu_f  || slogE.toDouble()<stdEd_f){ui->label_79->setPalette(sample_palette);}
+        if (mmlogE.toDouble()>maxEu_f  || mmlogE.toDouble()<maxEd_f){ui->label_80->setPalette(sample_palette);}
+        if (Vrate.toDouble()>Vrateu_f  || Vrate.toDouble()<Vrated_f){ui->label_69->setPalette(sample_palette);}
+        if (avgdurv.toDouble()>avgdurVu_f  || avgdurv.toDouble()<avgdurVd_f){ui->label_70->setPalette(sample_palette);}
+        if (stddurv.toDouble()>stddurVu_f  || stddurv.toDouble()<stddurVd_f){ui->label_71->setPalette(sample_palette);}
+        if (Silrate.toDouble()>Srateu_f  || Silrate.toDouble()<Srated_f){ui->label_72->setPalette(sample_palette);}
+        if (avgdurs.toDouble()>avgdurSu_f  || avgdurs.toDouble()<avgdurSd_f){ui->label_73->setPalette(sample_palette);}
+        if (stddurs.toDouble()>stddurSu_f  || stddurs.toDouble()<stddurSd_f){ui->label_74->setPalette(sample_palette);}
+        if (varf0semi.toDouble()>varF0semiu_f  || varf0semi.toDouble()<varF0semid_f){ui->label_187->setPalette(sample_palette);}
+
+        ui->label_107->setText(QString{ "%1->%2" }.arg( avgf0d_f).arg(avgf0u_f));
+        ui->label_108->setText(QString{ "%1->%2" }.arg( stdf0d_f).arg(stdf0u_f));
+        ui->label_109->setText(QString{ "%1->%2" }.arg( maxf0d_f).arg(maxf0u_f));
+        ui->label_110->setText(QString{ "%1->%2" }.arg( avgEd_f).arg(avgEu_f));
+        ui->label_111->setText(QString{ "%1->%2" }.arg( stdEd_f).arg(stdEu_f));
+        ui->label_112->setText(QString{ "%1->%2" }.arg( maxEd_f).arg(maxEu_f));
+        ui->label_113->setText(QString{ "%1->%2" }.arg( Vrated_f).arg(Vrateu_f));
+        ui->label_114->setText(QString{ "%1->%2" }.arg( avgdurVd_f).arg(avgdurVu_f));
+        ui->label_115->setText(QString{ "%1->%2" }.arg( stddurVd_f).arg(stddurVu_f));
+        ui->label_116->setText(QString{ "%1->%2" }.arg( Srated_f).arg(Srateu_f));
+        ui->label_117->setText(QString{ "%1->%2" }.arg( avgdurSd_f).arg(avgdurSu_f));
+        ui->label_118->setText(QString{ "%1->%2" }.arg( stddurSd_f).arg(stddurSu_f));
+        ui->label_186->setText(QString{ "%1->%2" }.arg( varF0semid_f).arg(varF0semiu_f));
+
     }
-    if (sF0.toDouble()>stdf0u  || sF0.toDouble()<stdf0d){
-        ui->label_76->setPalette(sample_palette);
+    else{
+        if (mF0.toDouble()>avgf0u_m  || mF0.toDouble()<avgf0d_m){ui->label_75->setPalette(sample_palette);}
+        if (sF0.toDouble()>stdf0u_m  || sF0.toDouble()<stdf0d_m){ui->label_76->setPalette(sample_palette);}
+        if (mmF0.toDouble()>maxf0u_m  || mmF0.toDouble()<maxf0d_m){ui->label_77->setPalette(sample_palette);}
+        if (mlogE.toDouble()>avgEu_m  || mlogE.toDouble()<avgEd_m){ui->label_78->setPalette(sample_palette);}
+        if (slogE.toDouble()>stdEu_m  || slogE.toDouble()<stdEd_m){ui->label_79->setPalette(sample_palette);}
+        if (mmlogE.toDouble()>maxEu_m  || mmlogE.toDouble()<maxEd_m){ui->label_80->setPalette(sample_palette);}
+        if (Vrate.toDouble()>Vrateu_m  || Vrate.toDouble()<Vrated_m){ui->label_69->setPalette(sample_palette);}
+        if (avgdurv.toDouble()>avgdurVu_m  || avgdurv.toDouble()<avgdurVd_m){ui->label_70->setPalette(sample_palette);}
+        if (stddurv.toDouble()>stddurVu_m  || stddurv.toDouble()<stddurVd_m){ui->label_71->setPalette(sample_palette);}
+        if (Silrate.toDouble()>Srateu_m  || Silrate.toDouble()<Srated_m){ui->label_72->setPalette(sample_palette);}
+        if (avgdurs.toDouble()>avgdurSu_m  || avgdurs.toDouble()<avgdurSd_m){ui->label_73->setPalette(sample_palette);}
+        if (stddurs.toDouble()>stddurSu_m  || stddurs.toDouble()<stddurSd_m){ui->label_74->setPalette(sample_palette);}
+        if (varf0semi.toDouble()>varF0semiu_m  || varf0semi.toDouble()<varF0semid_m){ui->label_187->setPalette(sample_palette);}
+
+        ui->label_107->setText(QString{ "%1->%2" }.arg( avgf0d_m).arg(avgf0u_m));
+        ui->label_108->setText(QString{ "%1->%2" }.arg( stdf0d_m).arg(stdf0u_m));
+        ui->label_109->setText(QString{ "%1->%2" }.arg( maxf0d_m).arg(maxf0u_m));
+        ui->label_110->setText(QString{ "%1->%2" }.arg( avgEd_m).arg(avgEu_m));
+        ui->label_111->setText(QString{ "%1->%2" }.arg( stdEd_m).arg(stdEu_m));
+        ui->label_112->setText(QString{ "%1->%2" }.arg( maxEd_m).arg(maxEu_m));
+        ui->label_113->setText(QString{ "%1->%2" }.arg( Vrated_m).arg(Vrateu_m));
+        ui->label_114->setText(QString{ "%1->%2" }.arg( avgdurVd_m).arg(avgdurVu_m));
+        ui->label_115->setText(QString{ "%1->%2" }.arg( stddurVd_m).arg(stddurVu_m));
+        ui->label_116->setText(QString{ "%1->%2" }.arg( Srated_m).arg(Srateu_m));
+        ui->label_117->setText(QString{ "%1->%2" }.arg( avgdurSd_m).arg(avgdurSu_m));
+        ui->label_118->setText(QString{ "%1->%2" }.arg( stddurSd_m).arg(stddurSu_m));
+        ui->label_186->setText(QString{ "%1->%2" }.arg( varF0semid_m).arg(varF0semiu_m));
+
     }
-    if (mmF0.toDouble()>maxf0u  || mmF0.toDouble()<maxf0d){
-        ui->label_77->setPalette(sample_palette);
+
+
+    if(ref_female){
+        ui->radarPros->setPixmap(QPixmap( path_base+"prosodyradarfemale.png" ) );
     }
-    if (mlogE.toDouble()>avgEu  || mlogE.toDouble()<avgEd){
-        ui->label_78->setPalette(sample_palette);
+    else{
+        ui->radarPros->setPixmap(QPixmap( path_base+"prosodyradarmale.png" ) );
     }
-    if (slogE.toDouble()>stdEu  || slogE.toDouble()<stdEd){
-        ui->label_79->setPalette(sample_palette);
-    }
-    if (mmlogE.toDouble()>maxEu  || mmlogE.toDouble()<maxEd){
-        ui->label_80->setPalette(sample_palette);
-    }
-    if (Vrate.toDouble()>Vrateu  || Vrate.toDouble()<Vrated){
-        ui->label_69->setPalette(sample_palette);
-    }
-    if (avgdurv.toDouble()>avgdurVu  || avgdurv.toDouble()<avgdurVd){
-        ui->label_70->setPalette(sample_palette);
-    }
-    if (stddurv.toDouble()>stddurVu  || stddurv.toDouble()<stddurVd){
-        ui->label_71->setPalette(sample_palette);
-    }
-    if (Silrate.toDouble()>Srateu  || Silrate.toDouble()<Srated){
-        ui->label_72->setPalette(sample_palette);
-    }
-    if (avgdurs.toDouble()>avgdurSu  || avgdurs.toDouble()<avgdurSd){
-        ui->label_73->setPalette(sample_palette);
-    }
-    if (stddurs.toDouble()>stddurSu  || stddurs.toDouble()<stddurSd){
-        ui->label_74->setPalette(sample_palette);
-    }
+
 }
 
 bool MainWindow::fileExists(QString path) {
@@ -1690,10 +1798,11 @@ void MainWindow::processBuffer(const QAudioBuffer& buffer)
 
 int MainWindow::printpdf(QString inputhtml, QString otputfile){
 
+
     QString current_path=QDir::currentPath();
     QString featuresPhonation=current_path+"/../phonVowels/feat.txt";
-QString line;
-QList<QString> feat;
+    QString line;
+    QList<QString> feat;
     QFile filefeatphonation(featuresPhonation);
     if (!filefeatphonation.open(QIODevice::ReadOnly | QIODevice::Text))
         return -1;
@@ -1707,7 +1816,9 @@ QList<QString> feat;
     QString shimmer=feat[1];
     QString APQ=feat[2];
     QString PPQ=feat[3];
-    QString logE=feat[4];
+    QString degU=feat[6];
+    QString varF0=feat[7];
+
     QList<QString> featartv;
     QString featuresArtVowels=current_path+"/../artVowels/feat.txt";
     QFile filefeaturesArtVowels(featuresArtVowels);
@@ -1751,6 +1862,7 @@ QList<QString> feat;
     QString Silrate=featpros[9];
     QString avgdurs=featpros[10];
     QString stddurs=featpros[11];
+    QString varF0semip=featpros[12];
     QString Predicted=current_path+"/../evaluation/predmFDA.txt";
     QList<QString> Predictedlist;
     QFile filePred(Predicted);
@@ -1761,10 +1873,32 @@ QList<QString> feat;
         Predictedlist.append(line);
     }
 
-
-
-
     filePred.close();
+
+
+
+    QString featuresDDK=current_path+"/../DDK/feat.txt";
+    QList<QString> featDDK;
+    QFile filefeatDDK(featuresDDK);
+    if (!filefeatDDK.open(QIODevice::ReadOnly | QIODevice::Text))
+        return -3;
+    while (!filefeatDDK.atEnd()) {
+         line = filefeatDDK.readLine();
+        featDDK.append(line);
+    }
+    filefeatDDK.close();
+    QString varF0semi=featDDK[0];
+    QString sF0d=featDDK[1];
+    QString mlogEd=featDDK[2];
+    QString slogEd=featDDK[3];
+    QString DDKrate=featDDK[5];
+    QString avgdurDDK=featDDK[6];
+    QString stddurDDK=featDDK[7];
+    QString Silrated=featDDK[8];
+    QString avgdursd=featDDK[9];
+    QString stddursd=featDDK[10];
+
+
 
   QDir::setCurrent(QCoreApplication::applicationDirPath());
 
@@ -1784,49 +1918,90 @@ QList<QString> feat;
 
 htmlContentLines[1].replace("Logo.png", current_path+"/../PDTool/Logo.png");
 htmlContentLines[10].replace("phonation1.png", current_path+"/../phonVowels/phonation1.png");
-htmlContentLines[10].replace("phonation2.png", current_path+"/../phonVowels/phonation2.png");
-htmlContentLines[80].replace("articulation1.png", current_path+"/../artVowels/articulation1.png");
-htmlContentLines[80].replace("articulation2.png", current_path+"/../artCont/articulation.png");
-htmlContentLines[183].replace("prosody1.png", current_path+"/../prosody/prosody.png");
-htmlContentLines[183].replace("prosody2.png", current_path+"/../prosody/prosodyradar.png");
-htmlContentLines[308].replace("intelligibility.png", current_path+"/../intelligibility/intelligibility.png");
-htmlContentLines[445].replace("prediction.png", current_path+"/../evaluation/prediction.png");
+if (ref_female){htmlContentLines[10].replace("phonation2.png", current_path+"/../phonVowels/phonation2female.png");}
+if (ref_male){htmlContentLines[10].replace("phonation2.png", current_path+"/../phonVowels/phonation2male.png");}
+qDebug() <<htmlContentLines[62];
+htmlContentLines[62].replace("articulation1.png", current_path+"/../artVowels/articulation1.png");
+if (ref_female){htmlContentLines[62].replace("articulation2.png", current_path+"/../artCont/articulationfemale.png");}
+if (ref_male){htmlContentLines[62].replace("articulation2.png", current_path+"/../artCont/articulationmale.png");}
+qDebug() <<htmlContentLines[124];
+htmlContentLines[124].replace("prosody1.png", current_path+"/../prosody/prosody.png");
+if (ref_female){htmlContentLines[124].replace("prosody2.png", current_path+"/../prosody/prosodyradarfemale.png");}
+if (ref_male){htmlContentLines[124].replace("prosody2.png", current_path+"/../prosody/prosodyradarmale.png");}
+qDebug() <<htmlContentLines[200];
+htmlContentLines[200].replace("ddk1.png", current_path+"/../DDK/DDK.png");
+if (ref_female){htmlContentLines[200].replace("ddk2.png", current_path+"/../DDK/DDKradarfemale.png");}
+if (ref_male){htmlContentLines[200].replace("ddk2.png", current_path+"/../DDK/DDKradarmale.png");}
+
+
+if (fileExists(current_path+"/../intelligibility/intelligibility.png")){
+    htmlContentLines[278].replace("intelligibility.png", current_path+"/../intelligibility/intelligibility.png");
+}
+qDebug() <<htmlContentLines[355];
+htmlContentLines[355].replace("prediction.png", current_path+"/../evaluation/prediction.png");
 htmlContentLines[5].replace("Fist Name:", "First Name:"+namePatient);
 htmlContentLines[6].replace("Last Name:", "Last Name:"+lastPatient);
-htmlContentLines[26].replace('-', jitter);
-htmlContentLines[37].replace('-', shimmer);
-htmlContentLines[48].replace('-', APQ);
-htmlContentLines[59].replace('-', PPQ);
-htmlContentLines[70].replace('-', logE);
-htmlContentLines[96].replace('-', mF1a);
-htmlContentLines[107].replace('-', mF2a);
-htmlContentLines[118].replace('-', mF1i);
-htmlContentLines[129].replace('-', mF2i);
-htmlContentLines[140].replace('-', mF1u);
-htmlContentLines[151].replace('-', mF2u);
-htmlContentLines[162].replace('-', VSA);
-htmlContentLines[173].replace('-', FCR);
-htmlContentLines[199].replace('-', Vrate);
-htmlContentLines[210].replace('-', avgdurv);
-htmlContentLines[221].replace('-', stddurv);
-htmlContentLines[232].replace('-', Silrate);
-htmlContentLines[243].replace('-', avgdurs);
-htmlContentLines[254].replace('-', stddurs);
-htmlContentLines[265].replace('-', mlogE);
-htmlContentLines[276].replace('-', slogE);
-htmlContentLines[287].replace('-', mF0);
-htmlContentLines[298].replace('-', sF0);
+qDebug() <<htmlContentLines[24];
+qDebug() <<htmlContentLines[30];
+qDebug() <<jitter;
+qDebug() <<shimmer;
+
+htmlContentLines[24].replace('-', jitter);
+htmlContentLines[30].replace('-', shimmer);
+htmlContentLines[36].replace('-', APQ);
+htmlContentLines[42].replace('-', PPQ);
+htmlContentLines[48].replace('-', degU);
+htmlContentLines[54].replace('-', varF0);
+qDebug() <<htmlContentLines[75];
+qDebug() <<htmlContentLines[80];
+qDebug() <<htmlContentLines[98];
+qDebug() <<mF1a;
+
+htmlContentLines[75].replace('-', mF1a);
+htmlContentLines[80].replace('-', mF2a);
+htmlContentLines[86].replace('-', mF1i);
+htmlContentLines[92].replace('-', mF2i);
+htmlContentLines[98].replace('-', mF1u);
+htmlContentLines[104].replace('-', mF2u);
+htmlContentLines[110].replace('-', VSA);
+htmlContentLines[116].replace('-', FCR);
+qDebug() <<htmlContentLines[138];
+qDebug() <<Vrate;
+htmlContentLines[138].replace('-', Vrate);
+htmlContentLines[144].replace('-', avgdurv);
+htmlContentLines[150].replace('-', stddurv);
+htmlContentLines[156].replace('-', Silrate);
+htmlContentLines[162].replace('-', avgdurs);
+htmlContentLines[168].replace('-', stddurs);
+htmlContentLines[174].replace('-', mlogE);
+htmlContentLines[180].replace('-', slogE);
+htmlContentLines[186].replace('-', mF0);
+htmlContentLines[192].replace('-', sF0);
+htmlContentLines[214].replace('-', DDKrate);
+qDebug() <<htmlContentLines[220];
+qDebug() <<avgdurDDK;
+htmlContentLines[220].replace('-', avgdurDDK);
+htmlContentLines[226].replace('-', stddurDDK);
+htmlContentLines[232].replace('-', Silrated);
+htmlContentLines[238].replace('-', avgdursd);
+htmlContentLines[244].replace('-', stddursd);
+htmlContentLines[250].replace('-', mlogEd);
+htmlContentLines[256].replace('-', slogEd);
+htmlContentLines[262].replace('-', sF0d);
+htmlContentLines[268].replace('-', varF0semi);
+
+
 QString waavgstr, dtwavgstr;
-htmlContentLines[324].replace('-', waavgstr.setNum(WAavg));
-htmlContentLines[335].replace('-', dtwavgstr.setNum(DTWavg));
-htmlContentLines[360].replace('-', Predictedlist[1]);
-htmlContentLines[371].replace('-', Predictedlist[2]);
-htmlContentLines[382].replace('-', Predictedlist[3]);
-htmlContentLines[393].replace('-', Predictedlist[4]);
-htmlContentLines[404].replace('-', Predictedlist[5]);
-htmlContentLines[415].replace('-', Predictedlist[6]);
-htmlContentLines[426].replace('-', Predictedlist[0]);
-htmlContentLines[437].replace('-', Predictedlist[7]);
+htmlContentLines[291].replace('-', waavgstr.setNum(WAavg));
+htmlContentLines[296].replace('-', dtwavgstr.setNum(DTWavg));
+htmlContentLines[315].replace('-', Predictedlist[1]);
+htmlContentLines[320].replace('-', Predictedlist[2]);
+htmlContentLines[325].replace('-', Predictedlist[3]);
+htmlContentLines[330].replace('-', Predictedlist[4]);
+htmlContentLines[335].replace('-', Predictedlist[5]);
+htmlContentLines[340].replace('-', Predictedlist[6]);
+htmlContentLines[345].replace('-', Predictedlist[0]);
+htmlContentLines[350].replace('-', Predictedlist[7]);
 htmlContent=htmlContentLines.join('\n');
   QTextDocument *document = new QTextDocument();
   document->setHtml(htmlContent);
@@ -1910,6 +2085,7 @@ void MainWindow::on_pushButton_9_clicked()
     namemain=va;
 
     QString comandpv="python "+path_base+mfdaScript+path_base+' '+va;
+    qDebug() <<comandpv;
     cmd.start(comandpv);
     cmd.waitForFinished(-1);
 
@@ -1946,4 +2122,336 @@ void MainWindow::on_pushButton_7_clicked()
     player->setVolume(50);
     player->play();
 
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+
+    QLinearGradient plotGradient;
+    plotGradient.setStart(0, 0);
+    plotGradient.setFinalStop(0, 350);
+    plotGradient.setColorAt(0, QColor(230, 230, 230));
+    plotGradient.setColorAt(1, QColor(220, 220, 220));
+    QPen pen;
+
+    QProcess cmd;
+    QStringList ls;
+    QString va;
+    qDebug()<<path_patient;
+    QString current_path=QDir::currentPath();
+    QString path_base=current_path+"/../DDK/";
+
+    if (flagCuted==0){
+    if (!QDir(path_patient).exists() || path_patient==""){
+        ls = QFileDialog::getOpenFileNames(this, choosecont, "", "Audio-Files(*.wav)");
+        va=ls[0];
+    }
+    else{
+        va=path_patient+"/DDK1.wav";
+    }}
+    else{va=current_path+"/../test.wav";}
+    if (flagCuted==1){flagCuted=0;}
+
+    file_2play=va;
+
+    QString comandpv="python "+path_base+ddkScript+va+" "+path_base+"featf0.txt "+ path_base+"featEnergy.txt "+path_base+"feat.txt "+path_base;
+    cmd.start(comandpv);
+    cmd.waitForFinished(-1);
+
+    qDebug() << comandpv;
+    QVector<double> y=readWavFile(va);
+    QVector<double> x((int)y.size());
+    for (int i=0; i<(int)y.size(); i++){
+      x[i] = ((double)i)/fs;
+    }
+     ui->customPlot_10->clearGraphs();
+    ui->customPlot_10->addGraph();
+    ui->customPlot_10->graph()->setData(x,y);
+    ui->customPlot_10->xAxis->setRange(0, (double)x.size()/fs);
+    ui->customPlot_10->yAxis->setRange(-1, 1);
+    ui->customPlot_10->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_10->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_10->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_10->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_10->xAxis->setLabel(xaxistime);
+    ui->customPlot_10->yAxis->setLabel(yaxisA);
+    ui->customPlot_10->setBackground(plotGradient);
+    pen.setColor(QColor(0,120,0));
+    ui->customPlot_10->graph()->setPen(pen);
+    ui->customPlot_10->replot();
+    //ui->customPlot_10->savePng(current_path+"/../DDK.png");
+    ui->radarDDK->setPixmap(QPixmap( path_base+"DDKradar.png" ) );
+    ui->radarDDK->setScaledContents(true);
+    ui->radarDDK->show();
+
+    QList<QString> feat;
+    QFile filefeat(path_base+"feat.txt");
+    qDebug() << "filefeat: " << current_path+"feat.txt";
+    if (!filefeat.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    while (!filefeat.atEnd()) {
+        QString line = filefeat.readLine();
+        feat.append(line);
+    }
+    QVector<double> F0;
+    QVector<double> time;
+    QFile fileF0(path_base+"featf0.txt");
+    qDebug() << "fileF0: " << path_base+"featf0.txt";
+    if (!fileF0.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    int nframes=0;
+    QString mmF0=feat[11];
+    while (!fileF0.atEnd()) {
+        QString line = fileF0.readLine();
+        F0.append(line.toDouble());
+        time.append((double)nframes/50);
+        nframes++;
+    }
+    qDebug() << "Nframes: " << nframes;
+    ui->customPlot_11->clearGraphs();
+    ui->customPlot_11->addGraph();
+    ui->customPlot_11->graph()->setData(time,F0);
+    ui->customPlot_11->xAxis->setRange(0, (double)x.size()/fs);
+    ui->customPlot_11->yAxis->setRange(0, mmF0.toDouble());
+    ui->customPlot_11->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_11->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_11->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_11->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_11->xAxis->setLabel(xaxistime);
+    ui->customPlot_11->yAxis->setLabel(yaxisfreq);
+    ui->customPlot_11->setBackground(plotGradient);
+    pen.setColor(QColor(0,120,0));
+    ui->customPlot_11->graph()->setPen(pen);
+    ui->customPlot_11->replot();
+    //ui->customPlot_11->savePng(current_path+"/../prosody2.png");
+
+    QVector<double> logE;
+    QVector<double> timeEn;
+    QFile filelogE(path_base+"featEnergy.txt");
+    if (!filelogE.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    nframes=0;
+    QString mmlogE=feat[4];
+    while (!filelogE.atEnd()) {
+      QString  line = filelogE.readLine();
+        logE.append(line.toDouble());
+        timeEn.append((double)nframes/100);
+        nframes++;
+    }
+    qDebug() << "Nframes: " << nframes;
+    ui->customPlot_12->clearGraphs();
+    ui->customPlot_12->addGraph();
+    ui->customPlot_12->graph()->setData(timeEn,logE);
+    ui->customPlot_12->xAxis->setRange(0, (double)x.size()/fs);
+    ui->customPlot_12->yAxis->setRange(0, qPow(10, 0.1*mmlogE.toDouble()));
+    ui->customPlot_12->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_12->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_12->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_12->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_12->xAxis->setLabel(xaxistime);
+    ui->customPlot_12->yAxis->setLabel(yaxislogE);
+    ui->customPlot_12->setBackground(plotGradient);
+    pen.setColor(QColor(0,120,0));
+    ui->customPlot_12->graph()->setPen(pen);
+    ui->customPlot_12->replot();
+    //ui->customPlot_12->savePng(current_path+"/../prosody3.png");
+
+    //feat=[F0varsemi, sF0, mlogE, slogE, mmlogE, DDKrate, avgdurddk, stddurddk, Silrate, avgdurs, stddurs]
+    ui->label_167->setText(feat[0]); // fo variability in semitones
+    ui->label_159->setText(feat[1]); // std f0
+    ui->label_165->setText(feat[2]); // average energy ddk
+    ui->label_160->setText(feat[3]); // std energy
+    ui->label_168->setText(feat[4]); // max energy
+    ui->label_169->setText(feat[5]); // DDK rate
+    ui->label_163->setText(feat[7]); // DDK regularity
+    ui->label_166->setText(feat[6]); // avg duration DDK
+    ui->label_161->setText(feat[8]); // pause_rate
+    ui->label_162->setText(feat[9]); // avg dur pause
+    ui->label_164->setText(feat[10]); // regularity_pauses
+
+    ui->customPlot->clearGraphs();
+    ui->customPlot->addGraph();
+    ui->customPlot->graph()->setData(x,y);
+    ui->customPlot->xAxis->setRange(0, (double)x.size()/fs);
+    ui->customPlot->yAxis->setRange(-1, 1);
+    ui->customPlot->xAxis->setLabel(xaxistime);
+    ui->customPlot->yAxis->setLabel(yaxisA);
+    ui->customPlot->setBackground(plotGradient);
+    pen.setColor(QColor(0,120,0));
+    ui->customPlot->graph()->setPen(pen);
+    xmain=x;
+    ymain=y;
+    ui->customPlot->replot();
+    xrange=ui->customPlot->xAxis->range();
+    namemain=va;
+    QPalette sample_palette;
+    sample_palette.setColor(QPalette::Window, Qt::white);
+    sample_palette.setColor(QPalette::WindowText, Qt::red);
+
+    if (ref_female){
+        if (feat[0].toDouble()>varF0semiddku_f  || feat[0].toDouble()<varF0semiddkd_f){ui->label_167->setPalette(sample_palette);}
+        if (feat[1].toDouble()>stdf0ddku_f  || feat[1].toDouble()<stdf0ddkd_f){ui->label_159->setPalette(sample_palette);}
+        if (feat[2].toDouble()>avgEddku_f  || feat[2].toDouble()<avgEddkd_f){ui->label_165->setPalette(sample_palette);}
+        if (feat[3].toDouble()>stdEddku_f  || feat[3].toDouble()<stdEddkd_f){ui->label_160->setPalette(sample_palette);}
+        if (feat[4].toDouble()>maxEddku_f  || feat[4].toDouble()<maxEddkd_f){ui->label_168->setPalette(sample_palette);}
+        if (feat[5].toDouble()>DDKrateu_f  || feat[5].toDouble()<DDKrated_f){ui->label_169->setPalette(sample_palette);}
+        if (feat[6].toDouble()>avgdurDDKu_f  || feat[6].toDouble()<avgdurDDKd_f){ui->label_166->setPalette(sample_palette);}
+        if (feat[7].toDouble()>DDKregu_f  || feat[7].toDouble()<DDKregd_f){ui->label_163->setPalette(sample_palette);}
+        if (feat[8].toDouble()>Srateddku_f  || feat[8].toDouble()<Srateddkd_f){ui->label_161->setPalette(sample_palette);}
+        if (feat[9].toDouble()>avgdurSddku_f  || feat[9].toDouble()<avgdurSddkd_f){ui->label_162->setPalette(sample_palette);}
+        if (feat[10].toDouble()>stddurSddku_f  || feat[10].toDouble()<stddurSddkd_f){ui->label_164->setPalette(sample_palette);}
+
+        ui->label_192->setText(QString{ "%1->%2" }.arg( varF0semiddkd_f).arg(varF0semiddku_f));
+        ui->label_193->setText(QString{ "%1->%2" }.arg( stdf0ddkd_f).arg(stdf0ddku_f));
+        ui->label_194->setText(QString{ "%1->%2" }.arg( avgEddkd_f).arg(avgEddku_f));
+        ui->label_195->setText(QString{ "%1->%2" }.arg( stdEddkd_f).arg(stdEddku_f));
+        ui->label_196->setText(QString{ "%1->%2" }.arg( maxEddkd_f).arg(maxEddku_f));
+        ui->label_197->setText(QString{ "%1->%2" }.arg( DDKrated_f).arg(DDKrateu_f));
+        ui->label_199->setText(QString{ "%1->%2" }.arg( avgdurDDKd_f).arg(avgdurDDKu_f));
+        ui->label_198->setText(QString{ "%1->%2" }.arg( DDKregd_f).arg(DDKregu_f));
+        ui->label_200->setText(QString{ "%1->%2" }.arg( Srateddkd_f).arg(Srateddku_f));
+        ui->label_201->setText(QString{ "%1->%2" }.arg( avgdurSddkd_f).arg(avgdurSddku_f));
+        ui->label_202->setText(QString{ "%1->%2" }.arg( stddurSddkd_f).arg(stddurSddku_f));
+
+
+    }
+    else{
+        if (feat[0].toDouble()>varF0semiddku_m  || feat[0].toDouble()<varF0semiddkd_m){ui->label_167->setPalette(sample_palette);}
+        if (feat[1].toDouble()>stdf0ddku_m  || feat[1].toDouble()<stdf0ddkd_m){ui->label_159->setPalette(sample_palette);}
+        if (feat[2].toDouble()>avgEddku_m  || feat[2].toDouble()<avgEddkd_m){ui->label_165->setPalette(sample_palette);}
+        if (feat[3].toDouble()>stdEddku_m  || feat[3].toDouble()<stdEddkd_m){ui->label_160->setPalette(sample_palette);}
+        if (feat[4].toDouble()>maxEddku_m  || feat[4].toDouble()<maxEddkd_m){ui->label_168->setPalette(sample_palette);}
+        if (feat[5].toDouble()>DDKrateu_m  || feat[5].toDouble()<DDKrated_m){ui->label_169->setPalette(sample_palette);}
+        if (feat[6].toDouble()>avgdurDDKu_m  || feat[6].toDouble()<avgdurDDKd_m){ui->label_166->setPalette(sample_palette);}
+        if (feat[7].toDouble()>DDKregu_m  || feat[7].toDouble()<DDKregd_m){ui->label_163->setPalette(sample_palette);}
+        if (feat[8].toDouble()>Srateddku_m  || feat[8].toDouble()<Srateddkd_m){ui->label_161->setPalette(sample_palette);}
+        if (feat[9].toDouble()>avgdurSddku_m  || feat[9].toDouble()<avgdurSddkd_m){ui->label_162->setPalette(sample_palette);}
+        if (feat[10].toDouble()>stddurSddku_m  || feat[10].toDouble()<stddurSddkd_m){ui->label_164->setPalette(sample_palette);}
+
+
+        ui->label_192->setText(QString{ "%1->%2" }.arg( varF0semiddkd_m).arg(varF0semiddku_m));
+        ui->label_193->setText(QString{ "%1->%2" }.arg( stdf0ddkd_m).arg(stdf0ddku_m));
+        ui->label_194->setText(QString{ "%1->%2" }.arg( avgEddkd_m).arg(avgEddku_m));
+        ui->label_195->setText(QString{ "%1->%2" }.arg( stdEddkd_m).arg(stdEddku_m));
+        ui->label_196->setText(QString{ "%1->%2" }.arg( maxEddkd_m).arg(maxEddku_m));
+        ui->label_197->setText(QString{ "%1->%2" }.arg( DDKrated_m).arg(DDKrateu_m));
+        ui->label_199->setText(QString{ "%1->%2" }.arg( avgdurDDKd_m).arg(avgdurDDKu_m));
+        ui->label_198->setText(QString{ "%1->%2" }.arg( DDKregd_m).arg(DDKregu_m));
+        ui->label_200->setText(QString{ "%1->%2" }.arg( Srateddkd_m).arg(Srateddku_m));
+        ui->label_201->setText(QString{ "%1->%2" }.arg( avgdurSddkd_m).arg(avgdurSddku_m));
+        ui->label_202->setText(QString{ "%1->%2" }.arg( stddurSddkd_m).arg(stddurSddku_m));
+
+
+
+    }
+
+
+    if(ref_female){
+        ui->radarDDK->setPixmap(QPixmap( path_base+"DDKradarfemale.png" ) );
+    }
+    else{
+        ui->radarDDK->setPixmap(QPixmap( path_base+"DDKradarmale.png" ) );
+    }
+
+
+
+}
+
+void MainWindow::on_radioButton_1_clicked()
+{
+    ref_female=true;
+    ref_male=false;
+}
+
+void MainWindow::on_radioButton_2_clicked()
+{
+    ref_female=false;
+    ref_male=true;
+}
+
+void MainWindow::on_radioButton_4_clicked() // f0 in Hz
+{
+
+    QString current_path=QDir::currentPath();
+    QString path_base=current_path+"/../phonVowels/";
+    QVector<double> F0;
+    QVector<double> time;
+    QFile fileF0(path_base+"featf0.txt");
+    if (!fileF0.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    int nframes=0;
+    double maxF0=0;
+    while (!fileF0.atEnd()) {
+        QString line = fileF0.readLine();
+        F0.append(line.toDouble());
+        if (line.toDouble()>maxF0){maxF0=line.toDouble();}
+        time.append((double)nframes/100);
+        nframes++;
+    }
+    QLinearGradient plotGradient;
+    plotGradient.setStart(0, 0);
+    plotGradient.setFinalStop(0, 350);
+    plotGradient.setColorAt(0, QColor(230, 230, 230));
+    plotGradient.setColorAt(1, QColor(220, 220, 220));
+
+
+    QPen pen;
+
+    ui->customPlot_3->clearGraphs();
+    ui->customPlot_3->addGraph();
+    ui->customPlot_3->graph()->setData(time,F0);
+
+    ui->customPlot_3->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->xAxis->setLabel(xaxistime);
+    ui->customPlot_3->yAxis->setLabel(yaxisfreq);
+    ui->customPlot_3->setBackground(plotGradient);
+    pen.setColor(QColor(0,120,0));
+    ui->customPlot_3->graph()->setPen(pen);
+    ui->customPlot_3->replot();
+}
+
+void MainWindow::on_radioButton_3_clicked() // f0 in semitones
+{
+    QString current_path=QDir::currentPath();
+    QString path_base=current_path+"/../phonVowels/";
+    QVector<double> F0;
+    QVector<double> time;
+    QFile fileF0(path_base+"featf0semi.txt");
+    if (!fileF0.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+    int nframes=0;
+    double maxF0=0;
+    while (!fileF0.atEnd()) {
+        QString line = fileF0.readLine();
+        F0.append(line.toDouble());
+        if (line.toDouble()>maxF0){maxF0=line.toDouble();}
+        time.append((double)nframes/100);
+        nframes++;
+    }
+
+
+    QLinearGradient plotGradient;
+    plotGradient.setStart(0, 0);
+    plotGradient.setFinalStop(0, 350);
+    plotGradient.setColorAt(0, QColor(230, 230, 230));
+    plotGradient.setColorAt(1, QColor(220, 220, 220));
+
+    QPen pen;
+
+    ui->customPlot_3->clearGraphs();
+    ui->customPlot_3->addGraph();
+    ui->customPlot_3->graph()->setData(time,F0);
+    ui->customPlot_3->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->xAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->yAxis->setLabelFont(QFont(QFont().family(), 12));
+    ui->customPlot_3->xAxis->setLabel(xaxistime);
+    ui->customPlot_3->yAxis->setLabel(yaxissemi);
+    ui->customPlot_3->setBackground(plotGradient);
+    pen.setColor(QColor(0,120,0));
+    ui->customPlot_3->graph()->setPen(pen);
+    ui->customPlot_3->replot();
 }

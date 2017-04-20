@@ -33,9 +33,13 @@ posnan=np.isnan(features)
 features[posnan]=0
 
 filest=folderSVR+'scaler.obj'
-fid2=open(filest, 'r')
-st=cp.load(fid2)
-fid2.close()
+try:
+    fid2=open(filest, 'r')
+    st=cp.load(fid2)
+    fid2.close()
+except:
+    with open(filest, 'rb') as f:
+        st = cp.load(f, encoding='latin1') 
 
 
 
@@ -59,17 +63,22 @@ Features=np.hstack((features, featuresGCCA.T[0]))
 
 intpred=np.zeros(8)
 print(Features.shape)
-fid=open(fileSVR, 'r')
+fid=open(fileSVR, 'rb')
 svr=cp.load(fid)
 fid.close()
 predsvr=svr.predict(Features)
 intpred[0]=np.round(predsvr)
 
 
+try:
+    fid=open(fileSVRUPDRS, 'r')
+    svr2=cp.load(fid)
+    fid.close()
+except:
+    with open(fileSVRUPDRS, 'rb') as f:
+        svr2 = cp.load(f, encoding='latin1') 
 
-fid=open(fileSVRUPDRS, 'r')
-svr2=cp.load(fid)
-fid.close()
+
 predsvr2=svr2.predict(Features)
 if predsvr2<0:
     predsvr2=0
@@ -80,45 +89,76 @@ intpred[7]=np.round(predsvr2)
 
 
 fileSVMresp=folderSVR+'SVMtrainedrespiration.obj'
-fid=open(fileSVMresp, 'r')
-cls=cp.load(fid)
-fid.close()
+try:
+    fid=open(fileSVMresp, 'r')
+    cls=cp.load(fid)
+    fid.close()
+except:
+    with open(fileSVMresp, 'rb') as f:
+        cls = cp.load(f, encoding='latin1') 
+        
 pred=cls.predict(features)
 intpred[1]=np.round(pred)
 
 fileSVMlips=folderSVR+'SVMtrainedlips.obj'
-fid=open(fileSVMlips, 'r')
-cls=cp.load(fid)
-fid.close()
+try:
+    fid=open(fileSVMlips, 'r')
+    cls=cp.load(fid)
+    fid.close()
+except:
+    with open(fileSVMlips, 'rb') as f:
+        cls = cp.load(f, encoding='latin1') 
+  
+  
+  
+  
 pred=cls.predict(features)
 intpred[2]=np.round(pred)
 
 fileSVMpal=folderSVR+'SVMtrainedpalate.obj'
-fid=open(fileSVMpal, 'r')
-cls=cp.load(fid)
-fid.close()
+try:
+    fid=open(fileSVMpal, 'r')
+    cls=cp.load(fid)
+    fid.close()
+except:
+    with open(fileSVMpal, 'rb') as f:
+        cls = cp.load(f, encoding='latin1') 
+
+    
 pred=cls.predict(features)
 intpred[3]=np.round(pred)
 
 fileSVMlx=folderSVR+'SVMtrainedlarinx.obj'
-fid=open(fileSVMlx, 'r')
-cls=cp.load(fid)
-fid.close()
+try:
+    fid=open(fileSVMlx, 'r')
+    cls=cp.load(fid)
+    fid.close()
+except:
+    with open(fileSVMlx, 'rb') as f:
+        cls = cp.load(f, encoding='latin1') 
 pred=cls.predict(features)
 intpred[4]=np.round(pred)
 
 
 fileSVMlx=folderSVR+'SVMtrainedtongue.obj'
-fid=open(fileSVMlx, 'r')
-cls=cp.load(fid)
-fid.close()
+try:
+    fid=open(fileSVMlx, 'r')
+    cls=cp.load(fid)
+    fid.close()
+except:
+    with open(fileSVMlx, 'rb') as f:
+        cls = cp.load(f, encoding='latin1') 
 pred=cls.predict(features)
 intpred[5]=np.round(pred)
 
 fileSVMlx=folderSVR+'SVMtrainedint.obj'
-fid=open(fileSVMlx, 'r')
-cls=cp.load(fid)
-fid.close()
+try:
+    fid=open(fileSVMlx, 'r')
+    cls=cp.load(fid)
+    fid.close()
+except:
+    with open(fileSVMlx, 'rb') as f:
+        cls = cp.load(f, encoding='latin1') 
 pred=cls.predict(features)
 intpred[6]=np.round(pred)
 
@@ -134,6 +174,8 @@ labels=np.asarray(medians)
 
 
 fig = plt.figure(figsize=(12,5))
+fig.patch.set_visible(False)
+
 plt.subplot(121)
 plt.hist(labels[0:50], 20, color='g', alpha=0.5, label='Patients')
 plt.hist(labels[50:-1], 20, color='c', alpha=0.5, label='Healthy Controls')

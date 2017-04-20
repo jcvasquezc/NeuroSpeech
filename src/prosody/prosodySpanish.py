@@ -30,7 +30,7 @@ def prosody(audio, path_base):
     F0=decodeF0(path_base+'tempF0.txt')
     logE=[]    
     for l in range(nF):
-        data_frame=data_audio[int(l*size_stepS):(l*size_stepS+size_frameS)]
+        data_frame=data_audio[int(l*size_stepS):int(l*size_stepS+size_frameS)]
         logE.append(10.0**logEnergy(data_frame))
     logE=np.asarray(logE)
 

@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import os, sys
 import numpy as np
 import math 
-from radarArt import *
+from radarArt import plot_radar
 
 def artCont(audio, path_base):
     print(audio)
@@ -31,10 +31,12 @@ def artCont(audio, path_base):
     meOff, stOff=extractTrans(segmentsOff, fs, size_frameS, size_stepS, nB)
 
     dataradar=np.hstack((meOn[0:22], meOff[0:22]))
-    BBEonmeref = np.asarray([7.86, 8.57, 8.47, 8.05, 7.69, 7.32, 6.95, 6.56, 6.20, 6.02, 5.93, 5.85, 5.79, 5.78, 5.71, 5.48, 5.24, 5.05, 4.71, 4.54, 4.48, 3.44])
-    BBEonstref =np.asarray([0.84, 1.04, 1.19, 1.42, 1.60, 1.69, 1.68, 1.60, 1.57, 1.55, 1.55, 1.55, 1.56, 1.56, 1.56, 1.51, 1.45, 1.41, 1.28, 1.22, 1.18, 1.19]) 
-    BBEoffmeref = np.asarray([8.15, 9.07, 9.01, 8.58, 8.20, 7.73, 7.27, 6.80, 6.35, 6.07, 5.95, 5.83, 5.70, 5.66, 5.58, 5.31, 5.04, 4.83, 4.53, 4.37, 4.32, 3.46])
-    BBEoffstref= np.asarray([0.66, 0.68, 0.72, 0.89, 1.07, 1.20, 1.28, 1.26, 1.23, 1.20, 1.21, 1.20, 1.17, 1.18, 1.18, 1.14, 1.11, 1.07, 1.00, 0.96, 0.96, 0.95])
+
+    BBEonmeref = np.asarray([7.16, 7.92, 8, 7.54, 7.17, 6.86, 6.48, 6.09, 5.75, 5.54, 5.47, 5.48, 5.53, 5.44, 5.34, 5.14, 4.85, 4.78, 4.5, 4.32, 4.35, 3.21])
+    BBEonstref =np.asarray([0.77, 1.02, 1.22, 1.38, 1.54, 1.66, 1.65, 1.61, 1.59, 1.57, 1.57, 1.64, 1.72, 1.71, 1.67, 1.62, 1.47, 1.45, 1.34, 1.3, 1.31, 1.3] ) 
+    BBEoffmeref = np.asarray([7.46, 8.59, 8.71, 8.18, 7.78, 7.33, 6.85, 6.39, 5.94, 5.65, 5.54, 5.53, 5.47, 5.32, 5.22, 4.97, 4.66, 4.56, 4.32, 4.17, 4.18, 3.23])
+    BBEoffstref= np.asarray([0.71, 0.73, 0.73, 0.85, 1.04, 1.15, 1.19, 1.18, 1.16, 1.14, 1.14, 1.21, 1.26, 1.26, 1.24, 1.22, 1.18, 1.19, 1.15, 1.16, 1.19, 1.09])
+    
     
     refh=np.hstack((BBEonmeref, BBEoffmeref))+np.hstack((BBEonstref, BBEoffstref))
     refl=np.hstack((BBEonmeref, BBEoffmeref))-np.hstack((BBEonstref, BBEoffstref))
@@ -42,28 +44,26 @@ def artCont(audio, path_base):
     names1=['BBE_on'+str(k) for k in range(1,23)]
     names2=['BBE_off'+str(k) for k in range(1,23)]
     names=np.hstack((names1, names2))
-    """
-    segmentsOn80, fs=decode_Texgrid(path_base+'vuv.txt', audio, 'Onset', win_trans=0.08)
-    print(segmentsOn80)
-    print(len(segmentsOn80))
-    if len(segmentsOn80)>2:    
-        segmentsOn80=segmentsOn80[1:-2]
-        onsetSeg=np.vstack(segmentsOn80)
-        print(onsetSeg.shape)
-        transavg=np.mean(onsetSeg, 0)
-    else:
-        transavg=np.asarray(segmentsOn80[0])
 
-    plt.figure()
-    Spectrum, freqs, t, im =plt.specgram(transavg, NFFT=512, Fs=16000, noverlap=160)  
-    plt.imshow(Spectrum, extent=[1, 180, 8000, 1], aspect='auto',
-                   vmax=abs(Spectrum).max(), vmin=-abs(Spectrum).max())
-    plt.xlabel("Time [ms]", fontsize=22)
-    plt.ylabel("Frequency [Hz]", fontsize=22)
-    namefig=path_base+'stftTrans.png'
-    plt.savefig(namefig)
-    """
-    plot_radar(np.power(10, 0.1*dataradar), np.power(10, 0.1*refh), np.power(10, 0.1*refl), names, '', path_base+'articulation.png')    
+    plot_radar(np.power(10, 0.1*dataradar), np.power(10, 0.1*refh), np.power(10, 0.1*refl), names, '', path_base+'articulationfemale.png')    
+
+    # for males
+    BBEonmeref = np.asarray([8.1, 8.61, 8.32, 7.92, 7.65, 7.32, 6.93, 6.47, 6.13, 6.09, 6.08, 6.02, 5.96, 5.99, 5.88, 5.53, 5.4, 5.18, 4.88, 4.7, 4.57, 3.48])
+    BBEonstref =np.asarray([0.97, 1.13, 1.28, 1.49, 1.66, 1.75, 1.76, 1.65, 1.62, 1.62, 1.65, 1.66, 1.68, 1.71, 1.71, 1.59, 1.57, 1.48, 1.37, 1.31, 1.24, 1.23] ) 
+    BBEoffmeref = np.asarray([8.47, 9.15, 8.91, 8.46, 8.1, 7.62, 7.08, 6.49, 6.1, 5.99, 5.97, 5.87, 5.71, 5.71, 5.58, 5.21, 5.05, 4.82, 4.55, 4.4, 4.27, 3.39])
+    BBEoffstref= np.asarray([0.75, 0.73, 0.8, 0.99, 1.16, 1.32, 1.36, 1.31, 1.29, 1.31, 1.37, 1.38, 1.38, 1.42, 1.43, 1.34, 1.35, 1.29, 1.19, 1.13, 1.08, 1.02])
+    
+    
+    refh=np.hstack((BBEonmeref, BBEoffmeref))+np.hstack((BBEonstref, BBEoffstref))
+    refl=np.hstack((BBEonmeref, BBEoffmeref))-np.hstack((BBEonstref, BBEoffstref))
+ 
+    names1=['BBE_on'+str(k) for k in range(1,23)]
+    names2=['BBE_off'+str(k) for k in range(1,23)]
+    names=np.hstack((names1, names2))
+
+    plot_radar(np.power(10, 0.1*dataradar), np.power(10, 0.1*refh), np.power(10, 0.1*refl), names, '', path_base+'articulationmale.png') 
+
+
 
 #define BBEonmeref QVector<double>  [7.86, 8.57, 8.47, 8.05, 7.69, 7.32, 6.95, 6.56, 6.20, 6.02, 5.93, 5.85, 5.79, 5.78, 5.71, 5.48, 5.24, 5.05, 4.71, 4.54, 4.48, 3.44]
 #define BBEoffmeref QVector<double> [0.84, 1.04, 1.19, 1.42, 1.60, 1.69, 1.68, 1.60, 1.57, 1.55, 1.55, 1.55, 1.56, 1.56, 1.56, 1.51, 1.45, 1.41, 1.28, 1.22, 1.18, 1.19]
@@ -165,7 +165,7 @@ def fftsolp(x,nfft):
      y = y[:,0] 
      
      y = np.fft.fft(y,nfft)
-     y = (y[0:nfft/2+1])
+     y = (y[0:int(nfft/2+1)])
      return y
 
     
@@ -199,7 +199,7 @@ def extractTrans(segments, fs, size_frameS, size_stepS, nB, nfft=2048):
         if (len(segments[j])>size_frameS):
             nF=int((len(segments[j])/size_frameS)/overlap)-1
             for iF in range(nF):
-                frames.append(np.hamming(size_frameS)*segments[j][iF*size_stepS:iF*size_stepS+size_frameS])
+                frames.append(np.hamming(size_frameS)*segments[j][int(iF*size_stepS):int(iF*size_stepS+size_frameS)])
                     
     BarkEn=np.zeros((len(frames),nB)) 
     for j in range(len(frames)):    

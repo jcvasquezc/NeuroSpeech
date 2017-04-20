@@ -11,7 +11,7 @@ import os
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from radarPros import *
+from radarPros import plot_radar
 
 
 
@@ -30,7 +30,7 @@ def prosody(audio, path_base):
     F0=decodeF0(path_base+'tempF0.txt')
     logE=[]    
     for l in range(nF):
-        data_frame=data_audio[int(l*size_stepS):(l*size_stepS+size_frameS)]
+        data_frame=data_audio[int(l*size_stepS):int(l*size_stepS+size_frameS)]
         logE.append(10.0**logEnergy(data_frame))
     logE=np.asarray(logE)
 
@@ -83,7 +83,9 @@ def prosody(audio, path_base):
     t2=np.arange(0.0, t[-1], 1.0/fsp)
     print(len(t2), len(F0))
     if len(t2)>len(F0):
-        t2=t2[0:len(F0)]
+        t2=t2[:len(F0)]
+    elif len(F0)>len(t2):
+        F0=F0[:len(t2)]
     plt.plot(t2, F0, color='k', linewidth=2.0)
     plt.xlabel('Time (s)')
     plt.ylabel('F0 (Hz)')
@@ -93,8 +95,10 @@ def prosody(audio, path_base):
     plt.subplot(313)
     fse=len(logE)/t[-1]
     t3=np.arange(0.0, t[-1], 1.0/fse)
-    if len(t3)!=len(logE):
-        t3=np.arange(1.0/fse, t[-1], 1.0/fse)
+    if len(t3)>len(logE):
+        t3=t3[:len(logE)]
+    elif len(logE)>len(t3):
+        logE=logE[:len(t3)]
     print(len(t3), len(logE))
     plt.plot(t3, logE, color='k', linewidth=2.0)
     plt.xlabel('Time (s)')
@@ -106,18 +110,36 @@ def prosody(audio, path_base):
     plt.savefig(path_base+'prosody.png')
     plt.savefig(path_base+'prosody.pdf')
     
-    dataradar=np.asarray([np.std(F0[F0!=0]), 10*np.log10(np.mean(logE)), 10*np.log10(np.std(logE)), 10*np.log10(np.max(logE)), Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs])
-    refh=np.asarray([39, 9.4, 10.8, 18.8, 2.5, 521, 347, 0.6, 547, 271])
-    refl=np.asarray([22, 7.0, 9.0, 16.9, 1.7, 292, 209, 0.3, 211, 6])
- 
-    names=['stdF0', 'avgE', 'stdE', 'maxE', 'Vrate', 'avgdurV', 'stddurV', 'Silrate', 'avgdurSil', 'stddurSil']
-    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradar.png')    
-    
-    
-    
-    
-    return F0, logE, np.mean(F0[F0!=0]), np.std(F0[F0!=0]), np.max(F0), 10*np.log10(np.mean(logE)), 10*np.log10(np.std(logE)), 10*np.log10(np.max(logE)), Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs
+    F0std=np.std(F0[F0!=0])
+    F0varsemi=Hz2semitones(F0std**2)    
+    print(F0varsemi)
+    dataradar=np.asarray([F0varsemi, np.std(F0[F0!=0]), np.mean(logE), np.std(logE), np.max(logE), Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs])
+    print(dataradar)    
 
+    refl=np.asarray([74.5, 30.0, 10**(0.1*1.9), 10**(0.1*5.4), 10**(0.1*16.3), 1.3, 271.5, 200.1, 0.4, 360.5, 63.7])
+    refh=np.asarray([91.7, 47.0, 10**(0.1*6.8), 10**(0.1*9.3), 10**(0.1*19.2), 2.1, 463.5, 377.7, 0.7, 834.9, 721.9])
+    names=['varF0_semi', 'stdF0', 'avgE', 'stdE', 'maxE', 'Vrate', 'avgdurV', 'stddurV', 'Silrate', 'avgdurSil', 'stddurSil']
+    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradarfemale.png')    
+    
+    
+    refl=np.asarray([58.5, 19.0, 10**(0.1*2.3), 10**(0.1*5.6), 10**(0.1*15.8), 1.1, 241., 169.9, 0.42, 387.7,  236.3])
+    refh=np.asarray([80.6, 35.6, 10**(0.1*7.0), 10**(0.1*9.4), 10**(0.1*19.2), 2.0, 488., 443.0, 0.80, 1098.4, 791.7])
+    names=['varF0_semi', 'stdF0', 'avgE', 'stdE', 'maxE', 'Vrate', 'avgdurV', 'stddurV', 'Silrate', 'avgdurSil', 'stddurSil']
+    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradarmale.png')    
+    
+    
+    
+    return F0, logE, np.mean(F0[F0!=0]), np.std(F0[F0!=0]), np.max(F0), 10*np.log10(np.mean(logE)), 10*np.log10(np.std(logE)), 10*np.log10(np.max(logE)), Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, F0varsemi
+
+def Hz2semitones(freq):
+    A4=440.
+    C0=A4*2**(-4.75)
+    if freq>0:
+        h=12*np.log2(freq/C0)
+        octave=h//12.
+        return h+octave
+    else:
+        return C0
 
 
 def VUV(audio, results, path_base, time_stepF0, lowf0, highf0, maxVUVPeriod, averageVUVPeriod):
@@ -204,9 +226,9 @@ fileresultsEn=sys.argv[3]
 file_features=sys.argv[4]
 path_base=sys.argv[5]
 
-F0, logE, mF0, sF0, mmF0, mlogE, slogE, mmlogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs=prosody(audio, path_base)
+F0, logE, mF0, sF0, mmF0, mlogE, slogE, mmlogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, F0varsemi=prosody(audio, path_base)
 
-feat=[mF0, sF0, mmF0, mlogE, slogE, mmlogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs]
+feat=[mF0, sF0, mmF0, mlogE, slogE, mmlogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, F0varsemi]
 
 np.savetxt(fileresultsf0, F0)
 np.savetxt(fileresultsEn, logE)

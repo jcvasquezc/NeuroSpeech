@@ -44,9 +44,12 @@ def intel_measures(path_base, audio, txt, lan):
         #print (audio)
         if os.path.isfile(path_base+'temp.flac'):
             os.remove(path_base+'temp.flac')
+        print('ya0')
         wav2flac(path_base, audio+hf[k], path_base+'temp.flac')
         m=np.mod(k,4)
+        print('ya1')
         speech2text(path_base+'temp.flac', path_base+'temp.txt', lan, keys[m])
+        print('ya2')        
         fp=open(path_base+'temp.txt')
         text_pred=fp.read()
         fp.close()
@@ -164,10 +167,10 @@ def speech2text(file_name2, file_name3, lan, key):
         ret = urllib2.urlopen(req)    
         text=ret.read()
     elif os.name=='nt':
-        ret = urllib2.urlopen(req)    
-        text=ret.read().decode('utf-8')
-        #with urllib2.urlopen(req) as ret:
-            #text=ret.read().decode('utf-8')
+        #ret = urllib2.urlopen(req)    
+        #text=ret.read().decode('utf-8')
+        with urllib2.urlopen(req) as ret:
+            text=ret.read().decode('utf-8')
     #print(text)
     p=text.find('"transcript":"')
     p2=text.find('"},{"transcript":"')
@@ -175,10 +178,12 @@ def speech2text(file_name2, file_name3, lan, key):
     p3=text2.find('","confidence":')
     if p3!=-1:
         text2=text2[0:p3]
-    fid=open(file_name3, 'w')
+    
     if os.name=='nt':
-        fid.write(text2.encode('utf-8'))
+        fid=open(file_name3, 'w')
+        fid.write(text2)
     elif os.name=='posix':
+        fid=open(file_name3, 'w')
         fid.write(text2)
     fid.close()
     

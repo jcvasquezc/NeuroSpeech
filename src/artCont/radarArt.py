@@ -31,6 +31,9 @@ class RaderChart():
         axes = [fig.add_axes([0.1,0.1,0.75,0.75],polar = True, label = "axes{}".format(i)) for i in range(len(variables))]
         _, text = axes[0].set_thetagrids(angles, labels = variables, fontsize=16)
         
+        fig.patch.set_visible(False)
+        
+        
         for txt, angle in zip(text, angles):
             txt.set_rotation(angle)
             
@@ -45,7 +48,9 @@ class RaderChart():
             grid_label = ['']+[str(int(x)) for x in grid[1:]]
             ax.set_rgrids(grid, labels = [], angle = angles[i])
             ax.set_ylim(*ranges[i])
-        
+            ax.set_yticks([])
+            ax.set_yticklabels([])
+            
         self.angle = np.deg2rad(np.r_[angles, angles[0]])
         self.ranges = ranges
         self.ax = axes[0]
@@ -94,9 +99,25 @@ def plot_radar(df, refh, refl, use_attributes, title, namefig):
     use_pokemons = ['Reference', 'Patient', 'Reference Low']
     
     #df_plot = df[df['Name'].map(lambda x:x in use_pokemons)==True]
-    datas = [refh, df, refl] 
 
-    ranges = [[2**-20, max([df[attr], refh[attr], refl[attr]])] for attr in range(len(use_attributes))]
+    refhplot=np.ones(len(df))*100
+    reflplot=np.ones(len(df))*50
+
+    print(df)
+    print(refl)
+    print(refh)
+    refln=(refl-min(refl))/(max(refl)-min(refl))*50
+    print(refln)
+    refhn=(refh-min(refh))/(max(refh)-min(refh))*50+50
+    print(refhn)
+    dfn=np.asarray([50+50*(df[f]-refl[f])/(refh[f]-refl[f]) for f in range(len(df))])
+    print(dfn)
+    datas = [refhplot, dfn, reflplot] 
+    dfn[np.where(dfn<0)[0]]=0
+    #ranges = [[2**-20, max([max(dfn), max(refhplot)])+20] for attr in range(len(use_attributes))]
+    ranges = [[2**-20, 120] for attr in range(len(use_attributes))]
+
+
     colorsbg = ['#53AFFE', '#8ED752', '#FFFFFF']
     colors = ['#53AFFE', '#8ED752', '#53AFFE']
     fig = plt.figure(figsize=(9, 9))
@@ -113,3 +134,4 @@ def plot_radar(df, refh, refl, use_attributes, title, namefig):
     plt.title(title, fontsize=20)
     #plt.show()    
     plt.savefig(namefig)
+    plt.savefig(namefig.replace('.png', '.pdf'))

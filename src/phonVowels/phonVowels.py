@@ -6,7 +6,7 @@ Created on Tue Apr  5 10:25:24 2016
 """
 
 
-from scipy.io.wavfile import write, read
+from scipy.io.wavfile import read
 import os
 import sys
 import numpy as np
@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 import math
 from statsmodels.tsa.tsatools import lagmat
 from sklearn.metrics.pairwise import euclidean_distances as dist
-from mpl_toolkits.mplot3d import Axes3D
-from radarPlot import *
+from radarPlot import plot_radar
+
 
 def phonationVowels(audio, path_base):
 
@@ -32,10 +32,32 @@ def phonationVowels(audio, path_base):
     Amp=[]
     logE=[]
     cd=[0]
+    
+    time_stepF0=0 # 0 #value by default (0-->0.75/low_f0) Other values are in miliseconds
+    low_f0=75 #75
+    high_f0=600 #600
+    maxPeriodVUV=0.02 #20 #milisecionds
+    averagePeriodvuv=0.01#10 #milisecionds
+    VUV(audio, path_base+'vuv.txt', path_base, time_stepF0, low_f0, high_f0, maxPeriodVUV, averagePeriodvuv)
+    segmentsV, fs=decode_Texgrid(path_base+'vuv.txt', audio, 'Voiced')
+    segmentsU, fs=decode_Texgrid(path_base+'vuv.txt', audio, 'Unvoiced')
+
+    durV=np.asarray([len(segmentsV[l]) for l in range(len(segmentsV))])    
+    totaldurV=np.sum(durV)
+    
+    thresholdU=0.27*fs
+    durU=np.asarray([len(segmentsU[l]) for l in range(len(segmentsU))])    
+    totaldurU=np.sum(durU[np.where(durU<thresholdU)[0]])
+        
+    thresholdE=10*logEnergy(0.025)
+    degreeU=100*float(totaldurU)/(totaldurU+totaldurV)
+    print(totaldurV, durU, degreeU)
     for l in range(nF):
-        data_frame=data_audio[int(l*size_stepS):(l*size_stepS+size_frameS)]
-        Amp.append(np.max(np.abs(data_frame)))
-        logE.append(10*logEnergy(data_frame))
+        data_frame=data_audio[int(l*size_stepS):int(l*size_stepS+size_frameS)]
+        energy=10*logEnergy(data_frame)
+        if energy>thresholdE:
+            Amp.append(np.max(np.abs(data_frame)))
+            logE.append(10*logEnergy(data_frame))
         #m=fnn(data_frame, 15)
         #tau=Tao(data_frame)
         #cd.append(Dim_Corr(data_frame, tau, m))
@@ -53,6 +75,11 @@ def phonationVowels(audio, path_base):
     mjitter=Jitter.mean(0)
     mshimmer=Shimmer.mean(0)
     mcd=cd.mean(0)
+    
+    F0semi=np.asarray([Hz2semitones(F0nz[l]) for l in range(len(F0nz))])
+    F0varsemi=np.std(F0semi)    
+    
+    
     #plt.plot(data_audio)
     #plt.show()
 
@@ -62,8 +89,10 @@ def phonationVowels(audio, path_base):
     plt.figure(1)
     plt.subplot(211)
     t=np.arange(0, float(len(data_audio))/fs, 1.0/fs)
-    if len(t)!=len(data_audio):
-        t=np.arange(1.0/fs, float(len(data_audio))/fs, 1.0/fs)
+    if len(t)>len(data_audio):
+        t=t[:len(data_audio)]
+    elif len(t)>len(data_audio):
+        data_audio=data_audio[:len(t)]
     print(len(t), len(data_audio))
     plt.plot(t, data_audio, 'k')
     plt.ylabel('Amplitude', fontsize=14)
@@ -71,12 +100,13 @@ def phonationVowels(audio, path_base):
     plt.xlim([0, t[-1]])
     plt.grid(True)
     plt.subplot(212)
-    fsp=len(F0)/t[-1]
+    fsp=int(len(F0)/t[-1])
     print(fsp)
     t2=np.arange(0.0, t[-1], 1.0/fsp)
-    print(len(t2), len(F0))
-    if len(t2)!=len(F0):
-        t2=np.arange(1.0/fsp, float(len(F0))/fsp, 1.0/fsp)
+    if len(t2)>len(F0):
+        t2=t2[:len(F0)]
+    elif len(F0)>len(t2):
+        F0=F0[:len(t2)]
 
     plt.plot(t2, F0, color='k', linewidth=2.0)
     plt.xlabel('Time (s)', fontsize=14)
@@ -87,11 +117,54 @@ def phonationVowels(audio, path_base):
     #plt.show()
     plt.savefig(path_base+'phonation1.png')
     plt.savefig(path_base+'phonation1.pdf')
-    dataradar=np.asarray([mjitter, mshimmer, apq, ppq])
+    dataradar=np.asarray([mjitter, mshimmer, apq, ppq, degreeU, F0varsemi])
     dataradar[np.isnan(dataradar)]=1000
-    plot_radar(dataradar, np.asarray([1.20, 6.30, 7.70, 0.43]), ['Jitter', 'Shimmer', 'APQ', 'PPQ'], '', path_base+'phonation2.png')    
-    return F0, mjitter, mshimmer, apq, ppq, mlogE, mcd  
+    plot_radar(dataradar, np.asarray([2.0, 6.50, 7.90, 0.50, 5.7, 1.7]), ['Jitter', 'Shimmer', 'APQ', 'PPQ', '%U', 'var. F0'], '', path_base+'phonation2male.png')    
+    plot_radar(dataradar, np.asarray([1.3, 6.40, 8.60, 0.77, 3.6, 2.7]), ['Jitter', 'Shimmer', 'APQ', 'PPQ', '%U', 'var. F0'], '', path_base+'phonation2female.png')    
 
+    return F0, F0semi, mjitter, mshimmer, apq, ppq, mlogE, mcd, degreeU, F0varsemi  
+
+def Hz2semitones(freq):
+    A4=440.
+    C0=A4*2**(-4.75)
+    if freq>0:
+        h=12*np.log2(freq/C0)
+        octave=h//12.
+        return h+octave
+    else:
+        return C0
+
+
+
+
+def VUV(audio, results, path_base, time_stepF0, lowf0, highf0, maxVUVPeriod, averageVUVPeriod):
+    #print 'praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod)
+    os.system(path_base+'../../Toolkits/praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod))
+    
+
+    
+def decode_Texgrid(file_textgrid, file_audio, type_segm, win_trans=0.04):
+    fid=open(file_textgrid)
+    data=fid.read()
+    fs, data_audio=read(file_audio)
+    if (type_segm=='Unvoiced' or type_segm=='Onset'):   
+        pos=multi_find(data, '"U"')
+    elif (type_segm=='Voiced' or type_segm=='Offset'):
+        pos=multi_find(data, '"V"')
+    segments=[]
+    for j in range(len(pos)):
+        pos2=multi_find(data[0:pos[j]], '\n')
+        nP=len(pos2)
+        inicio=data[pos2[nP-3]:pos2[nP-2]]
+        fin=data[pos2[nP-2]:pos2[nP-1]]
+        inicioVal=int(float(inicio)*fs)
+        finVal=int(float(fin)*fs)-1
+        if (type_segm=='Onset' or type_segm=='Offset'):
+            segments.append(data_audio[int(finVal-win_trans*fs):int(finVal+win_trans*fs)])
+        else:
+            segments.append(data_audio[inicioVal:finVal])
+    print(len(segments))
+    return segments, fs
 
 
 
@@ -378,10 +451,12 @@ audio=sys.argv[1]
 fileresultsf0=sys.argv[2]
 file_features=sys.argv[3]
 path_base=sys.argv[4]
-F0, mjitter, mshimmer, apq, ppq, mlogE, mcd   = phonationVowels(audio, path_base)
-feat=[mjitter, mshimmer, apq, ppq, mlogE, mcd]
+F0, F0semi, mjitter, mshimmer, apq, ppq, mlogE, mcd, degreeU, varF0  = phonationVowels(audio, path_base)
+feat=[mjitter, mshimmer, apq, ppq, mlogE, mcd, degreeU, varF0]
 
 np.savetxt(fileresultsf0, F0)
+np.savetxt(fileresultsf0.replace('.txt', 'semitones.txt'), F0semi)
+
 np.savetxt(file_features, feat, fmt="%.2f")
 #np.savetxt(path_base+'atractor.txt', atractor.T)
 

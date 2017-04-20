@@ -16,7 +16,13 @@ from scipy.stats import spearmanr
 import matplotlib.pyplot as plt
 from sklearn import metrics
 
-subtask='i'
+subtask='t'
+
+fileSVR='C:/Users/elmon/Dropbox/Parkinson/PDTool/src/evaluation/SVMtrainedtongue.obj'
+filest='C:/Users/elmon/Dropbox/Parkinson/PDTool/src/evaluation/scalerSVMtongue.obj'
+
+feat1file='C:/Users/elmon/Dropbox/Parkinson/PDTool/exp_predmFDA/Features/art_ddk1.txt'
+
 
 if subtask=='r': # respiration
     labels=np.asarray([3, 3, 4, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 2, 3, 3, 1, 1, 4, 3, 3, 3, 3, 3, 1, 2, 3, 4, 3, 3, 3, 3, 2, 3, 3, 2, 1, 1, 1, 2, 3, 3, 4, 2, 3, 3, 1, 3, 1, 1, 1, 1, 2, 3, 0, 1, 1, 2, 0, 1, 1, 2, 1, 1, 3, 1, 2, 2, 3, 0, 0, 2, 2, 3, 1, 1, 0, 0, 1, 1, 1, 3, 3, 1, 1, 2, 2, 2, 2, 0, 0, 0, 1, 1, 2, 0, 0, 1, 1])
@@ -34,7 +40,6 @@ elif subtask=='i': # intelligibility
 
 
 
-feat1file='C:\Users\elmon\Dropbox/Parkinson/PDTool/exp_predmFDA/Features/art_ddk1.txt'
 
 
 feat1=np.loadtxt(feat1file)
@@ -55,15 +60,12 @@ labelspred=cls.predict(Features)
 CM=metrics.confusion_matrix(labels, labelspred)
 print('Confusion Matrix:'+str(CM))
 
-fileSVR='C:/Users/elmon/Dropbox/Parkinson/PDTool/src/evaluation/SVMtrainedint.obj'
-filest='C:/Users/elmon/Dropbox/Parkinson/PDTool/src/evaluation/scalerSVMint.obj'
-
-fid=open(fileSVR, 'w')
+fid=open(fileSVR, 'wb')
 cp.dump(cls, fid)
 
 fid.close()
 
-fid2=open(filest, 'w')
+fid2=open(filest, 'wb')
 cp.dump(st, fid2)
 
 fid2.close()

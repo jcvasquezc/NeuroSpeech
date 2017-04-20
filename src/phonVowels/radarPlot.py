@@ -2,7 +2,7 @@
 """
 Created on Sat Sep 10 13:55:53 2016
 
-@author: elmon
+@author: J. C. Vasquez-Correa
 """
 
 import numpy as np
@@ -33,19 +33,21 @@ class RaderChart():
         
         #for txt, angle in zip(text, angles):
             #txt.set_rotation(angle - 90)
-        
+        fig.patch.set_visible(False)
+
         for ax in axes[1:]:
             ax.patch.set_visible(False)
             ax.xaxis.set_visible(False)
             ax.grid('off')
-        
+
         for i, ax in enumerate(axes):
             grid = np.linspace(*ranges[i], num = n_ordinate_levels)
             
             grid_label = ['']+[str(int(x)) for x in grid[1:]]
             ax.set_rgrids(grid, labels = grid_label, angle = angles[i])
             ax.set_ylim(*ranges[i])
-        
+            ax.set_yticks([])
+            ax.set_yticklabels([])
         self.angle = np.deg2rad(np.r_[angles, angles[0]])
         self.ranges = ranges
         self.ax = axes[0]
@@ -53,6 +55,7 @@ class RaderChart():
     def plot(self, data, *args, **kw):
         sdata = _scale_data(data, self.ranges)
         self.ax.plot(self.angle, np.r_[sdata, sdata[0]], *args, **kw)
+
 
     def fill(self, data, *args, **kw):
         sdata = _scale_data(data, self.ranges)
@@ -94,8 +97,24 @@ def plot_radar(df, ref, use_attributes, title, namefig):
     use_pokemons = ['Reference','Patient']
     
     #df_plot = df[df['Name'].map(lambda x:x in use_pokemons)==True]
-    datas = [ref, df] 
-    ranges = [[2**-20, max([df[attr], ref[attr]])] for attr in range(len(use_attributes))]
+
+    refhplot=np.ones(len(df))*100
+    reflplot=np.ones(len(df))*50
+
+    refhn=(ref-min(ref))/(max(ref)-min(ref))*50+50
+    print(refhn)
+    dfn=np.asarray([50+50*(df[f])/(ref[f]) for f in range(len(df))])
+    print(dfn)
+    datas = [refhplot, dfn, reflplot] 
+    dfn[np.where(dfn<0)[0]]=0
+    #ranges = [[2**-20, max([max(dfn), max(refhplot)])+20] for attr in range(len(use_attributes))]
+    ranges = [[2**-20, 200] for attr in range(len(use_attributes))]
+    
+    
+    
+    #df_plot = df[df['Name'].map(lambda x:x in use_pokemons)==True]
+    datas = [refhplot, dfn] 
+
     colors = ['#53AFFE', '#8ED752'] 
     
     fig = plt.figure(figsize=(7, 7))
@@ -103,6 +122,7 @@ def plot_radar(df, ref, use_attributes, title, namefig):
     for data, color, pokemon in zip(datas, colors, use_pokemons):
         radar.plot(data, color = color, label = pokemon, linewidth=2.0)
         radar.fill(data, alpha = 0.1, color = color)
-        radar.legend(bbox_to_anchor=(1.15, 1.15), fontsize=20)
+        radar.legend(bbox_to_anchor=(0., 1.02, 1., .102), ncol=2, mode="expand", fontsize=20, loc=3)
     plt.title(title, fontsize=20)
     plt.savefig(namefig)
+    plt.savefig(namefig.replace('.png', '.pdf'))

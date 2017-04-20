@@ -33,7 +33,7 @@ posnan=np.isnan(features)
 features[posnan]=0
 
 filest=folderSVR+'scaler.obj'
-fid2=open(filest, 'r')
+fid2=open(filest, 'rb')
 st=cp.load(fid2)
 fid2.close()
 
@@ -59,7 +59,7 @@ Features=np.hstack((features, featuresGCCA.T[0]))
 
 intpred=np.zeros(8)
 print(Features.shape)
-fid=open(fileSVR, 'r')
+fid=open(fileSVR, 'rb')
 svr=cp.load(fid)
 fid.close()
 predsvr=svr.predict(Features)
@@ -67,7 +67,7 @@ intpred[0]=np.round(predsvr)
 
 
 
-fid=open(fileSVRUPDRS, 'r')
+fid=open(fileSVRUPDRS, 'rb')
 svr2=cp.load(fid)
 fid.close()
 predsvr2=svr2.predict(Features)
@@ -80,28 +80,28 @@ intpred[7]=np.round(predsvr2)
 
 
 fileSVMresp=folderSVR+'SVMtrainedrespiration.obj'
-fid=open(fileSVMresp, 'r')
+fid=open(fileSVMresp, 'rb')
 cls=cp.load(fid)
 fid.close()
 pred=cls.predict(features)
 intpred[1]=np.round(pred)
 
 fileSVMlips=folderSVR+'SVMtrainedlips.obj'
-fid=open(fileSVMlips, 'r')
+fid=open(fileSVMlips, 'rb')
 cls=cp.load(fid)
 fid.close()
 pred=cls.predict(features)
 intpred[2]=np.round(pred)
 
 fileSVMpal=folderSVR+'SVMtrainedpalate.obj'
-fid=open(fileSVMpal, 'r')
+fid=open(fileSVMpal, 'rb')
 cls=cp.load(fid)
 fid.close()
 pred=cls.predict(features)
 intpred[3]=np.round(pred)
 
 fileSVMlx=folderSVR+'SVMtrainedlarinx.obj'
-fid=open(fileSVMlx, 'r')
+fid=open(fileSVMlx, 'rb')
 cls=cp.load(fid)
 fid.close()
 pred=cls.predict(features)
@@ -109,14 +109,14 @@ intpred[4]=np.round(pred)
 
 
 fileSVMlx=folderSVR+'SVMtrainedtongue.obj'
-fid=open(fileSVMlx, 'r')
+fid=open(fileSVMlx, 'rb')
 cls=cp.load(fid)
 fid.close()
 pred=cls.predict(features)
 intpred[5]=np.round(pred)
 
 fileSVMlx=folderSVR+'SVMtrainedint.obj'
-fid=open(fileSVMlx, 'r')
+fid=open(fileSVMlx, 'rb')
 cls=cp.load(fid)
 fid.close()
 pred=cls.predict(features)
@@ -154,6 +154,6 @@ plt.hist(labels[0:50], 20, color='g', alpha=0.5, label='Pacientes')
 plt.plot(np.asarray([predsvr2, predsvr2]), [0, 11], color='r', linewidth=2, label='Usuario')
 plt.legend()
 plt.xlim([0,128])
-plt.xlabel('UPRS -III predicho')
+plt.xlabel('UPDRS -III predicho')
 #plt.show()
 plt.savefig(folderSVR+'prediction.png')
