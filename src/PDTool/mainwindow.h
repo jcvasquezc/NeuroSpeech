@@ -51,6 +51,7 @@ private slots:
     void on_pushButton_3_clicked();
     void on_pushButton_7_clicked();
     void mouseDoubleClick(QMouseEvent *event);
+    void saveAudio();
     void removeAllGraphs();
     void contextMenuRequest(QPoint pos);
     void updateStatus(QMediaRecorder::Status);
@@ -75,6 +76,8 @@ private slots:
     void on_radioButton_4_clicked();
 
     void on_radioButton_3_clicked();
+
+    void on_listWidget_clicked(const QModelIndex &index);
 
 private:
     void clearAudioLevels();

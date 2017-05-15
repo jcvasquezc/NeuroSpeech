@@ -15,7 +15,7 @@ except:
     import pickle as cp
 
 import matplotlib.pyplot as plt
-from extractFeatures import *
+from extractFeatures import extractFeatures
 
 
 if len(sys.argv)!=3:
@@ -49,7 +49,6 @@ fileSVR=folderSVR+'SVRtrained.obj'
 fileSVRUPDRS=folderSVR+'SVRtrainedUPDRS.obj'
 
 fileGCCA=folderSVR+'Wx2opt.txt'
-
 
 WGCCA=np.loadtxt(fileGCCA)
 mat1=np.matrix(WGCCA)
@@ -183,10 +182,6 @@ plt.plot(np.asarray([predsvr, predsvr]), [0, 8], color='r', linewidth=2, label='
 plt.legend()
 plt.xlabel('Modified Frenchay dysarthria score')
 #plt.show()
-
-
-
-
 
 
 labels=np.asarray([28,19,52, 32, 28, 30, 29, 41, 38, 43, 6, 61, 28, 44, 50, 30, 42, 20, 14, 92, 53, 21, 13, 19, 75, 40, 30, 19, 23, 40, 9, 67, 15, 54, 51, 71, 40, 40, 53, 28, 38, 57, 23, 33, 30, 53, 45, 65, 21, 29])

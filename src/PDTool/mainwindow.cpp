@@ -193,6 +193,10 @@ MainWindow::MainWindow(QWidget *parent) :
     if (remove("../intelligibility/feat5.txt")!=0){perror("error deleting file");}
     if (remove("../intelligibility/feat6.txt")!=0){perror("error deleting file");}
     if (remove("../intelligibility/feat7.txt")!=0){perror("error deleting file");}
+    if (remove("../intelligibility/feat8.txt")!=0){perror("error deleting file");}
+    if (remove("../intelligibility/feat9.txt")!=0){perror("error deleting file");}
+    if (remove("../intelligibility/feat10.txt")!=0){perror("error deleting file");}
+    if (remove("../intelligibility/feat11.txt")!=0){perror("error deleting file");}
     if (remove("../intelligibility/pred1.txt")!=0){perror("error deleting file");}
     if (remove("../intelligibility/pred2.txt")!=0){perror("error deleting file");}
     if (remove("../intelligibility/pred3.txt")!=0){perror("error deleting file");}
@@ -200,6 +204,15 @@ MainWindow::MainWindow(QWidget *parent) :
     if (remove("../intelligibility/pred5.txt")!=0){perror("error deleting file");}
     if (remove("../intelligibility/pred6.txt")!=0){perror("error deleting file");}
     if (remove("../intelligibility/pred7.txt")!=0){perror("error deleting file");}
+    if (remove("../intelligibility/pred8.txt")!=0){perror("error deleting file");}
+    if (remove("../intelligibility/pred9.txt")!=0){perror("error deleting file");}
+    if (remove("../intelligibility/pred10.txt")!=0){perror("error deleting file");}
+    if (remove("../intelligibility/pred11.txt")!=0){perror("error deleting file");}
+    if (remove("../evaluation/prediction.png")!=0){perror("error deleting file");}
+    if (remove("../evaluation/predmFDA.txt")!=0){perror("error deleting file");}
+    if (remove("../evaluation/vuv.txt")!=0){perror("error deleting file");}
+    if (remove("../evaluation/tempForm.txt")!=0){perror("error deleting file");}
+
     if (remove("../phonation1.png")!=0){perror("error deleting file");}
     if (remove("../phonation2.png")!=0){perror("error deleting file");}
     if (remove("../articulation1.png")!=0){perror("error deleting file");}
@@ -226,23 +239,55 @@ void MainWindow::contextMenuRequest(QPoint pos)
 
     if (ui->customPlot->graphCount() > 0)
       menu->addAction("Clear graph", this, SLOT(removeAllGraphs()));
+      menu->addAction("Save Audio", this, SLOT(saveAudio()));
+
 
 
   menu->popup(ui->customPlot->mapToGlobal(pos));
 }
 
 
+void MainWindow::saveAudio(){
+    QProcess cmd;
+    double BUF_SIZE=(xaxiscut[1]-xaxiscut[0])*fs;
+    QVector<double> buffer;
+    for (int i=0; i< BUF_SIZE; i++)
+    {   buffer.append(ymain[i+(int)(xaxiscut[0]*fs)]);
+    }
+    qDebug()<<BUF_SIZE<<xaxiscut[0]*fs<<xaxiscut[1]*fs;
+    QString current_path=QDir::currentPath();
+    QString path_base=current_path+"/../";
+
+    QString namecut = QFileDialog::getSaveFileName(this, tr("save audio"), "", tr("Audio-Files(*.wav)"));
+
+    QString comandcut="python "+path_base+"cutAudio.py "+namemain+" "+namecut+" "+QString::number(xaxiscut[0])+" "+QString::number(xaxiscut[1]);
+    qDebug()<< comandcut;
+    cmd.start(comandcut);
+    cmd.waitForFinished(-1);
+    flagCuted=1;
+
+}
+
 void MainWindow::removeAllGraphs()
 {QPen pen;
     QLinearGradient plotGradient;
-
+  contAxes=0;
   ui->customPlot->clearGraphs();
   ui->customPlot->addGraph();
   ui->customPlot->graph()->setData(xmain,ymain);
   ui->customPlot->xAxis->setRange(0, (double)xmain.size()/fs);
   ui->customPlot->yAxis->setRange(-1, 1);
+  ui->customPlot->xAxis->setTickLabelFont(QFont(QFont().family(), 12));
+  ui->customPlot->yAxis->setTickLabelFont(QFont(QFont().family(), 12));
+  ui->customPlot->xAxis->setLabelFont(QFont(QFont().family(), 12));
+  ui->customPlot->yAxis->setLabelFont(QFont(QFont().family(), 12));
   ui->customPlot->xAxis->setLabel(xaxistime);
   ui->customPlot->yAxis->setLabel(yaxisA);
+  plotGradient.setStart(0, 0);
+  plotGradient.setFinalStop(0, 350);
+  plotGradient.setColorAt(0, QColor(230, 230, 230));
+  plotGradient.setColorAt(1, QColor(220, 220, 220));
+
   ui->customPlot->setBackground(plotGradient);
   pen.setColor(QColor(0,120,0));
   ui->customPlot->graph()->setPen(pen);
@@ -1389,78 +1434,113 @@ QString MainWindow::get_name(int rec_flag, QString folder, bool save){
     switch (rec_flag){
     case 0:
         name=folder+"/A.wav";
+         ui->label_97->setText("Sustained vowel /A/");
         break;
     case 1:
         name=folder+"/E.wav";
+        ui->label_97->setText("Sustained vowel /E/");
         break;
     case 2:
         name=folder+"/I.wav";
+        ui->label_97->setText("Sustained vowel /I/");
         break;
     case 3:
         name=folder+"/O.wav";
+        ui->label_97->setText("Sustained vowel /O/");
         break;
     case 4:
         name=folder+"/U.wav";
+        ui->label_97->setText("Sustained vowel /U/");
         break;
     case 5:
         name=folder+"/ModulatedVowels.wav";
+        ui->label_97->setText("Modulated vowels /A-E-I-O-U/");
         break;
     case 6:
         name=folder+"/DDK.wav";
+        ui->label_97->setText("Rapid repetition of /pa-ta-ka/");
         break;
     case 7:
         name=folder+"/DDK2.wav";
+        ui->label_97->setText("Rapid repetition of /pa-ka-ta/");
         break;
     case 8:
         name=folder+"/DDK3.wav";
+        ui->label_97->setText("Rapid repetition of /pe-ta-ka/");
         break;
     case 9:
         name=folder+"/DDK4.wav";
+        ui->label_97->setText("Rapid repetition of /pa/");
+
         break;
     case 10:
         name=folder+"/DDK5.wav";
+        ui->label_97->setText("Rapid repetition of /ta/");
         break;
     case 11:
         name=folder+"/DDK6.wav";
+        ui->label_97->setText("Rapid repetition of /ka/");
         break;
     case 12:
         name=folder+"/words.wav";
+        ui->label_97->setText("Read isolated words");
+
         break;
     case 13:
         name=folder+"/sent1.wav";
+        ui->label_97->setText("sentence: \r\n Mi casa tiene tres cuartos");
         break;
     case 14:
         name=folder+"/sent2.wav";
+        ui->label_97->setText("sentence: \r\n Omar, que vive cerca trajo miel");
         break;
     case 15:
         name=folder+"/sent3.wav";
+        ui->label_97->setText("sentence: \r\n Laura sube al tren que pasa");
+
         break;
     case 16:
         name=folder+"/sent4.wav";
+        ui->label_97->setText("sentence: \r\n Los libros nuevs no caben \r\n en la mesa de la oficina");
+
         break;
     case 17:
         name=folder+"/sent5.wav";
+        ui->label_97->setText("sentence: \r\n Rosita Niño, que pinta bien, \r\n donó sus cuadros ayer");
+
         break;
     case 18:
         name=folder+"/sent6.wav";
+        ui->label_97->setText("sentence: \r\n Luisa Rey compra el colchón \r\n duro que tanto le gusta");
+
         break;
     case 19:
         name=folder+"/sent7.wav";
+        ui->label_97->setText("sentence: \r\n Viste las noticias, \r\n yo ví ganar la medalla de plata en pesas, \r\n ese muchacho tiene mucha fuerza");
+
         break;
     case 20:
         name=folder+"/sent8.wav";
+        ui->label_97->setText("sentence: \r\n Juan se rompió una pierna \r\n cuando iba en la moto");
+
         break;
     case 21:
         name=folder+"/sent9.wav";
+        ui->label_97->setText("sentence: \r\n Estoy muy triste, \r\n ayer vi morir a un amigo");
         break;
     case 22:
         name=folder+"/sent10.wav";
+        ui->label_97->setText("sentence: \r\n Estoy muy preocupado, \r\n cada vez me es mas dificil hablar");
         break;
     case 23:
         name=folder+"/Readtext.wav";
+        ui->label_97->setText("read text: Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
+
         break;
     default:
         name=folder+"/Monologue.wav";
+        ui->label_97->setText("Spontanepus speech: \r\n What do you do in a normal day?");
+
         break;
     }
     QString contS;
@@ -1937,6 +2017,9 @@ if (ref_male){htmlContentLines[200].replace("ddk2.png", current_path+"/../DDK/DD
 if (fileExists(current_path+"/../intelligibility/intelligibility.png")){
     htmlContentLines[278].replace("intelligibility.png", current_path+"/../intelligibility/intelligibility.png");
 }
+
+namePatient=ui->textEdit->toPlainText();
+lastPatient=ui->textEdit_2->toPlainText();
 qDebug() <<htmlContentLines[355];
 htmlContentLines[355].replace("prediction.png", current_path+"/../evaluation/prediction.png");
 htmlContentLines[5].replace("Fist Name:", "First Name:"+namePatient);
@@ -2454,4 +2537,11 @@ void MainWindow::on_radioButton_3_clicked() // f0 in semitones
     pen.setColor(QColor(0,120,0));
     ui->customPlot_3->graph()->setPen(pen);
     ui->customPlot_3->replot();
+}
+
+void MainWindow::on_listWidget_clicked(const QModelIndex &index)
+{
+    int current_row=ui->listWidget->currentRow();
+
+    QString name=get_name(current_row, path_patient, false);
 }

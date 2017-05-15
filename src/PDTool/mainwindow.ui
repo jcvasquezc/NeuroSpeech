@@ -32,7 +32,7 @@
      <string notr="true">background-color: rgb(230, 230, 230);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -101,7 +101,7 @@
        <rect>
         <x>20</x>
         <y>10</y>
-        <width>1221</width>
+        <width>1231</width>
         <height>321</height>
        </rect>
       </property>
@@ -140,9 +140,9 @@
       <widget class="QPushButton" name="pushButton_7">
        <property name="geometry">
         <rect>
-         <x>880</x>
+         <x>790</x>
          <y>10</y>
-         <width>141</width>
+         <width>121</width>
          <height>31</height>
         </rect>
        </property>
@@ -224,22 +224,12 @@
         <string notr="true">background-color: rgb(230, 230, 230);</string>
        </property>
       </widget>
-      <widget class="QListWidget" name="listWidget_2">
-       <property name="geometry">
-        <rect>
-         <x>1030</x>
-         <y>10</y>
-         <width>171</width>
-         <height>81</height>
-        </rect>
-       </property>
-      </widget>
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>501</x>
          <y>9</y>
-         <width>371</width>
+         <width>281</width>
          <height>81</height>
         </rect>
        </property>
@@ -285,6 +275,34 @@
        </property>
        <property name="text">
         <string>Male</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_97">
+       <property name="geometry">
+        <rect>
+         <x>920</x>
+         <y>0</y>
+         <width>311</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);
+border-color: rgb(0, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string>Task:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
       </widget>
      </widget>
