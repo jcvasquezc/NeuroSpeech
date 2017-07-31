@@ -30,8 +30,6 @@ To execute Neuro-Speech, please go to the folder src/Release, and then click in 
 
 * **Jesús Francisco Vargas Bonilla**
 
-* **Elmar Nöth**
-
 ## License
 
 This project is licensed under the  GNU GENERAL PUBLIC License - see the [LICENSE.md](LICENSE.md) file for details
