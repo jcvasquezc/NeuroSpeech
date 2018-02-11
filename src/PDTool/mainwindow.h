@@ -75,6 +75,9 @@ private slots:
 
     void on_radioButton_4_clicked();
 
+    void on_radioButton_5_clicked();
+    void on_radioButton_6_clicked();
+
     void on_radioButton_3_clicked();
 
     void on_listWidget_clicked(const QModelIndex &index);
@@ -114,8 +117,12 @@ private:
     float contAxes;
     float WAavg=0, DTWavg=0;
     int contfile;
-    boolean ref_female=true;
-    boolean ref_male=false;
+    bool ref_female=true;
+    bool ref_male=false;
+    bool task_AD=false;
+    bool task_PD=true;
+    //boolean ref_female=true;
+    //boolean ref_male=false;
     QVector<float> xaxiscut;
    // QFile destinationFile;
 };

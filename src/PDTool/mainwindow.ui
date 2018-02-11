@@ -214,9 +214,9 @@
       <widget class="QCustomPlot" name="customPlot" native="true">
        <property name="geometry">
         <rect>
-         <x>210</x>
+         <x>320</x>
          <y>100</y>
-         <width>1001</width>
+         <width>891</width>
          <height>221</height>
         </rect>
        </property>
@@ -305,6 +305,48 @@ border-color: rgb(0, 0, 0);</string>
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radioButton_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>101</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Alzehimer</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>91</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Parkinson</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>18</width>
+         <height>18</height>
+        </size>
+       </property>
+      </widget>
      </widget>
      <widget class="QPushButton" name="pushButton_8">
       <property name="geometry">
@@ -355,10 +397,10 @@ border-color: rgb(0, 0, 0);</string>
      <widget class="QListWidget" name="listWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>120</y>
+        <x>130</x>
+        <y>110</y>
         <width>201</width>
-        <height>181</height>
+        <height>211</height>
        </rect>
       </property>
       <property name="font">
@@ -4983,7 +5025,7 @@ border-color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>1291</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

@@ -1431,117 +1431,204 @@ bool MainWindow::fileExists(QString path) {
 
 QString MainWindow::get_name(int rec_flag, QString folder, bool save){
     QString name="";
-    switch (rec_flag){
-    case 0:
-        name=folder+"/A.wav";
-         ui->label_97->setText("Sustained vowel /A/");
-        break;
-    case 1:
-        name=folder+"/E.wav";
-        ui->label_97->setText("Sustained vowel /E/");
-        break;
-    case 2:
-        name=folder+"/I.wav";
-        ui->label_97->setText("Sustained vowel /I/");
-        break;
-    case 3:
-        name=folder+"/O.wav";
-        ui->label_97->setText("Sustained vowel /O/");
-        break;
-    case 4:
-        name=folder+"/U.wav";
-        ui->label_97->setText("Sustained vowel /U/");
-        break;
-    case 5:
-        name=folder+"/ModulatedVowels.wav";
-        ui->label_97->setText("Modulated vowels /A-E-I-O-U/");
-        break;
-    case 6:
-        name=folder+"/DDK.wav";
-        ui->label_97->setText("Rapid repetition of /pa-ta-ka/");
-        break;
-    case 7:
-        name=folder+"/DDK2.wav";
-        ui->label_97->setText("Rapid repetition of /pa-ka-ta/");
-        break;
-    case 8:
-        name=folder+"/DDK3.wav";
-        ui->label_97->setText("Rapid repetition of /pe-ta-ka/");
-        break;
-    case 9:
-        name=folder+"/DDK4.wav";
-        ui->label_97->setText("Rapid repetition of /pa/");
+    if (task_PD){
+        switch (rec_flag){
+        case 0:
+            name=folder+"/A.wav";
+             ui->label_97->setText("Sustained vowel /A/");
+            break;
+        case 1:
+            name=folder+"/E.wav";
+            ui->label_97->setText("Sustained vowel /E/");
+            break;
+        case 2:
+            name=folder+"/I.wav";
+            ui->label_97->setText("Sustained vowel /I/");
+            break;
+        case 3:
+            name=folder+"/O.wav";
+            ui->label_97->setText("Sustained vowel /O/");
+            break;
+        case 4:
+            name=folder+"/U.wav";
+            ui->label_97->setText("Sustained vowel /U/");
+            break;
+        case 5:
+            name=folder+"/ModulatedVowels.wav";
+            ui->label_97->setText("Modulated vowels /A-E-I-O-U/");
+            break;
+        case 6:
+            name=folder+"/DDK.wav";
+            ui->label_97->setText("Rapid repetition of /pa-ta-ka/");
+            break;
+        case 7:
+            name=folder+"/DDK2.wav";
+            ui->label_97->setText("Rapid repetition of /pa-ka-ta/");
+            break;
+        case 8:
+            name=folder+"/DDK3.wav";
+            ui->label_97->setText("Rapid repetition of /pe-ta-ka/");
+            break;
+        case 9:
+            name=folder+"/DDK4.wav";
+            ui->label_97->setText("Rapid repetition of /pa/");
 
-        break;
-    case 10:
-        name=folder+"/DDK5.wav";
-        ui->label_97->setText("Rapid repetition of /ta/");
-        break;
-    case 11:
-        name=folder+"/DDK6.wav";
-        ui->label_97->setText("Rapid repetition of /ka/");
-        break;
-    case 12:
-        name=folder+"/words.wav";
-        ui->label_97->setText("Read isolated words");
+            break;
+        case 10:
+            name=folder+"/DDK5.wav";
+            ui->label_97->setText("Rapid repetition of /ta/");
+            break;
+        case 11:
+            name=folder+"/DDK6.wav";
+            ui->label_97->setText("Rapid repetition of /ka/");
+            break;
+        case 12:
+            name=folder+"/words.wav";
+            ui->label_97->setText("Read isolated words");
 
-        break;
-    case 13:
-        name=folder+"/sent1.wav";
-        ui->label_97->setText("sentence: \r\n Mi casa tiene tres cuartos");
-        break;
-    case 14:
-        name=folder+"/sent2.wav";
-        ui->label_97->setText("sentence: \r\n Omar, que vive cerca trajo miel");
-        break;
-    case 15:
-        name=folder+"/sent3.wav";
-        ui->label_97->setText("sentence: \r\n Laura sube al tren que pasa");
+            break;
+        case 13:
+            name=folder+"/sent1.wav";
+            ui->label_97->setText("sentence: \r\n Mi casa tiene tres cuartos");
+            break;
+        case 14:
+            name=folder+"/sent2.wav";
+            ui->label_97->setText("sentence: \r\n Omar, que vive cerca trajo miel");
+            break;
+        case 15:
+            name=folder+"/sent3.wav";
+            ui->label_97->setText("sentence: \r\n Laura sube al tren que pasa");
 
-        break;
-    case 16:
-        name=folder+"/sent4.wav";
-        ui->label_97->setText("sentence: \r\n Los libros nuevs no caben \r\n en la mesa de la oficina");
+            break;
+        case 16:
+            name=folder+"/sent4.wav";
+            ui->label_97->setText("sentence: \r\n Los libros nuevs no caben \r\n en la mesa de la oficina");
 
-        break;
-    case 17:
-        name=folder+"/sent5.wav";
-        ui->label_97->setText("sentence: \r\n Rosita Niño, que pinta bien, \r\n donó sus cuadros ayer");
+            break;
+        case 17:
+            name=folder+"/sent5.wav";
+            ui->label_97->setText("sentence: \r\n Rosita Niño, que pinta bien, \r\n donó sus cuadros ayer");
 
-        break;
-    case 18:
-        name=folder+"/sent6.wav";
-        ui->label_97->setText("sentence: \r\n Luisa Rey compra el colchón \r\n duro que tanto le gusta");
+            break;
+        case 18:
+            name=folder+"/sent6.wav";
+            ui->label_97->setText("sentence: \r\n Luisa Rey compra el colchón \r\n duro que tanto le gusta");
 
-        break;
-    case 19:
-        name=folder+"/sent7.wav";
-        ui->label_97->setText("sentence: \r\n Viste las noticias, \r\n yo ví ganar la medalla de plata en pesas, \r\n ese muchacho tiene mucha fuerza");
+            break;
+        case 19:
+            name=folder+"/sent7.wav";
+            ui->label_97->setText("sentence: \r\n Viste las noticias, \r\n yo ví ganar la medalla de plata en pesas, \r\n ese muchacho tiene mucha fuerza");
 
-        break;
-    case 20:
-        name=folder+"/sent8.wav";
-        ui->label_97->setText("sentence: \r\n Juan se rompió una pierna \r\n cuando iba en la moto");
+            break;
+        case 20:
+            name=folder+"/sent8.wav";
+            ui->label_97->setText("sentence: \r\n Juan se rompió una pierna \r\n cuando iba en la moto");
 
-        break;
-    case 21:
-        name=folder+"/sent9.wav";
-        ui->label_97->setText("sentence: \r\n Estoy muy triste, \r\n ayer vi morir a un amigo");
-        break;
-    case 22:
-        name=folder+"/sent10.wav";
-        ui->label_97->setText("sentence: \r\n Estoy muy preocupado, \r\n cada vez me es mas dificil hablar");
-        break;
-    case 23:
-        name=folder+"/Readtext.wav";
-        ui->label_97->setText("read text: Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
+            break;
+        case 21:
+            name=folder+"/sent9.wav";
+            ui->label_97->setText("sentence: \r\n Estoy muy triste, \r\n ayer vi morir a un amigo");
+            break;
+        case 22:
+            name=folder+"/sent10.wav";
+            ui->label_97->setText("sentence: \r\n Estoy muy preocupado, \r\n cada vez me es mas dificil hablar");
+            break;
+        case 23:
+            name=folder+"/Readtext.wav";
+            ui->label_97->setText("read text: Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
 
-        break;
-    default:
-        name=folder+"/Monologue.wav";
-        ui->label_97->setText("Spontanepus speech: \r\n What do you do in a normal day?");
+            break;
+        default:
+            name=folder+"/Monologue.wav";
+            ui->label_97->setText("Spontanepus speech: \r\n What do you do in a normal day?");
 
-        break;
+            break;
+        }
+    }
+
+    if (task_AD){
+        switch (rec_flag){
+        case 0:
+            name=folder+"/cookie-theft.wav";
+            ui->label_97->setText("Description of the cookie theft image.");
+            break;
+        case 1:
+            name=folder+"/seq-numbers.wav";
+            ui->label_97->setText("Please say the sequence of \r\n numbers from 1 to 21.");
+            break;
+        case 2:
+            name=folder+"/seq-days.wav";
+            ui->label_97->setText("Please say the sequence \r\n of the days of the week.");
+            break;
+        case 3:
+            name=folder+"/seq-months.wav";
+            ui->label_97->setText("Please say the sequence \r\n of the months of the year.");
+            break;
+        case 4:
+            name=folder+"/words.wav";
+            ui->label_97->setText("Read isolated words.");
+            break;
+        case 5:
+            name=folder+"/no-words.wav";
+            ui->label_97->setText("Read isolated no words.");
+            break;
+        case 6:
+            name=folder+"/sent1.wav";
+            ui->label_97->setText("sentence: \r\n El grifo gotea");
+            break;
+        case 7:
+            name=folder+"/sent2.wav";
+            ui->label_97->setText("sentence: \r\n Volví a casa después de comer");
+            break;
+        case 8:
+            name=folder+"/sent3.wav";
+            ui->label_97->setText("sentence: \r\n Las naranjas son dulces");
+            break;
+
+        case 9:
+            name=folder+"/sent4.wav";
+            ui->label_97->setText("sentence: \r\n Lo escucharon hoy hablar por la radio");
+            break;
+
+        case 10:
+            name=folder+"/sent5.wav";
+            ui->label_97->setText("sentence: \r\n Levante la tapa del motor");
+            break;
+
+        case 11:
+            name=folder+"/sent6.wav";
+            ui->label_97->setText("sentence: \r\n El gorrión del granero cogió un gusano gordo");
+            break;
+
+        case 12:
+            name=folder+"/sent7.wav";
+            ui->label_97->setText("sentence: \r\n El espía se escapó hacia la montaña");
+            break;
+
+        case 13:
+            name=folder+"/sent7.wav";
+            ui->label_97->setText("sentence: \r\n El argumento del abogado lo \r\n convenció en el juicio");
+            break;
+        case 14:
+            name=folder+"/fluency-animals.wav";
+            ui->label_97->setText("All of animals in one minute");
+            break;
+
+        case 15:
+            name=folder+"/fluency-pwords.wav";
+            ui->label_97->setText("All of words starting with P in one minute");
+            break;
+        case 16:
+            name=folder+"/rabbit-history.wav";
+            ui->label_97->setText("Explain history about rabbit and turtle \r\n with the sequence of images");
+            break;
+        default:
+            name=folder+"/Readtext.wav";
+            ui->label_97->setText("read text: Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
+            break;
+
+
+        }
     }
     QString contS;
     if (save){
@@ -2451,6 +2538,30 @@ void MainWindow::on_radioButton_2_clicked()
     ref_female=false;
     ref_male=true;
 }
+
+
+void MainWindow::on_radioButton_5_clicked()
+{
+    task_AD=true;
+    task_PD=false;
+    ui->listWidget->clear();
+    QStringList list;
+    list<<listTasksAD;
+    ui->listWidget->addItems(list);
+
+}
+
+void MainWindow::on_radioButton_6_clicked()
+{
+    task_AD=false;
+    task_PD=true;
+    ui->listWidget->clear();
+    QStringList list;
+    list<<listTasks;
+    ui->listWidget->addItems(list);
+}
+
+
 
 void MainWindow::on_radioButton_4_clicked() // f0 in Hz
 {
