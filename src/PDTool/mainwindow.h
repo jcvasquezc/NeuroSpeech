@@ -32,7 +32,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void opendialogb();
+    void opendialogb(int task_ad=0);
     void processBuffer(const QAudioBuffer&);
 
 private slots:

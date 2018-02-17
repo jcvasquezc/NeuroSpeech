@@ -25,7 +25,10 @@ def phonationVowels(audio, path_base):
     size_frameS=0.04*float(fs)
     size_stepS=0.02*float(fs)
     overlap=size_stepS/size_frameS
-    os.system(path_base+'../../Toolkits/praat '+path_base+'F0_Praat.praat '+audio+' '+path_base+'tempF0.txt 75 600 0') #f0 extraction Praat
+    if os.name == 'nt':
+        os.system(path_base+'../../Toolkits/praat '+path_base+'F0_Praat.praat '+audio+' '+path_base+'tempF0.txt 75 600 0') #f0 extraction Praat
+    else:
+        os.system('praat '+path_base+'F0_Praat.praat '+audio+' '+path_base+'tempF0.txt 75 600 0') #f0 extraction Praat
     F0=decodeF0(path_base+'tempF0.txt')
     Jitter=jitter_env(F0, len(F0))
     nF=int((len(data_audio)/size_frameS/overlap))-1
@@ -139,8 +142,10 @@ def Hz2semitones(freq):
 
 def VUV(audio, results, path_base, time_stepF0, lowf0, highf0, maxVUVPeriod, averageVUVPeriod):
     #print 'praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod)
-    os.system(path_base+'../../Toolkits/praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod))
-    
+    if os.name=="nt":
+        os.system(path_base+'../../Toolkits/praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod))
+    else:
+        os.system('praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod))
 
     
 def decode_Texgrid(file_textgrid, file_audio, type_segm, win_trans=0.04):

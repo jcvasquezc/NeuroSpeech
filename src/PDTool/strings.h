@@ -13,6 +13,9 @@
 #define button4    "../PDTool/button4.png"
 #define button5    "../PDTool/button5.png"
 #define button7    "../PDTool/button7.png"
+#define task_image0 "../PDTool/image_task_cookie.png"
+#define task_image16 "../PDTool/image_task_history.png"
+
 #define button5stop "../PDTool/button5stop.png"
 #define logo       "../PDTool/Logo.png"
 #define button5rec "../PDTool/button5rec.png"

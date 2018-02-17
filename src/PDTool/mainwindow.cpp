@@ -60,6 +60,17 @@ MainWindow::MainWindow(QWidget *parent) :
     plotGradient.setColorAt(1, QColor(220, 220, 220));
     QPen pen;
     ui->customPlot->setBackground(plotGradient);
+    ui->customPlot_2->setBackground(plotGradient);
+    ui->customPlot_3->setBackground(plotGradient);
+    ui->customPlot_4->setBackground(plotGradient);
+    ui->customPlot_5->setBackground(plotGradient);
+    ui->customPlot_6->setBackground(plotGradient);
+    ui->customPlot_7->setBackground(plotGradient);
+    ui->customPlot_8->setBackground(plotGradient);
+    ui->customPlot_9->setBackground(plotGradient);
+    ui->customPlot_10->setBackground(plotGradient);
+    ui->customPlot_11->setBackground(plotGradient);
+    ui->customPlot_12->setBackground(plotGradient);
     pen.setColor(QColor(0,120,0));
     ui->customPlot->replot();
     ui->customPlot->setInteraction(QCP::iRangeDrag, true);
@@ -125,8 +136,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidget->setTabText(4, intelligibility);
     ui->tabWidget->setTabText(6, evaluation);
     ui->tabWidget->setTabText(5, DDK);
-    ui->label->setText(nameP);
-    ui->label_2->setText(Lastname);
     ui->pushButton_7->setText(playExample);
     ui->pushButton_8->setText(createReport);
 
@@ -221,6 +230,12 @@ MainWindow::MainWindow(QWidget *parent) :
     if (remove("../prosody2.png")!=0){perror("error deleting file");}
     if (remove("../prosody3.png")!=0){perror("error deleting file");}
     if (remove("../test.wav")!=0){perror("error deleting file");}
+
+
+ // open window for AD images
+
+
+
 
 }
 
@@ -341,8 +356,8 @@ void MainWindow::mouseDoubleClick(QMouseEvent *event)
 }
 
 
-void MainWindow::opendialogb(){
-    dialogb=new Dialogb(this);
+void MainWindow::opendialogb(int task_ad){
+    dialogb=new Dialogb(this, task_ad);
     dialogb->show();
 }
 
@@ -429,8 +444,9 @@ void MainWindow::on_pushButton_clicked()
     QVector<double> F0;
     QVector<double> time;
     QFile fileF0(path_base+"featf0.txt");
-    qDebug() << "fileF0: " << current_path+"featf0.txt";
+    qDebug() << "fileF0: " << path_base+"featf0.txt";
     if (!fileF0.open(QIODevice::ReadOnly | QIODevice::Text))
+        qDebug() << "Only lecture fileF0: " << path_base+"featf0.txt";
         return;
     int nframes=0;
     double maxF0=0;
@@ -460,8 +476,9 @@ void MainWindow::on_pushButton_clicked()
     ui->customPlot_3->savePng(current_path+"/../phonation2.png");
     QList<QString> feat;
     QFile filefeat(path_base+"feat.txt");
-    qDebug() << "filefeat: " << current_path+"feat.txt";
+    qDebug() << "filefeat: " << path_base+"feat.txt";
     if (!filefeat.open(QIODevice::ReadOnly | QIODevice::Text))
+        qDebug() << "filefeat read only";
         return;
     while (!filefeat.atEnd()) {
         QString line = filefeat.readLine();
@@ -936,6 +953,17 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
     }
 
     if (checked){
+
+        if (task_AD){
+            int current_row=ui->listWidget->currentRow();
+            if (current_row==0 || current_row==16){
+                opendialogb(current_row); // open window for image description
+            }
+
+        }
+
+
+
         QString name=get_name(current_row, path_patient, true);
         QStringList codecName=audioRecorder->supportedAudioCodecs();
         qDebug() <<codecName;
@@ -2653,6 +2681,7 @@ void MainWindow::on_radioButton_3_clicked() // f0 in semitones
 void MainWindow::on_listWidget_clicked(const QModelIndex &index)
 {
     int current_row=ui->listWidget->currentRow();
+
 
     QString name=get_name(current_row, path_patient, false);
 }

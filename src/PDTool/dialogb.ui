@@ -6,129 +6,63 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>442</width>
-    <height>184</height>
+    <width>539</width>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>140</y>
-     <width>181</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>20</y>
-     <width>111</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>60</y>
-     <width>111</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>30</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>First Name</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Last Name</string>
-   </property>
-  </widget>
-  <widget class="QListWidget" name="listWidget">
+  <widget class="QLabel" name="label_title">
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>20</y>
-     <width>171</width>
-     <height>111</height>
+     <y>10</y>
+     <width>81</width>
+     <height>16</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Title</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_image">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>521</width>
+     <height>331</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_close_image">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>410</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
    </property>
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>Dialogb</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>Dialogb</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

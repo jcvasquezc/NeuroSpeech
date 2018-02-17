@@ -10,12 +10,14 @@ namespace Ui {
 class Dialogb : public QDialog {
     Q_OBJECT
 public:
-    Dialogb(QWidget *parent = 0);
+    Dialogb(QWidget *parent = 0, int task_ad=0);
     ~Dialogb();
 
 
 private slots:
-    void on_listWidget_clicked(const QModelIndex &index);
+
+    void on_pushButton_close_image_clicked();
+    void receivetask(int task);
 
 private:
     Ui::Dialogb *ui;
