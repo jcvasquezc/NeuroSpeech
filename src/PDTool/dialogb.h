@@ -2,7 +2,7 @@
 #define DIALOGB_H
 
 #include <QDialog>
-
+#include <QTimer>
 namespace Ui {
     class Dialogb;
 }
@@ -18,9 +18,14 @@ private slots:
 
     void on_pushButton_close_image_clicked();
     void receivetask(int task);
+    void showTime();
+
+
 
 private:
     Ui::Dialogb *ui;
+     QTimer *timer;
+     int seconds;
 
 };
 

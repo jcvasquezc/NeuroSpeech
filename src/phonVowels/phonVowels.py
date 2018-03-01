@@ -29,6 +29,7 @@ def phonationVowels(audio, path_base):
         os.system(path_base+'../../Toolkits/praat '+path_base+'F0_Praat.praat '+audio+' '+path_base+'tempF0.txt 75 600 0') #f0 extraction Praat
     else:
         os.system('praat '+path_base+'F0_Praat.praat '+audio+' '+path_base+'tempF0.txt 75 600 0') #f0 extraction Praat
+        print("Praat in ubuntu")
     F0=decodeF0(path_base+'tempF0.txt')
     Jitter=jitter_env(F0, len(F0))
     nF=int((len(data_audio)/size_frameS/overlap))-1

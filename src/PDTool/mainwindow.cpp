@@ -397,6 +397,9 @@ void MainWindow::on_pushButton_clicked()
     cmd.start(comandpv);
     cmd.waitForFinished(-1);
 
+
+
+
     qDebug() << comandpv;
 
     QVector<double> y=readWavFile(va);
@@ -971,7 +974,14 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
         if (audioRecorder->state() == QMediaRecorder::StoppedState) {
             QAudioEncoderSettings settings;
             audioRecorder->setAudioInput(inputs[0]);
-            settings.setCodec("audio/pcm");
+
+            #if (defined (_WIN32) || defined (_WIN64))
+                settings.setCodec("audio/pcm");
+            #elif (defined (LINUX) || defined (__linux__))
+                settings.setCodec("audio/x-wma, wmaversion=(int)2");
+            #endif
+
+
             settings.setSampleRate(fs);
             settings.setBitRate(16);
             settings.setChannelCount(1);
