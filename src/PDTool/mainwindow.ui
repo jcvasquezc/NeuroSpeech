@@ -32,7 +32,7 @@
      <string notr="true">background-color: rgb(230, 230, 230);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -114,7 +114,7 @@
       <widget class="QPushButton" name="pushButton_5">
        <property name="geometry">
         <rect>
-         <x>650</x>
+         <x>690</x>
          <y>20</y>
          <width>81</width>
          <height>81</height>
@@ -127,7 +127,7 @@
       <widget class="QPushButton" name="pushButton_6">
        <property name="geometry">
         <rect>
-         <x>750</x>
+         <x>780</x>
          <y>20</y>
          <width>81</width>
          <height>81</height>
@@ -150,8 +150,8 @@
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;First name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Ubuntu'; font-size:11pt;&quot;&gt;First name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="textEdit_2">
@@ -167,17 +167,17 @@ p, li { white-space: pre-wrap; }
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Last name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Ubuntu'; font-size:11pt;&quot;&gt;Last name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QCustomPlot" name="customPlot" native="true">
        <property name="geometry">
         <rect>
          <x>320</x>
-         <y>110</y>
+         <y>130</y>
          <width>891</width>
-         <height>191</height>
+         <height>171</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -198,9 +198,9 @@ p, li { white-space: pre-wrap; }
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>850</x>
+         <x>870</x>
          <y>20</y>
-         <width>361</width>
+         <width>341</width>
          <height>81</height>
         </rect>
        </property>
@@ -210,7 +210,7 @@ p, li { white-space: pre-wrap; }
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>220</y>
+         <y>230</y>
          <width>101</width>
          <height>81</height>
         </rect>
@@ -264,7 +264,7 @@ p, li { white-space: pre-wrap; }
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>130</y>
+         <y>140</y>
          <width>102</width>
          <height>79</height>
         </rect>
@@ -364,8 +364,8 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>320</x>
          <y>20</y>
-         <width>311</width>
-         <height>81</height>
+         <width>361</width>
+         <height>101</height>
         </rect>
        </property>
        <property name="font">
@@ -385,6 +385,23 @@ border-color: rgb(0, 0, 0);</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="textEdit_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Ubuntu'; font-size:11pt;&quot;&gt;Age&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
@@ -952,7 +969,7 @@ border-color: rgb(0, 0, 0);</string>
         <x>450</x>
         <y>60</y>
         <width>261</width>
-        <height>203</height>
+        <height>212</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
@@ -1469,7 +1486,7 @@ border-color: rgb(10, 10, 10);</string>
         <x>630</x>
         <y>10</y>
         <width>261</width>
-        <height>364</height>
+        <height>380</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
@@ -3398,7 +3415,7 @@ border-color: rgb(0, 0, 0);</string>
         <x>600</x>
         <y>20</y>
         <width>311</width>
-        <height>318</height>
+        <height>332</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_5">
@@ -4005,7 +4022,7 @@ border-color: rgb(0, 0, 0);</string>
         <x>10</x>
         <y>50</y>
         <width>291</width>
-        <height>157</height>
+        <height>164</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_6">
@@ -4455,7 +4472,7 @@ border-color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>1291</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

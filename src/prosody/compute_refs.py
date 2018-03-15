@@ -225,11 +225,11 @@ Features=[]
 for j in range(len(hf)):
     audio=audios+hf[j]
     print(audio)
-    if audio.find('.wav')>0:
-        F0, logE, mF0, sF0, mmF0, mlogE, slogE, mmlogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, F0varsemi=prosody(audio, path_base)
+    #if audio.find('.wav')>0:
+    F0, logE, mF0, sF0, mmF0, mlogE, slogE, mmlogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, F0varsemi=prosody(audio, path_base)
         
-        feat=[mF0, sF0, mmF0, mlogE, slogE, mmlogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, F0varsemi]
-        Features.append(feat)
+    feat=[mF0, sF0, mmF0, mlogE, slogE, mmlogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, F0varsemi]
+    Features.append(feat)
 np.savetxt(fileresultsf0, F0)
 np.savetxt(fileresultsEn, logE)
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>539</width>
-    <height>446</height>
+    <width>1423</width>
+    <height>693</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QLabel" name="label_title">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>550</x>
      <y>10</y>
      <width>81</width>
      <height>16</height>
@@ -34,10 +34,10 @@
   <widget class="QLabel" name="label_image">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>80</y>
-     <width>521</width>
-     <height>331</height>
+     <x>270</x>
+     <y>0</y>
+     <width>901</width>
+     <height>601</height>
     </rect>
    </property>
    <property name="font">
@@ -52,8 +52,8 @@
   <widget class="QPushButton" name="pushButton_close_image">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>410</y>
+     <x>680</x>
+     <y>650</y>
      <width>89</width>
      <height>25</height>
     </rect>
@@ -65,7 +65,7 @@
   <widget class="QLabel" name="label_time">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>550</x>
      <y>30</y>
      <width>41</width>
      <height>31</height>
@@ -80,6 +80,10 @@
     <string>60</string>
    </property>
   </widget>
+  <zorder>label_time</zorder>
+  <zorder>label_title</zorder>
+  <zorder>pushButton_close_image</zorder>
+  <zorder>label_image</zorder>
  </widget>
  <resources/>
  <connections/>

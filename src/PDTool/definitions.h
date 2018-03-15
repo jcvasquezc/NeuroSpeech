@@ -153,6 +153,35 @@
 
 
 
+#define avgf0u_y 216.4 //ok
+#define avgf0d_y 118.2 //ok
+#define stdf0d_y 18.6 //ok
+#define stdf0u_y 42.2 //ok
+#define maxf0u_y 440.0 //ok
+#define maxf0d_y 205.5 //ok
+#define avgEd_y 3.1 //ok
+#define avgEu_y 9.9 //ok
+#define stdEd_y 6.4 //ok
+#define stdEu_y 12.4 //ok
+#define maxEd_y 15.9 //ok
+#define maxEu_y 21.9 //ok
+#define Vrated_y 1.7 //ok
+#define Vrateu_y 2.3 //ok
+#define avgdurVd_y 201 //ok
+#define avgdurVu_y 292 //ok
+#define stddurVd_y 161 //ok
+#define stddurVu_y 240 //ok
+#define Srateu_y 0.7 //ok
+#define Srated_y 1.0 //ok
+#define avgdurSu_y 640 //ok
+#define avgdurSd_y 351 //ok
+#define stddurSu_y 472 //ok
+#define stddurSd_y 123 //ok
+#define varF0semiu_y 88 //ok
+#define varF0semid_y 56 //ok
+
+
+
 #define stdf0ddkd_f 8 //ok
 #define stdf0ddku_f 29 //ok
 #define maxf0ddku_f 313 //ok

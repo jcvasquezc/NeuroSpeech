@@ -13,8 +13,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from radarPros import plot_radar
 
-
-
 def prosody(audio, path_base):
 
     fs, data_audio=read(audio)
@@ -116,12 +114,20 @@ def prosody(audio, path_base):
     dataradar=np.asarray([F0varsemi, np.std(F0[F0!=0]), np.mean(logE), np.std(logE), np.max(logE), Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs])
     print(dataradar)    
 
+
+
     refl=np.asarray([74.5, 30.0, 10**(0.1*1.9), 10**(0.1*5.4), 10**(0.1*16.3), 1.3, 271.5, 200.1, 0.4, 360.5, 63.7])
     refh=np.asarray([91.7, 47.0, 10**(0.1*6.8), 10**(0.1*9.3), 10**(0.1*19.2), 2.1, 463.5, 377.7, 0.7, 834.9, 721.9])
     names=['varF0_semi', 'stdF0', 'avgE', 'stdE', 'maxE', 'Vrate', 'avgdurV', 'stddurV', 'Silrate', 'avgdurSil', 'stddurSil']
     plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradarfemale.png')    
     
+    refl=np.asarray([56.0, 18.6, 10**(0.1*3.1), 10**(0.1*6.4), 10**(0.1*15.9), 1.7, 201.5, 161.8, 0.72, 351.4, 123.3])
+    refh=np.asarray([88.0, 42.2, 10**(0.1*9.9), 10**(0.1*12.4), 10**(0.1*21.9), 2.3, 292.5, 240.4, 0.98, 640.7, 472.5])
+    names=['varF0_semi', 'stdF0', 'avgE', 'stdE', 'maxE', 'Vrate', 'avgdurV', 'stddurV', 'Silrate', 'avgdurSil', 'stddurSil']
+    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradaryoung.png')    
     
+	
+	
     refl=np.asarray([58.5, 19.0, 10**(0.1*2.3), 10**(0.1*5.6), 10**(0.1*15.8), 1.1, 241., 169.9, 0.42, 387.7,  236.3])
     refh=np.asarray([80.6, 35.6, 10**(0.1*7.0), 10**(0.1*9.4), 10**(0.1*19.2), 2.0, 488., 443.0, 0.80, 1098.4, 791.7])
     names=['varF0_semi', 'stdF0', 'avgE', 'stdE', 'maxE', 'Vrate', 'avgdurV', 'stddurV', 'Silrate', 'avgdurSil', 'stddurSil']

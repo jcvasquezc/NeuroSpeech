@@ -16,7 +16,7 @@ Dialogb::Dialogb(QWidget *parent, int task_ad) :
 
     ui->setupUi(this);
 
-    seconds=60;
+    seconds=180;
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(showTime()));
@@ -39,7 +39,7 @@ void Dialogb::on_pushButton_close_image_clicked()
 
 void Dialogb::receivetask(int task)
 {
-    seconds=60;
+    seconds=180;
     QString task_picture="";
     if (task==0){
         task_picture=task_image0;
