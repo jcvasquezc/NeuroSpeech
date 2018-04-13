@@ -44,8 +44,11 @@ void Dialogb::receivetask(int task)
     if (task==0){
         task_picture=task_image0;
     }
-    if (task==16){
+    if (task==9){
         task_picture=task_image16;
+    }
+    if (task==10){
+        task_picture=task_image17;
     }
 
     ui->label_image->setPixmap(QPixmap( task_picture ) );

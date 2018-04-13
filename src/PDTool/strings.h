@@ -15,13 +15,14 @@
 #define button7    "../PDTool/button7.png"
 #define task_image0 "../PDTool/image_task_cookie.png"
 #define task_image16 "../PDTool/image_task_history.png"
+#define task_image17 "../PDTool/image_read_text.png"
 
 #define button5stop "../PDTool/button5stop.png"
 #define logo       "../PDTool/Logo.png"
 #define button5rec "../PDTool/button5rec.png"
 #define button6play "../PDTool/button6play.png"
 #define listTasks  "/A/"<<"/E/"<<"/I/"<<"/O/"<<"/U/"<<"Modulated Vowels"<<"Pa-Ta-Ka"<<"Pa-Ka-Ta"<<"Pe-Ta-Ka"<<"Pa"<<"Ta"<<"Ka"<<"Words"<<"sentence 1"<<"sentence 2"<<"sentence 3"<<"sentence 4"<<"sentence 5"<<"sentence 6"<<"sentence 7"<<"sentence 8"<<"sentence 9"<<"sentence 10"<<"Read Text"<<"Monologue"
-#define listTasksAD  "Cookie-Theft"<<"List numbers"<<"List days"<<"List months"<<"Words"<<"No words"<<"sentence 1"<<"sentence 2"<<"sentence 3"<<"sentence 4"<<"sentence 5"<<"sentence 6"<<"sentence 7"<<"sentence 8"<<"Animals"<<"Words with P"<<"Rabbit turtle history"<<"Read text"
+#define listTasksAD  "Cookie-Theft"<<"List numbers"<<"List days"<<"List months"<<"Words"<<"No words"<<"sentences"<<"Animals"<<"Words with P"<<"Rabbit turtle history"<<"Read text"
 
 #define xaxistime  "Time (sec)"
 #define yaxisA     "Amplitude"
@@ -49,6 +50,8 @@
 #define chooses10  "Choose file of sentence 10 (Estoy muy preocupado)"
 #define choosesRT  "Choose file of the read text"
 #define report     "/../reporteNeuroSpeech.htm"
+#define reportAD     "/../reporteNeuroSpeechAD.htm"
+
 #define Onset      "Onset"
 #define Offset     "Offset"
 #define repeat     "Please repeat this recording"

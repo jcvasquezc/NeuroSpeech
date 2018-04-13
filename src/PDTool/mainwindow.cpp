@@ -959,7 +959,7 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
 
         if (task_AD){
             int current_row=ui->listWidget->currentRow();
-            if (current_row==0 || current_row==16){
+            if (current_row==0 || current_row==9 || current_row==10){
                 opendialogb(current_row); // open window for image description
             }
 
@@ -1239,17 +1239,44 @@ void MainWindow::on_pushButton_3_clicked()
         va=ls[0];
     }
     else{
-        va=path_patient+"/monologue.wav";
+
+        if (task_PD){
+            va=path_patient+"/monologue.wav";
+        }
+        if (task_AD){
+            va=path_patient+"/readtext.wav";
+        }
+
     }}
     else{va=current_path+"/../test.wav";}
     if (flagCuted==1){flagCuted=0;}
 
     file_2play=va;
+
+
+
+    QString comandPraat=current_path+"/../../Toolkits/praat "+path_base+"F0_Praat.praat "+va+ " "+ path_base+"tempF0.txt 75 500 0.02";
+    cmd.start(comandPraat);
+    cmd.waitForFinished(-1);
+
+    qDebug() << comandPraat;
+
+
+
+
+   comandPraat=current_path+"/../../Toolkits/praat "+path_base+"vuv.praat "+va+ " "+ path_base+"vuv.txt 75 600 0 0.02 0.01";
+
+    cmd.start(comandPraat);
+    cmd.waitForFinished(-1);
+
+    qDebug() << comandPraat;
+
     QString comandpv="python "+path_base+prosScript+va+" "+path_base+"featf0.txt "+ path_base+"featEnergy.txt "+path_base+"feat.txt "+path_base;
     cmd.start(comandpv);
     cmd.waitForFinished(-1);
 
     qDebug() << comandpv;
+
     QVector<double> y=readWavFile(va);
     QVector<double> x((int)y.size());
     for (int i=0; i<(int)y.size(); i++){
@@ -1390,113 +1417,154 @@ void MainWindow::on_pushButton_3_clicked()
     sample_palette.setColor(QPalette::WindowText, Qt::red);
 
 
+    QPalette sample_palette_blue;
+    sample_palette_blue.setColor(QPalette::Window, Qt::white);
+    sample_palette_blue.setColor(QPalette::WindowText, Qt::blue);
+
     QString agestr=ui->textEdit_3->toPlainText();
     int age=agestr.toInt();
 
+    int current_row=ui->listWidget->currentRow();
 
-    if (age>40){
-        if (ref_female){
-            if (mF0.toDouble()>avgf0u_f  || mF0.toDouble()<avgf0d_f){ui->label_75->setPalette(sample_palette);}
-            if (sF0.toDouble()>stdf0u_f  || sF0.toDouble()<stdf0d_f){ui->label_76->setPalette(sample_palette);}
-            if (mmF0.toDouble()>maxf0u_f  || mmF0.toDouble()<maxf0d_f){ui->label_77->setPalette(sample_palette);}
-            if (mlogE.toDouble()>avgEu_f  || mlogE.toDouble()<avgEd_f){ui->label_78->setPalette(sample_palette);}
-            if (slogE.toDouble()>stdEu_f  || slogE.toDouble()<stdEd_f){ui->label_79->setPalette(sample_palette);}
-            if (mmlogE.toDouble()>maxEu_f  || mmlogE.toDouble()<maxEd_f){ui->label_80->setPalette(sample_palette);}
-            if (Vrate.toDouble()>Vrateu_f  || Vrate.toDouble()<Vrated_f){ui->label_69->setPalette(sample_palette);}
-            if (avgdurv.toDouble()>avgdurVu_f  || avgdurv.toDouble()<avgdurVd_f){ui->label_70->setPalette(sample_palette);}
-            if (stddurv.toDouble()>stddurVu_f  || stddurv.toDouble()<stddurVd_f){ui->label_71->setPalette(sample_palette);}
-            if (Silrate.toDouble()>Srateu_f  || Silrate.toDouble()<Srated_f){ui->label_72->setPalette(sample_palette);}
-            if (avgdurs.toDouble()>avgdurSu_f  || avgdurs.toDouble()<avgdurSd_f){ui->label_73->setPalette(sample_palette);}
-            if (stddurs.toDouble()>stddurSu_f  || stddurs.toDouble()<stddurSd_f){ui->label_74->setPalette(sample_palette);}
-            if (varf0semi.toDouble()>varF0semiu_f  || varf0semi.toDouble()<varF0semid_f){ui->label_187->setPalette(sample_palette);}
+    if (task_PD || (task_AD && current_row==10)){
 
-            ui->label_107->setText(QString{ "%1->%2" }.arg( avgf0d_f).arg(avgf0u_f));
-            ui->label_108->setText(QString{ "%1->%2" }.arg( stdf0d_f).arg(stdf0u_f));
-            ui->label_109->setText(QString{ "%1->%2" }.arg( maxf0d_f).arg(maxf0u_f));
-            ui->label_110->setText(QString{ "%1->%2" }.arg( avgEd_f).arg(avgEu_f));
-            ui->label_111->setText(QString{ "%1->%2" }.arg( stdEd_f).arg(stdEu_f));
-            ui->label_112->setText(QString{ "%1->%2" }.arg( maxEd_f).arg(maxEu_f));
-            ui->label_113->setText(QString{ "%1->%2" }.arg( Vrated_f).arg(Vrateu_f));
-            ui->label_114->setText(QString{ "%1->%2" }.arg( avgdurVd_f).arg(avgdurVu_f));
-            ui->label_115->setText(QString{ "%1->%2" }.arg( stddurVd_f).arg(stddurVu_f));
-            ui->label_116->setText(QString{ "%1->%2" }.arg( Srated_f).arg(Srateu_f));
-            ui->label_117->setText(QString{ "%1->%2" }.arg( avgdurSd_f).arg(avgdurSu_f));
-            ui->label_118->setText(QString{ "%1->%2" }.arg( stddurSd_f).arg(stddurSu_f));
-            ui->label_186->setText(QString{ "%1->%2" }.arg( varF0semid_f).arg(varF0semiu_f));
+        if (age>40){
+            if (ref_female){
+                if (mF0.toDouble()>avgf0u_f  || mF0.toDouble()<avgf0d_f){ui->label_75->setPalette(sample_palette);}
+                if (sF0.toDouble()>stdf0u_f  || sF0.toDouble()<stdf0d_f){ui->label_76->setPalette(sample_palette);}
+                if (mmF0.toDouble()>maxf0u_f  || mmF0.toDouble()<maxf0d_f){ui->label_77->setPalette(sample_palette);}
+                if (mlogE.toDouble()>avgEu_f  || mlogE.toDouble()<avgEd_f){ui->label_78->setPalette(sample_palette);}
+                if (slogE.toDouble()>stdEu_f  || slogE.toDouble()<stdEd_f){ui->label_79->setPalette(sample_palette);}
+                if (mmlogE.toDouble()>maxEu_f  || mmlogE.toDouble()<maxEd_f){ui->label_80->setPalette(sample_palette);}
+                if (Vrate.toDouble()>Vrateu_f  || Vrate.toDouble()<Vrated_f){ui->label_69->setPalette(sample_palette);}
+                if (avgdurv.toDouble()>avgdurVu_f  || avgdurv.toDouble()<avgdurVd_f){ui->label_70->setPalette(sample_palette);}
+                if (stddurv.toDouble()>stddurVu_f  || stddurv.toDouble()<stddurVd_f){ui->label_71->setPalette(sample_palette);}
+                if (Silrate.toDouble()>Srateu_f  || Silrate.toDouble()<Srated_f){ui->label_72->setPalette(sample_palette);}
+                if (avgdurs.toDouble()>avgdurSu_f  || avgdurs.toDouble()<avgdurSd_f){ui->label_73->setPalette(sample_palette);}
+                if (stddurs.toDouble()>stddurSu_f  || stddurs.toDouble()<stddurSd_f){ui->label_74->setPalette(sample_palette);}
+                if (varf0semi.toDouble()>varF0semiu_f  || varf0semi.toDouble()<varF0semid_f){ui->label_187->setPalette(sample_palette);}
+
+                ui->label_107->setText(QString{ "%1->%2" }.arg( avgf0d_f).arg(avgf0u_f));
+                ui->label_108->setText(QString{ "%1->%2" }.arg( stdf0d_f).arg(stdf0u_f));
+                ui->label_109->setText(QString{ "%1->%2" }.arg( maxf0d_f).arg(maxf0u_f));
+                ui->label_110->setText(QString{ "%1->%2" }.arg( avgEd_f).arg(avgEu_f));
+                ui->label_111->setText(QString{ "%1->%2" }.arg( stdEd_f).arg(stdEu_f));
+                ui->label_112->setText(QString{ "%1->%2" }.arg( maxEd_f).arg(maxEu_f));
+                ui->label_113->setText(QString{ "%1->%2" }.arg( Vrated_f).arg(Vrateu_f));
+                ui->label_114->setText(QString{ "%1->%2" }.arg( avgdurVd_f).arg(avgdurVu_f));
+                ui->label_115->setText(QString{ "%1->%2" }.arg( stddurVd_f).arg(stddurVu_f));
+                ui->label_116->setText(QString{ "%1->%2" }.arg( Srated_f).arg(Srateu_f));
+                ui->label_117->setText(QString{ "%1->%2" }.arg( avgdurSd_f).arg(avgdurSu_f));
+                ui->label_118->setText(QString{ "%1->%2" }.arg( stddurSd_f).arg(stddurSu_f));
+                ui->label_186->setText(QString{ "%1->%2" }.arg( varF0semid_f).arg(varF0semiu_f));
+
+            }
+            else{
+                if (mF0.toDouble()>avgf0u_m  || mF0.toDouble()<avgf0d_m){ui->label_75->setPalette(sample_palette);}
+                if (sF0.toDouble()>stdf0u_m  || sF0.toDouble()<stdf0d_m){ui->label_76->setPalette(sample_palette);}
+                if (mmF0.toDouble()>maxf0u_m  || mmF0.toDouble()<maxf0d_m){ui->label_77->setPalette(sample_palette);}
+                if (mlogE.toDouble()>avgEu_m  || mlogE.toDouble()<avgEd_m){ui->label_78->setPalette(sample_palette);}
+                if (slogE.toDouble()>stdEu_m  || slogE.toDouble()<stdEd_m){ui->label_79->setPalette(sample_palette);}
+                if (mmlogE.toDouble()>maxEu_m  || mmlogE.toDouble()<maxEd_m){ui->label_80->setPalette(sample_palette);}
+                if (Vrate.toDouble()>Vrateu_m  || Vrate.toDouble()<Vrated_m){ui->label_69->setPalette(sample_palette);}
+                if (avgdurv.toDouble()>avgdurVu_m  || avgdurv.toDouble()<avgdurVd_m){ui->label_70->setPalette(sample_palette);}
+                if (stddurv.toDouble()>stddurVu_m  || stddurv.toDouble()<stddurVd_m){ui->label_71->setPalette(sample_palette);}
+                if (Silrate.toDouble()>Srateu_m  || Silrate.toDouble()<Srated_m){ui->label_72->setPalette(sample_palette);}
+                if (avgdurs.toDouble()>avgdurSu_m  || avgdurs.toDouble()<avgdurSd_m){ui->label_73->setPalette(sample_palette);}
+                if (stddurs.toDouble()>stddurSu_m  || stddurs.toDouble()<stddurSd_m){ui->label_74->setPalette(sample_palette);}
+                if (varf0semi.toDouble()>varF0semiu_m  || varf0semi.toDouble()<varF0semid_m){ui->label_187->setPalette(sample_palette);}
+
+                ui->label_107->setText(QString{ "%1->%2" }.arg( avgf0d_m).arg(avgf0u_m));
+                ui->label_108->setText(QString{ "%1->%2" }.arg( stdf0d_m).arg(stdf0u_m));
+                ui->label_109->setText(QString{ "%1->%2" }.arg( maxf0d_m).arg(maxf0u_m));
+                ui->label_110->setText(QString{ "%1->%2" }.arg( avgEd_m).arg(avgEu_m));
+                ui->label_111->setText(QString{ "%1->%2" }.arg( stdEd_m).arg(stdEu_m));
+                ui->label_112->setText(QString{ "%1->%2" }.arg( maxEd_m).arg(maxEu_m));
+                ui->label_113->setText(QString{ "%1->%2" }.arg( Vrated_m).arg(Vrateu_m));
+                ui->label_114->setText(QString{ "%1->%2" }.arg( avgdurVd_m).arg(avgdurVu_m));
+                ui->label_115->setText(QString{ "%1->%2" }.arg( stddurVd_m).arg(stddurVu_m));
+                ui->label_116->setText(QString{ "%1->%2" }.arg( Srated_m).arg(Srateu_m));
+                ui->label_117->setText(QString{ "%1->%2" }.arg( avgdurSd_m).arg(avgdurSu_m));
+                ui->label_118->setText(QString{ "%1->%2" }.arg( stddurSd_m).arg(stddurSu_m));
+                ui->label_186->setText(QString{ "%1->%2" }.arg( varF0semid_m).arg(varF0semiu_m));
+            }
 
         }
         else{
-            if (mF0.toDouble()>avgf0u_m  || mF0.toDouble()<avgf0d_m){ui->label_75->setPalette(sample_palette);}
-            if (sF0.toDouble()>stdf0u_m  || sF0.toDouble()<stdf0d_m){ui->label_76->setPalette(sample_palette);}
-            if (mmF0.toDouble()>maxf0u_m  || mmF0.toDouble()<maxf0d_m){ui->label_77->setPalette(sample_palette);}
-            if (mlogE.toDouble()>avgEu_m  || mlogE.toDouble()<avgEd_m){ui->label_78->setPalette(sample_palette);}
-            if (slogE.toDouble()>stdEu_m  || slogE.toDouble()<stdEd_m){ui->label_79->setPalette(sample_palette);}
-            if (mmlogE.toDouble()>maxEu_m  || mmlogE.toDouble()<maxEd_m){ui->label_80->setPalette(sample_palette);}
-            if (Vrate.toDouble()>Vrateu_m  || Vrate.toDouble()<Vrated_m){ui->label_69->setPalette(sample_palette);}
-            if (avgdurv.toDouble()>avgdurVu_m  || avgdurv.toDouble()<avgdurVd_m){ui->label_70->setPalette(sample_palette);}
-            if (stddurv.toDouble()>stddurVu_m  || stddurv.toDouble()<stddurVd_m){ui->label_71->setPalette(sample_palette);}
-            if (Silrate.toDouble()>Srateu_m  || Silrate.toDouble()<Srated_m){ui->label_72->setPalette(sample_palette);}
-            if (avgdurs.toDouble()>avgdurSu_m  || avgdurs.toDouble()<avgdurSd_m){ui->label_73->setPalette(sample_palette);}
-            if (stddurs.toDouble()>stddurSu_m  || stddurs.toDouble()<stddurSd_m){ui->label_74->setPalette(sample_palette);}
-            if (varf0semi.toDouble()>varF0semiu_m  || varf0semi.toDouble()<varF0semid_m){ui->label_187->setPalette(sample_palette);}
+            if (mF0.toDouble()>avgf0u_y  || mF0.toDouble()<avgf0d_y){ui->label_75->setPalette(sample_palette);}
+            if (sF0.toDouble()>stdf0u_y  || sF0.toDouble()<stdf0d_y){ui->label_76->setPalette(sample_palette);}
+            if (mmF0.toDouble()>maxf0u_y  || mmF0.toDouble()<maxf0d_y){ui->label_77->setPalette(sample_palette);}
+            if (mlogE.toDouble()>avgEu_y  || mlogE.toDouble()<avgEd_y){ui->label_78->setPalette(sample_palette);}
+            if (slogE.toDouble()>stdEu_y  || slogE.toDouble()<stdEd_y){ui->label_79->setPalette(sample_palette);}
+            if (mmlogE.toDouble()>maxEu_y  || mmlogE.toDouble()<maxEd_y){ui->label_80->setPalette(sample_palette);}
+            if (Vrate.toDouble()>Vrateu_y  || Vrate.toDouble()<Vrated_y){ui->label_69->setPalette(sample_palette);}
+            if (avgdurv.toDouble()>avgdurVu_y  || avgdurv.toDouble()<avgdurVd_y){ui->label_70->setPalette(sample_palette);}
+            if (stddurv.toDouble()>stddurVu_y  || stddurv.toDouble()<stddurVd_y){ui->label_71->setPalette(sample_palette);}
+            if (Silrate.toDouble()>Srateu_y  || Silrate.toDouble()<Srated_y){ui->label_72->setPalette(sample_palette);}
+            if (avgdurs.toDouble()>avgdurSu_y  || avgdurs.toDouble()<avgdurSd_y){ui->label_73->setPalette(sample_palette);}
+            if (stddurs.toDouble()>stddurSu_y  || stddurs.toDouble()<stddurSd_y){ui->label_74->setPalette(sample_palette);}
+            if (varf0semi.toDouble()>varF0semiu_y  || varf0semi.toDouble()<varF0semid_y){ui->label_187->setPalette(sample_palette);}
 
-            ui->label_107->setText(QString{ "%1->%2" }.arg( avgf0d_m).arg(avgf0u_m));
-            ui->label_108->setText(QString{ "%1->%2" }.arg( stdf0d_m).arg(stdf0u_m));
-            ui->label_109->setText(QString{ "%1->%2" }.arg( maxf0d_m).arg(maxf0u_m));
-            ui->label_110->setText(QString{ "%1->%2" }.arg( avgEd_m).arg(avgEu_m));
-            ui->label_111->setText(QString{ "%1->%2" }.arg( stdEd_m).arg(stdEu_m));
-            ui->label_112->setText(QString{ "%1->%2" }.arg( maxEd_m).arg(maxEu_m));
-            ui->label_113->setText(QString{ "%1->%2" }.arg( Vrated_m).arg(Vrateu_m));
-            ui->label_114->setText(QString{ "%1->%2" }.arg( avgdurVd_m).arg(avgdurVu_m));
-            ui->label_115->setText(QString{ "%1->%2" }.arg( stddurVd_m).arg(stddurVu_m));
-            ui->label_116->setText(QString{ "%1->%2" }.arg( Srated_m).arg(Srateu_m));
-            ui->label_117->setText(QString{ "%1->%2" }.arg( avgdurSd_m).arg(avgdurSu_m));
-            ui->label_118->setText(QString{ "%1->%2" }.arg( stddurSd_m).arg(stddurSu_m));
-            ui->label_186->setText(QString{ "%1->%2" }.arg( varF0semid_m).arg(varF0semiu_m));
+            ui->label_107->setText(QString{ "%1->%2" }.arg( avgf0d_y).arg(avgf0u_y));
+            ui->label_108->setText(QString{ "%1->%2" }.arg( stdf0d_y).arg(stdf0u_y));
+            ui->label_109->setText(QString{ "%1->%2" }.arg( maxf0d_y).arg(maxf0u_y));
+            ui->label_110->setText(QString{ "%1->%2" }.arg( avgEd_y).arg(avgEu_y));
+            ui->label_111->setText(QString{ "%1->%2" }.arg( stdEd_y).arg(stdEu_y));
+            ui->label_112->setText(QString{ "%1->%2" }.arg( maxEd_y).arg(maxEu_y));
+            ui->label_113->setText(QString{ "%1->%2" }.arg( Vrated_y).arg(Vrateu_y));
+            ui->label_114->setText(QString{ "%1->%2" }.arg( avgdurVd_y).arg(avgdurVu_y));
+            ui->label_115->setText(QString{ "%1->%2" }.arg( stddurVd_y).arg(stddurVu_y));
+            ui->label_116->setText(QString{ "%1->%2" }.arg( Srated_y).arg(Srateu_y));
+            ui->label_117->setText(QString{ "%1->%2" }.arg( avgdurSd_y).arg(avgdurSu_y));
+            ui->label_118->setText(QString{ "%1->%2" }.arg( stddurSd_y).arg(stddurSu_y));
+            ui->label_186->setText(QString{ "%1->%2" }.arg( varF0semid_y).arg(varF0semiu_y));
         }
 
-    }
-    else{
-        if (mF0.toDouble()>avgf0u_y  || mF0.toDouble()<avgf0d_y){ui->label_75->setPalette(sample_palette);}
-        if (sF0.toDouble()>stdf0u_y  || sF0.toDouble()<stdf0d_y){ui->label_76->setPalette(sample_palette);}
-        if (mmF0.toDouble()>maxf0u_y  || mmF0.toDouble()<maxf0d_y){ui->label_77->setPalette(sample_palette);}
-        if (mlogE.toDouble()>avgEu_y  || mlogE.toDouble()<avgEd_y){ui->label_78->setPalette(sample_palette);}
-        if (slogE.toDouble()>stdEu_y  || slogE.toDouble()<stdEd_y){ui->label_79->setPalette(sample_palette);}
-        if (mmlogE.toDouble()>maxEu_y  || mmlogE.toDouble()<maxEd_y){ui->label_80->setPalette(sample_palette);}
-        if (Vrate.toDouble()>Vrateu_y  || Vrate.toDouble()<Vrated_y){ui->label_69->setPalette(sample_palette);}
-        if (avgdurv.toDouble()>avgdurVu_y  || avgdurv.toDouble()<avgdurVd_y){ui->label_70->setPalette(sample_palette);}
-        if (stddurv.toDouble()>stddurVu_y  || stddurv.toDouble()<stddurVd_y){ui->label_71->setPalette(sample_palette);}
-        if (Silrate.toDouble()>Srateu_y  || Silrate.toDouble()<Srated_y){ui->label_72->setPalette(sample_palette);}
-        if (avgdurs.toDouble()>avgdurSu_y  || avgdurs.toDouble()<avgdurSd_y){ui->label_73->setPalette(sample_palette);}
-        if (stddurs.toDouble()>stddurSu_y  || stddurs.toDouble()<stddurSd_y){ui->label_74->setPalette(sample_palette);}
-        if (varf0semi.toDouble()>varF0semiu_y  || varf0semi.toDouble()<varF0semid_y){ui->label_187->setPalette(sample_palette);}
-
-        ui->label_107->setText(QString{ "%1->%2" }.arg( avgf0d_y).arg(avgf0u_y));
-        ui->label_108->setText(QString{ "%1->%2" }.arg( stdf0d_y).arg(stdf0u_y));
-        ui->label_109->setText(QString{ "%1->%2" }.arg( maxf0d_y).arg(maxf0u_y));
-        ui->label_110->setText(QString{ "%1->%2" }.arg( avgEd_y).arg(avgEu_y));
-        ui->label_111->setText(QString{ "%1->%2" }.arg( stdEd_y).arg(stdEu_y));
-        ui->label_112->setText(QString{ "%1->%2" }.arg( maxEd_y).arg(maxEu_y));
-        ui->label_113->setText(QString{ "%1->%2" }.arg( Vrated_y).arg(Vrateu_y));
-        ui->label_114->setText(QString{ "%1->%2" }.arg( avgdurVd_y).arg(avgdurVu_y));
-        ui->label_115->setText(QString{ "%1->%2" }.arg( stddurVd_y).arg(stddurVu_y));
-        ui->label_116->setText(QString{ "%1->%2" }.arg( Srated_y).arg(Srateu_y));
-        ui->label_117->setText(QString{ "%1->%2" }.arg( avgdurSd_y).arg(avgdurSu_y));
-        ui->label_118->setText(QString{ "%1->%2" }.arg( stddurSd_y).arg(stddurSu_y));
-        ui->label_186->setText(QString{ "%1->%2" }.arg( varF0semid_y).arg(varF0semiu_y));
-    }
-
-    if (age>40){
-        if(ref_female){
-            ui->radarPros->setPixmap(QPixmap( path_base+"prosodyradarfemale.png" ) );
+        if (age>40){
+            if(ref_female){
+                ui->radarPros->setPixmap(QPixmap( path_base+"prosodyradarfemale.png" ) );
+            }
+            else{
+                ui->radarPros->setPixmap(QPixmap( path_base+"prosodyradarmale.png" ) );
+            }
         }
         else{
-            ui->radarPros->setPixmap(QPixmap( path_base+"prosodyradarmale.png" ) );
+            ui->radarPros->setPixmap(QPixmap( path_base+"prosodyradaryoung.png" ) );
         }
+
     }
+
     else{
-        ui->radarPros->setPixmap(QPixmap( path_base+"prosodyradaryoung.png" ) );
+        ui->label_75->setPalette(sample_palette_blue);
+        ui->label_76->setPalette(sample_palette_blue);
+        ui->label_77->setPalette(sample_palette_blue);
+        ui->label_78->setPalette(sample_palette_blue);
+        ui->label_79->setPalette(sample_palette_blue);
+        ui->label_80->setPalette(sample_palette_blue);
+        ui->label_69->setPalette(sample_palette_blue);
+        ui->label_70->setPalette(sample_palette_blue);
+        ui->label_71->setPalette(sample_palette_blue);
+        ui->label_72->setPalette(sample_palette_blue);
+        ui->label_73->setPalette(sample_palette_blue);
+        ui->label_74->setPalette(sample_palette_blue);
+        ui->label_187->setPalette(sample_palette_blue);
+
+        ui->label_107->setText(QString{ "->" });
+        ui->label_108->setText(QString{ "->" });
+        ui->label_109->setText(QString{ "->" });
+        ui->label_110->setText(QString{ "->" });
+        ui->label_111->setText(QString{ "->" });
+        ui->label_112->setText(QString{ "->" });
+        ui->label_113->setText(QString{ "->" });
+        ui->label_114->setText(QString{ "->" });
+        ui->label_115->setText(QString{ "->" });
+        ui->label_116->setText(QString{ "->" });
+        ui->label_117->setText(QString{ "->" });
+        ui->label_118->setText(QString{ "->" });
+        ui->label_186->setText(QString{ "->" });
+
     }
+
 }
 
 bool MainWindow::fileExists(QString path) {
@@ -1578,7 +1646,7 @@ QString MainWindow::get_name(int rec_flag, QString folder, bool save){
             break;
         case 16:
             name=folder+"/sent4.wav";
-            ui->label_97->setText("sentence: \r\n Los libros nuevs no caben \r\n en la mesa de la oficina");
+            ui->label_97->setText("sentence: \r\n Los libros nuevos no caben \r\n en la mesa de la oficina");
 
             break;
         case 17:
@@ -1607,11 +1675,11 @@ QString MainWindow::get_name(int rec_flag, QString folder, bool save){
             break;
         case 22:
             name=folder+"/sent10.wav";
-            ui->label_97->setText("sentence: \r\n Estoy muy preocupado, \r\n cada vez me es mas dificil hablar");
+            ui->label_97->setText("sentence: \r\n Estoy muy preocupado, \r\n cada vez me es más dificil hablar");
             break;
         case 23:
             name=folder+"/Readtext.wav";
-            ui->label_97->setText("read text: Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
+            ui->label_97->setText("Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
 
             break;
         default:
@@ -1649,58 +1717,25 @@ QString MainWindow::get_name(int rec_flag, QString folder, bool save){
             ui->label_97->setText("Read isolated no words.");
             break;
         case 6:
-            name=folder+"/sent1.wav";
+            name=folder+"/sentences.wav";
             ui->label_97->setText("sentence: \r\n");
             break;
         case 7:
-            name=folder+"/sent2.wav";
-            ui->label_97->setText("sentence: \r\n");
-            break;
-        case 8:
-            name=folder+"/sent3.wav";
-            ui->label_97->setText("sentence: \r\n");
-            break;
-
-        case 9:
-            name=folder+"/sent4.wav";
-            ui->label_97->setText("sentence: \r\n ");
-            break;
-
-        case 10:
-            name=folder+"/sent5.wav";
-            ui->label_97->setText("sentence: \r\n ");
-            break;
-
-        case 11:
-            name=folder+"/sent6.wav";
-            ui->label_97->setText("sentence: \r\n ");
-            break;
-
-        case 12:
-            name=folder+"/sent7.wav";
-            ui->label_97->setText("sentence: \r\n");
-            break;
-
-        case 13:
-            name=folder+"/sent8.wav";
-            ui->label_97->setText("sentence: \r\n ");
-            break;
-        case 14:
             name=folder+"/fluency-animals.wav";
             ui->label_97->setText("All of animals in one minute");
             break;
 
-        case 15:
+        case 8:
             name=folder+"/fluency-pwords.wav";
             ui->label_97->setText("All of words starting with P in one minute");
             break;
-        case 16:
+        case 9:
             name=folder+"/rabbit-history.wav";
             ui->label_97->setText("Explain history about rabbit and turtle \r\n with the sequence of images");
             break;
         default:
-            name=folder+"/Readtext.wav";
-            ui->label_97->setText("read text: Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
+            name=folder+"/readtext.wav";
+            ui->label_97->setText("Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
             break;
 
 
@@ -2039,12 +2074,139 @@ void MainWindow::processBuffer(const QAudioBuffer& buffer)
         audioLevels.at(i)->setLevel(levels.at(i));
 }
 
-int MainWindow::printpdf(QString inputhtml, QString otputfile){
+
+int MainWindow::printpdfAD(QString inputhtml, QString otputfile){
+
 
 
     QString current_path=QDir::currentPath();
-    QString featuresPhonation=current_path+"/../phonVowels/feat.txt";
+
+    QDir::setCurrent(QCoreApplication::applicationDirPath());
     QString line;
+    QFile  htmlFile (inputhtml);
+    if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+        return -5;
+    }
+    QString htmlContent;
+    QStringList htmlContentLines;
+    QTextStream in(&htmlFile);
+
+    while (!in.atEnd()) {
+      line = in.readLine();
+      htmlContentLines.append(line);
+      //qDebug() <<line;
+    }
+
+    QString mF0, sF0, mlogE, slogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, varF0semip, featuresProsody;
+
+    featuresProsody=current_path+"/../prosody/feat.txt";
+    QList<QString> featpros;
+    QFile filefeatprosody(featuresProsody);
+
+    QTextDocument *document = new QTextDocument();
+
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setPageSize(QPrinter::A4);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(otputfile);
+
+     namePatient=ui->textEdit->toPlainText();
+     lastPatient=ui->textEdit_2->toPlainText();
+     htmlContentLines[1].replace("Logo.png", current_path+"/../PDTool/Logo.png");
+     htmlContentLines[5].replace("Fist Name:", "First Name:"+namePatient);
+     htmlContentLines[6].replace("Last Name:", "Last Name:"+lastPatient);
+
+     if (!filefeatprosody.open(QIODevice::ReadOnly | QIODevice::Text))
+         return -3;
+     while (!filefeatprosody.atEnd()) {
+          line = filefeatprosody.readLine();
+         featpros.append(line);
+     }
+     filefeatprosody.close();
+     mF0=featpros[0];
+     sF0=featpros[1];
+     mlogE=featpros[3];
+     slogE=featpros[4];
+     Vrate=featpros[6];
+     avgdurv=featpros[7];
+     stddurv=featpros[8];
+     Silrate=featpros[9];
+     avgdurs=featpros[10];
+     stddurs=featpros[11];
+     varF0semip=featpros[12];
+
+     //qDebug() <<htmlContentLines[11];
+     htmlContentLines[11].replace("prosody1.png", current_path+"/../prosody/prosody.png");
+
+     QString agestr=ui->textEdit_3->toPlainText();
+     int age=agestr.toInt();
+     if (age<40){
+         htmlContentLines[11].replace("prosody2.png", current_path+"/../prosody/prosodyradaryoung.png");
+     }
+     else{
+         if (ref_female){htmlContentLines[11].replace("prosody2.png", current_path+"/../prosody/prosodyradarfemale.png");}
+         if (ref_male){htmlContentLines[11].replace("prosody2.png", current_path+"/../prosody/prosodyradarmale.png");}
+
+     }
+     htmlContentLines[25].replace('-', Vrate);
+     htmlContentLines[31].replace('-', avgdurv);
+     htmlContentLines[37].replace('-', stddurv);
+     htmlContentLines[43].replace('-', Silrate);
+     htmlContentLines[49].replace('-', avgdurs);
+     htmlContentLines[55].replace('-', stddurs);
+     htmlContentLines[61].replace('-', mlogE);
+     htmlContentLines[67].replace('-', slogE);
+     htmlContentLines[73].replace('-', mF0);
+     htmlContentLines[79].replace('-', sF0);
+
+     htmlContent=htmlContentLines.join('\n');
+
+     document->setHtml(htmlContent);
+     document->print(&printer);
+     htmlFile.close();
+     delete document;
+     return 0;
+
+}
+
+
+int MainWindow::printpdf(QString inputhtml, QString otputfile){
+
+    QString current_path=QDir::currentPath();
+
+    QDir::setCurrent(QCoreApplication::applicationDirPath());
+    QString line;
+    QFile  htmlFile (inputhtml);
+    if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+        return -5;
+    }
+    QString htmlContent;
+    QStringList htmlContentLines;
+    QTextStream in(&htmlFile);
+
+    while (!in.atEnd()) {
+      line = in.readLine();
+      htmlContentLines.append(line);
+      qDebug() <<line;
+    }
+
+    QString mF0, sF0, mlogE, slogE, Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, varF0semip, featuresProsody;
+
+    featuresProsody=current_path+"/../prosody/feat.txt";
+    QList<QString> featpros;
+    QFile filefeatprosody(featuresProsody);
+
+    QTextDocument *document = new QTextDocument();
+
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setPageSize(QPrinter::A4);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(otputfile);
+
+
+
+    QString featuresPhonation=current_path+"/../phonVowels/feat.txt";
+
     QList<QString> feat;
     QFile filefeatphonation(featuresPhonation);
     if (!filefeatphonation.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -2085,9 +2247,7 @@ int MainWindow::printpdf(QString inputhtml, QString otputfile){
     QString mF2o=featartv[10];
     QString mF1u=featartv[11];
     QString mF2u=featartv[12];
-    QString featuresProsody=current_path+"/../prosody/feat.txt";
-    QList<QString> featpros;
-    QFile filefeatprosody(featuresProsody);
+
     if (!filefeatprosody.open(QIODevice::ReadOnly | QIODevice::Text))
         return -3;
     while (!filefeatprosody.atEnd()) {
@@ -2095,17 +2255,17 @@ int MainWindow::printpdf(QString inputhtml, QString otputfile){
         featpros.append(line);
     }
     filefeatprosody.close();
-    QString mF0=featpros[0];
-    QString sF0=featpros[1];
-    QString mlogE=featpros[3];
-    QString slogE=featpros[4];
-    QString Vrate=featpros[6];
-    QString avgdurv=featpros[7];
-    QString stddurv=featpros[8];
-    QString Silrate=featpros[9];
-    QString avgdurs=featpros[10];
-    QString stddurs=featpros[11];
-    QString varF0semip=featpros[12];
+    mF0=featpros[0];
+    sF0=featpros[1];
+    mlogE=featpros[3];
+    slogE=featpros[4];
+    Vrate=featpros[6];
+    avgdurv=featpros[7];
+    stddurv=featpros[8];
+    Silrate=featpros[9];
+    avgdurs=featpros[10];
+    stddurs=featpros[11];
+    varF0semip=featpros[12];
     QString Predicted=current_path+"/../evaluation/predmFDA.txt";
     QList<QString> Predictedlist;
     QFile filePred(Predicted);
@@ -2143,21 +2303,6 @@ int MainWindow::printpdf(QString inputhtml, QString otputfile){
 
 
 
-  QDir::setCurrent(QCoreApplication::applicationDirPath());
-
-  QFile  htmlFile (inputhtml);
-  if (!htmlFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-      return -5;
-  }
-  QString htmlContent;
-  QStringList htmlContentLines;
-  QTextStream in(&htmlFile);
-
-    while (!in.atEnd()) {
-        line = in.readLine();
-        htmlContentLines.append(line);
-        qDebug() <<line;
-    }
 
 htmlContentLines[1].replace("Logo.png", current_path+"/../PDTool/Logo.png");
 htmlContentLines[10].replace("phonation1.png", current_path+"/../phonVowels/phonation1.png");
@@ -2249,12 +2394,7 @@ htmlContentLines[340].replace('-', Predictedlist[6]);
 htmlContentLines[345].replace('-', Predictedlist[0]);
 htmlContentLines[350].replace('-', Predictedlist[7]);
 htmlContent=htmlContentLines.join('\n');
-  QTextDocument *document = new QTextDocument();
   document->setHtml(htmlContent);
-  QPrinter printer(QPrinter::HighResolution);
-  printer.setPageSize(QPrinter::A4);
-  printer.setOutputFormat(QPrinter::PdfFormat);
-  printer.setOutputFileName(otputfile);
   document->print(&printer);
   htmlFile.close();
   delete document;
@@ -2265,8 +2405,20 @@ void MainWindow::on_pushButton_8_clicked()
 {
     QString current_path=QDir::currentPath();
     QString fileName= QFileDialog::getSaveFileName(this, tr("Generate Report"), "report.pdf", tr("Documents (*.pdf)"));
-    int a=printpdf(current_path+report, fileName);
+
+    int a=-9;
+    if (task_PD){
+        a=printpdf(current_path+report, fileName);
+
+    }
+
+    if (task_AD){
+        a=printpdfAD(current_path+reportAD, fileName);
+
+    }
     qDebug()<<a;
+
+
 }
 
 void MainWindow::on_pushButton_6_clicked()

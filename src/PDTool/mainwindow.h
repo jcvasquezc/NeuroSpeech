@@ -59,6 +59,8 @@ private slots:
     void updateProgress(qint64 pos);
     void displayErrorMessage();
     int printpdf(QString inputhtml, QString otputfile);
+    int printpdfAD(QString inputhtml, QString otputfile);
+
 
     void on_pushButton_8_clicked();
 

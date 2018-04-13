@@ -28,7 +28,7 @@ else:
 
 
 features=extractFeatures(file_audio, folderSVR)
-    
+
 posnan=np.isnan(features)
 features[posnan]=0
 
@@ -39,12 +39,12 @@ try:
     fid2.close()
 except:
     with open(filest, 'rb') as f:
-        st = cp.load(f, encoding='latin1') 
+        st = cp.load(f, encoding='latin1')
 
 
 
 #features=st.transform(features)
-    
+
 fileSVR=folderSVR+'SVRtrained.obj'
 fileSVRUPDRS=folderSVR+'SVRtrainedUPDRS.obj'
 
@@ -65,7 +65,7 @@ print(Features.shape)
 fid=open(fileSVR, 'rb')
 svr=cp.load(fid)
 fid.close()
-predsvr=svr.predict(Features)
+predsvr=svr.predict(Features.reshape(1, -1))
 intpred[0]=np.round(predsvr)
 
 
@@ -75,18 +75,18 @@ try:
     fid.close()
 except:
     with open(fileSVRUPDRS, 'rb') as f:
-        svr2 = cp.load(f, encoding='latin1') 
+        svr2 = cp.load(f, encoding='latin1')
 
 
-predsvr2=svr2.predict(Features)
+predsvr2=svr2.predict(Features.reshape(1, -1))
 if predsvr2<0:
     predsvr2=0
 if predsvr2>128:
     predsvr2=128
-    
+
 intpred[7]=np.round(predsvr2)
 
-
+features=features.reshape(1,-1)
 fileSVMresp=folderSVR+'SVMtrainedrespiration.obj'
 try:
     fid=open(fileSVMresp, 'r')
@@ -94,8 +94,8 @@ try:
     fid.close()
 except:
     with open(fileSVMresp, 'rb') as f:
-        cls = cp.load(f, encoding='latin1') 
-        
+        cls = cp.load(f, encoding='latin1')
+
 pred=cls.predict(features)
 intpred[1]=np.round(pred)
 
@@ -106,11 +106,11 @@ try:
     fid.close()
 except:
     with open(fileSVMlips, 'rb') as f:
-        cls = cp.load(f, encoding='latin1') 
-  
-  
-  
-  
+        cls = cp.load(f, encoding='latin1')
+
+
+
+
 pred=cls.predict(features)
 intpred[2]=np.round(pred)
 
@@ -121,9 +121,9 @@ try:
     fid.close()
 except:
     with open(fileSVMpal, 'rb') as f:
-        cls = cp.load(f, encoding='latin1') 
+        cls = cp.load(f, encoding='latin1')
 
-    
+
 pred=cls.predict(features)
 intpred[3]=np.round(pred)
 
@@ -134,7 +134,7 @@ try:
     fid.close()
 except:
     with open(fileSVMlx, 'rb') as f:
-        cls = cp.load(f, encoding='latin1') 
+        cls = cp.load(f, encoding='latin1')
 pred=cls.predict(features)
 intpred[4]=np.round(pred)
 
@@ -146,7 +146,7 @@ try:
     fid.close()
 except:
     with open(fileSVMlx, 'rb') as f:
-        cls = cp.load(f, encoding='latin1') 
+        cls = cp.load(f, encoding='latin1')
 pred=cls.predict(features)
 intpred[5]=np.round(pred)
 
@@ -157,7 +157,7 @@ try:
     fid.close()
 except:
     with open(fileSVMlx, 'rb') as f:
-        cls = cp.load(f, encoding='latin1') 
+        cls = cp.load(f, encoding='latin1')
 pred=cls.predict(features)
 intpred[6]=np.round(pred)
 
@@ -168,7 +168,7 @@ np.savetxt(folderSVR+'predmFDA.txt', np.asarray(intpred), fmt='%s')
 LabelsTrainAll=[]
 LabelsTrainAll.append([31,32,47,38,27,29,33,29,15,13,21,39,35,37,27,31,33,17,13,41,24,31,31,23,38,28,29,39,45,27,35,41,35,29,27,27,37,17,13,17,21,25,39,40,21,37,25,19,19,23,1,2,2,9,13,0,1,0,25,0,15,0,13,0,4,15,10,11,1,13,0,0,1,19,27,17,0,0,0,0,9,11,23,29,0,4,4,13,9,15,0,0,0,1,0,0,0,0,0,0]) #G
 LabelsTrainAll.append([31,32,47,38,27,29,33,29,15,13,23,32,35,39,25,29,21,13,13,41,25,29,27,25,33,15,25,39,41,23,37,39,29,27,25,29,32,23,13,21,25,29,34,33,25,33,25,17,23,25,11,11,21,12,12,9,16,7,21,19,17,17,19,16,15,20,17,5,14,19,12,13,19,15,21,27,11,13,16,13,23,13,23,16,8,9,17,21,17,17,14,11,10,17,17,12,7,1,3,13]) # I
-medians=[np.median([LabelsTrainAll[0][im], LabelsTrainAll[1][im]]) for im in range(100)]        
+medians=[np.median([LabelsTrainAll[0][im], LabelsTrainAll[1][im]]) for im in range(100)]
 labels=np.asarray(medians)
 
 

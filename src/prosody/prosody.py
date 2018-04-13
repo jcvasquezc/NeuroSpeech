@@ -24,9 +24,12 @@ def prosody(audio, path_base):
     thr_en_pause=0.2
     overlap=size_stepS/size_frameS
     nF=int((len(data_audio)/size_frameS/overlap))-1
-    os.system(path_base+'../../Toolkits/praat '+path_base+'F0_Praat.praat '+audio+' '+path_base+'tempF0.txt 75 500 0.02') #f0 extraction Praat
+    if os.name=="posix":
+        os.system('praat '+path_base+'F0_Praat.praat '+audio+' '+path_base+'tempF0.txt 75 500 0.02') #f0 extraction Praat
+    else:
+        os.system(path_base+'../../Toolkits/praat '+path_base+'F0_Praat.praat '+audio+' '+path_base+'tempF0.txt 75 500 0.02') #f0 extraction Praat
     F0=decodeF0(path_base+'tempF0.txt')
-    logE=[]    
+    logE=[]
     for l in range(nF):
         data_frame=data_audio[int(l*size_stepS):int(l*size_stepS+size_frameS)]
         logE.append(10.0**logEnergy(data_frame))
@@ -40,16 +43,16 @@ def prosody(audio, path_base):
     VUV(audio, path_base+'vuv.txt', path_base, time_stepF0, low_f0, high_f0, maxPeriodVUV, averagePeriodvuv)
     segmentsV, fs=decode_Texgrid(path_base+'vuv.txt', audio, 'Voiced')
     segmentsU, fs=decode_Texgrid(path_base+'vuv.txt', audio, 'Unvoiced')
-    
+
     Nvoiced=len(segmentsV)
     Nunvoiced=len(segmentsU)
-        
-    
+
+
     Vrate=fs*float(Nvoiced)/len(data_audio)
-    
+
     avgdurv=1000*np.mean([len(segmentsV[k]) for k in range(Nvoiced)])/float(fs)
     stddurv=1000*np.std([len(segmentsV[k]) for k in range(Nvoiced)])/float(fs)
-    
+
     silence=[]
     for k in range(Nunvoiced):
         eu=logEnergy(segmentsU[k])
@@ -57,7 +60,7 @@ def prosody(audio, path_base):
             silence.append(segmentsU[k])
 
     Silrate=fs*float(len(silence))/len(data_audio)
-    
+
     avgdurs=1000*np.mean([len(silence[k]) for k in range(len(silence))])/float(fs)
     stddurs=1000*np.std([len(silence[k]) for k in range(len(silence))])/float(fs)
 
@@ -88,7 +91,7 @@ def prosody(audio, path_base):
     plt.xlabel('Time (s)')
     plt.ylabel('F0 (Hz)')
     plt.ylim([0,np.max(F0)+10])
-    plt.xlim([0, t[-1]])   
+    plt.xlim([0, t[-1]])
     plt.grid(True)
     plt.subplot(313)
     fse=len(logE)/t[-1]
@@ -102,39 +105,39 @@ def prosody(audio, path_base):
     plt.xlabel('Time (s)')
     plt.ylabel('Energy')
     plt.ylim([0,np.max(logE)+5])
-    plt.xlim([0, t[-1]])    
+    plt.xlim([0, t[-1]])
     plt.grid(True)
     #plt.show()
     plt.savefig(path_base+'prosody.png')
     plt.savefig(path_base+'prosody.pdf')
-    
+
     F0std=np.std(F0[F0!=0])
-    F0varsemi=Hz2semitones(F0std**2)    
+    F0varsemi=Hz2semitones(F0std**2)
     print(F0varsemi)
     dataradar=np.asarray([F0varsemi, np.std(F0[F0!=0]), np.mean(logE), np.std(logE), np.max(logE), Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs])
-    print(dataradar)    
+    print(dataradar)
 
 
 
     refl=np.asarray([74.5, 30.0, 10**(0.1*1.9), 10**(0.1*5.4), 10**(0.1*16.3), 1.3, 271.5, 200.1, 0.4, 360.5, 63.7])
     refh=np.asarray([91.7, 47.0, 10**(0.1*6.8), 10**(0.1*9.3), 10**(0.1*19.2), 2.1, 463.5, 377.7, 0.7, 834.9, 721.9])
     names=['varF0_semi', 'stdF0', 'avgE', 'stdE', 'maxE', 'Vrate', 'avgdurV', 'stddurV', 'Silrate', 'avgdurSil', 'stddurSil']
-    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradarfemale.png')    
-    
+    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradarfemale.png')
+
     refl=np.asarray([56.0, 18.6, 10**(0.1*3.1), 10**(0.1*6.4), 10**(0.1*15.9), 1.7, 201.5, 161.8, 0.72, 351.4, 123.3])
     refh=np.asarray([88.0, 42.2, 10**(0.1*9.9), 10**(0.1*12.4), 10**(0.1*21.9), 2.3, 292.5, 240.4, 0.98, 640.7, 472.5])
     names=['varF0_semi', 'stdF0', 'avgE', 'stdE', 'maxE', 'Vrate', 'avgdurV', 'stddurV', 'Silrate', 'avgdurSil', 'stddurSil']
-    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradaryoung.png')    
-    
-	
-	
+    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradaryoung.png')
+
+
+
     refl=np.asarray([58.5, 19.0, 10**(0.1*2.3), 10**(0.1*5.6), 10**(0.1*15.8), 1.1, 241., 169.9, 0.42, 387.7,  236.3])
     refh=np.asarray([80.6, 35.6, 10**(0.1*7.0), 10**(0.1*9.4), 10**(0.1*19.2), 2.0, 488., 443.0, 0.80, 1098.4, 791.7])
     names=['varF0_semi', 'stdF0', 'avgE', 'stdE', 'maxE', 'Vrate', 'avgdurV', 'stddurV', 'Silrate', 'avgdurSil', 'stddurSil']
-    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradarmale.png')    
-    
-    
-    
+    plot_radar(dataradar, refh, refl, names, 'Prosody', path_base+'prosodyradarmale.png')
+
+
+
     return F0, logE, np.mean(F0[F0!=0]), np.std(F0[F0!=0]), np.max(F0), 10*np.log10(np.mean(logE)), 10*np.log10(np.std(logE)), 10*np.log10(np.max(logE)), Vrate, avgdurv, stddurv, Silrate, avgdurs, stddurs, F0varsemi
 
 def Hz2semitones(freq):
@@ -150,14 +153,18 @@ def Hz2semitones(freq):
 
 def VUV(audio, results, path_base, time_stepF0, lowf0, highf0, maxVUVPeriod, averageVUVPeriod):
     #print 'praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod)
-    os.system(path_base+'../../Toolkits/praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod))
+    if os.name=="posix":
+        print("LINUX SYSTEM")
+        os.system('praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod))
+    else:
+        os.system(path_base+'../../Toolkits/praat '+ path_base+'vuv.praat '+audio+' '+ results+' '+str(lowf0)+' '+str(highf0)+' '+str(time_stepF0)+' '+str(maxVUVPeriod)+' '+str(averageVUVPeriod))
 
 
 def decode_Texgrid(file_textgrid, file_audio, type_segm, win_trans=0.04):
     fid=open(file_textgrid)
     data=fid.read()
     fs, data_audio=read(file_audio)
-    if (type_segm=='Unvoiced' or type_segm=='Onset'):   
+    if (type_segm=='Unvoiced' or type_segm=='Onset'):
         pos=multi_find(data, '"U"')
     elif (type_segm=='Voiced' or type_segm=='Offset'):
         pos=multi_find(data, '"V"')
@@ -175,7 +182,7 @@ def decode_Texgrid(file_textgrid, file_audio, type_segm, win_trans=0.04):
             segments.append(data_audio[inicioVal:finVal])
     return segments, fs
 
-    
+
 
 def multi_find(s, r):
     s_len = len(s)
@@ -205,8 +212,8 @@ def decodeF0(fileTxt):
         ji=ji+1
     F0=np.asarray(F0)
     return F0
-    
-    
+
+
 def logEnergy(sig):
     sig2=np.power(sig,2)
     sumsig2=np.sum(sig2)
