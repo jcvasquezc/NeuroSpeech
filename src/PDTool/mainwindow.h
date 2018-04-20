@@ -84,6 +84,8 @@ private slots:
 
     void on_listWidget_clicked(const QModelIndex &index);
 
+    void on_tabWidget_currentChanged(int index);
+
 private:
     void clearAudioLevels();
     //Ui::MainWindowSpanish *ui;

@@ -44,10 +44,10 @@ void Dialogb::receivetask(int task)
     if (task==0){
         task_picture=task_image0;
     }
-    if (task==9){
+    if (task==16){
         task_picture=task_image16;
     }
-    if (task==10){
+    if (task==17){
         task_picture=task_image17;
     }
 

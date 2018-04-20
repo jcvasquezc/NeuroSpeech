@@ -959,8 +959,19 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
 
         if (task_AD){
             int current_row=ui->listWidget->currentRow();
-            if (current_row==0 || current_row==9 || current_row==10){
+            if (current_row==0 || current_row==16 || current_row==17){
                 opendialogb(current_row); // open window for image description
+            }
+
+            if (current_row >= 6 && current_row <=13){
+                QString current_path=QDir::currentPath();
+                QString path_base=current_path+"/../audio_examples/";
+                QString rowstr;
+                QString file_play="";
+                file_play=path_base+'a'+rowstr.number(current_row)+".wav";
+                player->setMedia(QUrl::fromLocalFile(file_play));
+                player->setVolume(50);
+                player->play();
             }
 
         }
@@ -1717,25 +1728,58 @@ QString MainWindow::get_name(int rec_flag, QString folder, bool save){
             ui->label_97->setText("Read isolated no words.");
             break;
         case 6:
-            name=folder+"/sentences.wav";
+            name=folder+"/sent1.wav";
             ui->label_97->setText("sentence: \r\n");
             break;
         case 7:
+            name=folder+"/sent2.wav";
+            ui->label_97->setText("sentence: \r\n");
+            break;
+        case 8:
+            name=folder+"/sent3.wav";
+            ui->label_97->setText("sentence: \r\n");
+            break;
+
+        case 9:
+            name=folder+"/sent4.wav";
+            ui->label_97->setText("sentence: \r\n ");
+            break;
+
+        case 10:
+            name=folder+"/sent5.wav";
+            ui->label_97->setText("sentence: \r\n ");
+            break;
+
+        case 11:
+            name=folder+"/sent6.wav";
+            ui->label_97->setText("sentence: \r\n ");
+            break;
+
+        case 12:
+            name=folder+"/sent7.wav";
+            ui->label_97->setText("sentence: \r\n");
+            break;
+
+        case 13:
+            name=folder+"/sent8.wav";
+            ui->label_97->setText("sentence: \r\n ");
+            break;
+        case 14:
             name=folder+"/fluency-animals.wav";
             ui->label_97->setText("All of animals in one minute");
             break;
 
-        case 8:
+        case 15:
             name=folder+"/fluency-pwords.wav";
             ui->label_97->setText("All of words starting with P in one minute");
             break;
-        case 9:
+        case 16:
             name=folder+"/rabbit-history.wav";
             ui->label_97->setText("Explain history about rabbit and turtle \r\n with the sequence of images");
             break;
         default:
-            name=folder+"/readtext.wav";
-            ui->label_97->setText("Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
+            name=folder+"/Readtext.wav";
+            ui->label_97->setText("read text: Ayer fuí al médico, \r\n Qué le pasa? me preguntó. Yo le dije: \r\n Ay doctor. Donde pongo el dedo me duele. \r\n Tiene la uña rota? Sí, Pues ya sabemos que es \r\n Deje su cheque a la salida");
             break;
 
 
@@ -2910,4 +2954,9 @@ void MainWindow::on_listWidget_clicked(const QModelIndex &index)
 
 
     QString name=get_name(current_row, path_patient, false);
+}
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
+
 }

@@ -32,7 +32,7 @@
      <string notr="true">background-color: rgb(230, 230, 230);</string>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -146,12 +146,18 @@
          <height>31</height>
         </rect>
        </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
+       </property>
        <property name="html">
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;First name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="placeholderText">
+        <string>First name</string>
        </property>
       </widget>
       <widget class="QTextEdit" name="textEdit_2">
@@ -163,12 +169,18 @@ p, li { white-space: pre-wrap; }
          <height>31</height>
         </rect>
        </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
+       </property>
        <property name="html">
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Last name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="placeholderText">
+        <string>Last name</string>
        </property>
       </widget>
       <widget class="QCustomPlot" name="customPlot" native="true">
@@ -396,12 +408,18 @@ border-color: rgb(0, 0, 0);</string>
          <height>31</height>
         </rect>
        </property>
+       <property name="tabChangesFocus">
+        <bool>true</bool>
+       </property>
        <property name="html">
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Age&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="placeholderText">
+        <string>Age</string>
        </property>
       </widget>
      </widget>
@@ -4472,7 +4490,7 @@ border-color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>1291</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -4495,6 +4513,29 @@ border-color: rgb(0, 0, 0);</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>textEdit</tabstop>
+  <tabstop>textEdit_2</tabstop>
+  <tabstop>textEdit_3</tabstop>
+  <tabstop>radioButton_6</tabstop>
+  <tabstop>radioButton_5</tabstop>
+  <tabstop>radioButton_2</tabstop>
+  <tabstop>radioButton_1</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_10</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>radioButton_4</tabstop>
+  <tabstop>radioButton_3</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

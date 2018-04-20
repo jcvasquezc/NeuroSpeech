@@ -373,9 +373,11 @@ public:
         textEdit = new QTextEdit(frame);
         textEdit->setObjectName(QStringLiteral("textEdit"));
         textEdit->setGeometry(QRect(10, 20, 101, 31));
+        textEdit->setTabChangesFocus(true);
         textEdit_2 = new QTextEdit(frame);
         textEdit_2->setObjectName(QStringLiteral("textEdit_2"));
         textEdit_2->setGeometry(QRect(10, 60, 101, 31));
+        textEdit_2->setTabChangesFocus(true);
         customPlot = new QCustomPlot(frame);
         customPlot->setObjectName(QStringLiteral("customPlot"));
         customPlot->setGeometry(QRect(320, 130, 891, 171));
@@ -490,6 +492,7 @@ public:
         textEdit_3 = new QTextEdit(frame);
         textEdit_3->setObjectName(QStringLiteral("textEdit_3"));
         textEdit_3->setGeometry(QRect(10, 100, 101, 31));
+        textEdit_3->setTabChangesFocus(true);
         pushButton_8 = new QPushButton(tab);
         pushButton_8->setObjectName(QStringLiteral("pushButton_8"));
         pushButton_8->setGeometry(QRect(540, 470, 181, 41));
@@ -2111,7 +2114,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1291, 22));
+        menuBar->setGeometry(QRect(0, 0, 1291, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -2119,10 +2122,30 @@ public:
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
+        QWidget::setTabOrder(textEdit, textEdit_2);
+        QWidget::setTabOrder(textEdit_2, textEdit_3);
+        QWidget::setTabOrder(textEdit_3, radioButton_6);
+        QWidget::setTabOrder(radioButton_6, radioButton_5);
+        QWidget::setTabOrder(radioButton_5, radioButton_2);
+        QWidget::setTabOrder(radioButton_2, radioButton_1);
+        QWidget::setTabOrder(radioButton_1, listWidget);
+        QWidget::setTabOrder(listWidget, pushButton_7);
+        QWidget::setTabOrder(pushButton_7, pushButton_5);
+        QWidget::setTabOrder(pushButton_5, pushButton_6);
+        QWidget::setTabOrder(pushButton_6, pushButton);
+        QWidget::setTabOrder(pushButton, pushButton_2);
+        QWidget::setTabOrder(pushButton_2, pushButton_3);
+        QWidget::setTabOrder(pushButton_3, pushButton_10);
+        QWidget::setTabOrder(pushButton_10, pushButton_4);
+        QWidget::setTabOrder(pushButton_4, pushButton_9);
+        QWidget::setTabOrder(pushButton_9, pushButton_8);
+        QWidget::setTabOrder(pushButton_8, tabWidget);
+        QWidget::setTabOrder(tabWidget, radioButton_4);
+        QWidget::setTabOrder(radioButton_4, radioButton_3);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -2140,13 +2163,15 @@ public:
         textEdit->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">First name</p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+        textEdit->setPlaceholderText(QApplication::translate("MainWindow", "First name", nullptr));
         textEdit_2->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Last name</p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+        textEdit_2->setPlaceholderText(QApplication::translate("MainWindow", "Last name", nullptr));
         label_7->setText(QApplication::translate("MainWindow", "Gender", nullptr));
         radioButton_2->setText(QApplication::translate("MainWindow", "Male", nullptr));
         radioButton_1->setText(QApplication::translate("MainWindow", "Female", nullptr));
@@ -2159,8 +2184,9 @@ public:
         textEdit_3->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Age</p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+        textEdit_3->setPlaceholderText(QApplication::translate("MainWindow", "Age", nullptr));
         pushButton_8->setText(QApplication::translate("MainWindow", "Create Report", nullptr));
         pushButton_9->setText(QString());
         pushButton_10->setText(QString());

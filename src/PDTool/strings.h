@@ -22,7 +22,7 @@
 #define button5rec "../PDTool/button5rec.png"
 #define button6play "../PDTool/button6play.png"
 #define listTasks  "/A/"<<"/E/"<<"/I/"<<"/O/"<<"/U/"<<"Modulated Vowels"<<"Pa-Ta-Ka"<<"Pa-Ka-Ta"<<"Pe-Ta-Ka"<<"Pa"<<"Ta"<<"Ka"<<"Words"<<"sentence 1"<<"sentence 2"<<"sentence 3"<<"sentence 4"<<"sentence 5"<<"sentence 6"<<"sentence 7"<<"sentence 8"<<"sentence 9"<<"sentence 10"<<"Read Text"<<"Monologue"
-#define listTasksAD  "Cookie-Theft"<<"List numbers"<<"List days"<<"List months"<<"Words"<<"No words"<<"sentences"<<"Animals"<<"Words with P"<<"Rabbit turtle history"<<"Read text"
+#define listTasksAD  "Cookie-Theft"<<"List numbers"<<"List days"<<"List months"<<"Words"<<"No words"<<"sentence 1"<<"sentence 2"<<"sentence 3"<<"sentence 4"<<"sentence 5"<<"sentence 6"<<"sentence 7"<<"sentence 8"<<"Animals"<<"Words with P"<<"Rabbit turtle history"<<"Read text"
 
 #define xaxistime  "Time (sec)"
 #define yaxisA     "Amplitude"
