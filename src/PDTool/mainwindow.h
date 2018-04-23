@@ -34,6 +34,7 @@ public:
 public slots:
     void opendialogb(int task_ad=0);
     void processBuffer(const QAudioBuffer&);
+    void playStateChanged(QMediaPlayer::State state);
 
 private slots:
     void on_pushButton_clicked();
@@ -118,6 +119,8 @@ private:
     QString namemain;
     QString file_2play;
     int flagCuted=0;
+    bool flagSentence;
+    QMediaPlayer::State flagPlay=QMediaPlayer::StoppedState;
     float contAxes;
     float WAavg=0, DTWavg=0;
     int contfile;

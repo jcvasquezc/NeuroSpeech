@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(processBuffer(QAudioBuffer)));
     probe->setSource(audioRecorder);
 
+    connect(player, SIGNAL(stateChanged(QMediaPlayer::State)),this,SLOT(playStateChanged(QMediaPlayer::State)));
+
     connect(audioRecorder, SIGNAL(durationChanged(qint64)), this,
             SLOT(updateProgress(qint64)));
 
@@ -954,7 +956,7 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
     if (!QDir(path_patient).exists()){
         QDir().mkdir(path_patient);
     }
-
+    qDebug()<<checked;
     if (checked){
 
         if (task_AD){
@@ -972,12 +974,11 @@ void MainWindow::on_pushButton_5_toggled(bool checked)
                 player->setMedia(QUrl::fromLocalFile(file_play));
                 player->setVolume(50);
                 player->play();
+                flagSentence=true;
+                return;
             }
-
         }
-
-
-
+        flagSentence=false;
         QString name=get_name(current_row, path_patient, true);
         QStringList codecName=audioRecorder->supportedAudioCodecs();
         qDebug() <<codecName;
@@ -2960,3 +2961,48 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 {
 
 }
+
+void MainWindow::playStateChanged(QMediaPlayer::State state)
+{
+    if (state == QMediaPlayer::StoppedState && flagSentence && ui->pushButton_5->isChecked())
+    {
+        QDateTime c_date(QDateTime::currentDateTime());
+        QString c_datestr=c_date.toString("yyyy_MM_dd");
+        int current_row=ui->listWidget->currentRow();
+        namePatient=ui->textEdit->toPlainText();
+        lastPatient=ui->textEdit_2->toPlainText();
+        QString current_path=QDir::currentPath();
+        path_patient=current_path+"/../../data/"+c_datestr+lastPatient+namePatient;
+        if (!QDir(path_patient).exists()){
+            QDir().mkdir(path_patient);
+        }
+        QString name=get_name(current_row, path_patient, true);
+        QStringList codecName=audioRecorder->supportedAudioCodecs();
+        qDebug() <<codecName;
+        QStringList inputs=audioRecorder->audioInputs();
+        if (audioRecorder->state() == QMediaRecorder::StoppedState) {
+            QAudioEncoderSettings settings;
+            audioRecorder->setAudioInput(inputs[0]);
+
+            #if (defined (_WIN32) || defined (_WIN64))
+                settings.setCodec("audio/pcm");
+            #elif (defined (LINUX) || defined (__linux__))
+                settings.setCodec("audio/x-wma, wmaversion=(int)2");
+            #endif
+
+
+            settings.setSampleRate(fs);
+            settings.setBitRate(16);
+            settings.setChannelCount(1);
+            settings.setQuality(QMultimedia::HighQuality);
+            settings.setEncodingMode(QMultimedia::ConstantBitRateEncoding);
+
+            audioRecorder->setEncodingSettings(settings, QVideoEncoderSettings(),"audio/x-wav");
+            audioRecorder->setContainerFormat("audio/x-wav");
+            audioRecorder->setOutputLocation(QUrl::fromLocalFile(name));
+            audioRecorder->record();
+        }
+
+    }
+}
+
