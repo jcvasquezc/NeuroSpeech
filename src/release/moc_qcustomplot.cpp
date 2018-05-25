@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../PDTool/qcustomplot.h"
+#include "../../../../Carpetas/Camilo_PCCAPTURADATOS_DELL_NEGRO/NeuroSpeech-master/src/PDTool/qcustomplot.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/QList>

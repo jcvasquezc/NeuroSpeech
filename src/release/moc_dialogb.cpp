@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../PDTool/dialogb.h"
+#include "../../../../Carpetas/Camilo_PCCAPTURADATOS_DELL_NEGRO/NeuroSpeech-master/src/PDTool/dialogb.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
