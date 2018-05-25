@@ -450,9 +450,10 @@ void MainWindow::on_pushButton_clicked()
     QVector<double> time;
     QFile fileF0(path_base+"featf0.txt");
     qDebug() << "fileF0: " << path_base+"featf0.txt";
-    if (!fileF0.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (!fileF0.open(QIODevice::ReadOnly | QIODevice::Text)){
         qDebug() << "Only lecture fileF0: " << path_base+"featf0.txt";
         return;
+    }
     int nframes=0;
     double maxF0=0;
     while (!fileF0.atEnd()) {
@@ -482,9 +483,9 @@ void MainWindow::on_pushButton_clicked()
     QList<QString> feat;
     QFile filefeat(path_base+"feat.txt");
     qDebug() << "filefeat: " << path_base+"feat.txt";
-    if (!filefeat.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (!filefeat.open(QIODevice::ReadOnly | QIODevice::Text)){
         qDebug() << "filefeat read only";
-        return;
+        return;}
     while (!filefeat.atEnd()) {
         QString line = filefeat.readLine();
         feat.append(line);

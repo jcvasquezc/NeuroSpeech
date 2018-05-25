@@ -190,50 +190,6 @@ public:
     QLabel *label_92;
     QLabel *label_80;
     QLabel *label_112;
-    QWidget *tab_7;
-    QCustomPlot *customPlot_10;
-    QCustomPlot *customPlot_11;
-    QCustomPlot *customPlot_12;
-    QLabel *radarDDK;
-    QWidget *gridLayoutWidget_5;
-    QGridLayout *gridLayout_5;
-    QLabel *label_193;
-    QLabel *label_162;
-    QLabel *label_168;
-    QLabel *label_173;
-    QLabel *label_170;
-    QLabel *label_174;
-    QLabel *label_180;
-    QLabel *label_202;
-    QLabel *label_176;
-    QLabel *label_209;
-    QLabel *label_195;
-    QLabel *label_200;
-    QLabel *label_192;
-    QLabel *label_175;
-    QLabel *label_169;
-    QLabel *label_171;
-    QLabel *label_163;
-    QLabel *label_165;
-    QLabel *label_177;
-    QLabel *label_197;
-    QLabel *label_172;
-    QLabel *label_161;
-    QLabel *label_178;
-    QLabel *label_159;
-    QLabel *label_179;
-    QLabel *label_164;
-    QLabel *label_208;
-    QLabel *label_196;
-    QLabel *label_160;
-    QLabel *label_201;
-    QLabel *label_167;
-    QLabel *label_194;
-    QLabel *label_198;
-    QLabel *label_210;
-    QLabel *label_166;
-    QLabel *label_199;
-    QFrame *line_7;
     QWidget *tab_5;
     QLabel *label_33;
     QLabel *label_34;
@@ -292,6 +248,50 @@ public:
     QLabel *label_189;
     QLabel *label_190;
     QLabel *label_191;
+    QWidget *tab_7;
+    QCustomPlot *customPlot_10;
+    QCustomPlot *customPlot_11;
+    QCustomPlot *customPlot_12;
+    QLabel *radarDDK;
+    QWidget *gridLayoutWidget_5;
+    QGridLayout *gridLayout_5;
+    QLabel *label_193;
+    QLabel *label_162;
+    QLabel *label_168;
+    QLabel *label_173;
+    QLabel *label_170;
+    QLabel *label_174;
+    QLabel *label_180;
+    QLabel *label_202;
+    QLabel *label_176;
+    QLabel *label_209;
+    QLabel *label_195;
+    QLabel *label_200;
+    QLabel *label_192;
+    QLabel *label_175;
+    QLabel *label_169;
+    QLabel *label_171;
+    QLabel *label_163;
+    QLabel *label_165;
+    QLabel *label_177;
+    QLabel *label_197;
+    QLabel *label_172;
+    QLabel *label_161;
+    QLabel *label_178;
+    QLabel *label_159;
+    QLabel *label_179;
+    QLabel *label_164;
+    QLabel *label_208;
+    QLabel *label_196;
+    QLabel *label_160;
+    QLabel *label_201;
+    QLabel *label_167;
+    QLabel *label_194;
+    QLabel *label_198;
+    QLabel *label_210;
+    QLabel *label_166;
+    QLabel *label_199;
+    QFrame *line_7;
     QWidget *tab_6;
     QLabel *evalmFDA;
     QFrame *line_4;
@@ -1274,300 +1274,6 @@ public:
         gridLayout_4->addWidget(label_112, 16, 2, 1, 1);
 
         tabWidget->addTab(tab_4, QString());
-        tab_7 = new QWidget();
-        tab_7->setObjectName(QStringLiteral("tab_7"));
-        customPlot_10 = new QCustomPlot(tab_7);
-        customPlot_10->setObjectName(QStringLiteral("customPlot_10"));
-        customPlot_10->setGeometry(QRect(10, 10, 571, 151));
-        customPlot_10->setStyleSheet(QStringLiteral("background-color: rgb(230, 230, 230);"));
-        customPlot_11 = new QCustomPlot(tab_7);
-        customPlot_11->setObjectName(QStringLiteral("customPlot_11"));
-        customPlot_11->setGeometry(QRect(10, 170, 571, 161));
-        customPlot_11->setStyleSheet(QStringLiteral("background-color: rgb(230, 230, 230);"));
-        customPlot_12 = new QCustomPlot(tab_7);
-        customPlot_12->setObjectName(QStringLiteral("customPlot_12"));
-        customPlot_12->setGeometry(QRect(10, 350, 571, 151));
-        customPlot_12->setStyleSheet(QStringLiteral("background-color: rgb(230, 230, 230);"));
-        radarDDK = new QLabel(tab_7);
-        radarDDK->setObjectName(QStringLiteral("radarDDK"));
-        radarDDK->setGeometry(QRect(920, 40, 331, 311));
-        gridLayoutWidget_5 = new QWidget(tab_7);
-        gridLayoutWidget_5->setObjectName(QStringLiteral("gridLayoutWidget_5"));
-        gridLayoutWidget_5->setGeometry(QRect(600, 20, 311, 332));
-        gridLayout_5 = new QGridLayout(gridLayoutWidget_5);
-        gridLayout_5->setSpacing(6);
-        gridLayout_5->setContentsMargins(11, 11, 11, 11);
-        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
-        gridLayout_5->setContentsMargins(0, 0, 0, 0);
-        label_193 = new QLabel(gridLayoutWidget_5);
-        label_193->setObjectName(QStringLiteral("label_193"));
-        label_193->setFont(font1);
-        label_193->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_193, 9, 2, 1, 1);
-
-        label_162 = new QLabel(gridLayoutWidget_5);
-        label_162->setObjectName(QStringLiteral("label_162"));
-        label_162->setFont(font1);
-        label_162->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_162, 5, 1, 1, 1);
-
-        label_168 = new QLabel(gridLayoutWidget_5);
-        label_168->setObjectName(QStringLiteral("label_168"));
-        label_168->setFont(font1);
-        label_168->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_168, 3, 1, 1, 1);
-
-        label_173 = new QLabel(gridLayoutWidget_5);
-        label_173->setObjectName(QStringLiteral("label_173"));
-        label_173->setFont(font1);
-        label_173->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_173, 12, 0, 1, 1);
-
-        label_170 = new QLabel(gridLayoutWidget_5);
-        label_170->setObjectName(QStringLiteral("label_170"));
-        label_170->setFont(font1);
-        label_170->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_170, 8, 0, 1, 1);
-
-        label_174 = new QLabel(gridLayoutWidget_5);
-        label_174->setObjectName(QStringLiteral("label_174"));
-        label_174->setFont(font1);
-        label_174->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_174, 13, 0, 1, 1);
-
-        label_180 = new QLabel(gridLayoutWidget_5);
-        label_180->setObjectName(QStringLiteral("label_180"));
-        label_180->setFont(font1);
-        label_180->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_180, 6, 0, 1, 1);
-
-        label_202 = new QLabel(gridLayoutWidget_5);
-        label_202->setObjectName(QStringLiteral("label_202"));
-        label_202->setFont(font1);
-        label_202->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_202, 6, 2, 1, 1);
-
-        label_176 = new QLabel(gridLayoutWidget_5);
-        label_176->setObjectName(QStringLiteral("label_176"));
-        label_176->setFont(font1);
-        label_176->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_176, 2, 0, 1, 1);
-
-        label_209 = new QLabel(gridLayoutWidget_5);
-        label_209->setObjectName(QStringLiteral("label_209"));
-        label_209->setFont(font1);
-        label_209->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_209, 7, 0, 1, 1);
-
-        label_195 = new QLabel(gridLayoutWidget_5);
-        label_195->setObjectName(QStringLiteral("label_195"));
-        label_195->setFont(font1);
-        label_195->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_195, 12, 2, 1, 1);
-
-        label_200 = new QLabel(gridLayoutWidget_5);
-        label_200->setObjectName(QStringLiteral("label_200"));
-        label_200->setFont(font1);
-        label_200->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_200, 4, 2, 1, 1);
-
-        label_192 = new QLabel(gridLayoutWidget_5);
-        label_192->setObjectName(QStringLiteral("label_192"));
-        label_192->setFont(font1);
-        label_192->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_192, 8, 2, 1, 1);
-
-        label_175 = new QLabel(gridLayoutWidget_5);
-        label_175->setObjectName(QStringLiteral("label_175"));
-        label_175->setFont(font1);
-        label_175->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_175, 1, 0, 1, 1);
-
-        label_169 = new QLabel(gridLayoutWidget_5);
-        label_169->setObjectName(QStringLiteral("label_169"));
-        label_169->setFont(font1);
-        label_169->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_169, 1, 1, 1, 1);
-
-        label_171 = new QLabel(gridLayoutWidget_5);
-        label_171->setObjectName(QStringLiteral("label_171"));
-        label_171->setFont(font1);
-        label_171->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_171, 9, 0, 1, 1);
-
-        label_163 = new QLabel(gridLayoutWidget_5);
-        label_163->setObjectName(QStringLiteral("label_163"));
-        label_163->setFont(font1);
-        label_163->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_163, 2, 1, 1, 1);
-
-        label_165 = new QLabel(gridLayoutWidget_5);
-        label_165->setObjectName(QStringLiteral("label_165"));
-        label_165->setFont(font1);
-        label_165->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_165, 11, 1, 1, 1);
-
-        label_177 = new QLabel(gridLayoutWidget_5);
-        label_177->setObjectName(QStringLiteral("label_177"));
-        label_177->setFont(font1);
-        label_177->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_177, 3, 0, 1, 1);
-
-        label_197 = new QLabel(gridLayoutWidget_5);
-        label_197->setObjectName(QStringLiteral("label_197"));
-        label_197->setFont(font1);
-        label_197->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_197, 1, 2, 1, 1);
-
-        label_172 = new QLabel(gridLayoutWidget_5);
-        label_172->setObjectName(QStringLiteral("label_172"));
-        label_172->setFont(font1);
-        label_172->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_172, 11, 0, 1, 1);
-
-        label_161 = new QLabel(gridLayoutWidget_5);
-        label_161->setObjectName(QStringLiteral("label_161"));
-        label_161->setFont(font1);
-        label_161->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_161, 4, 1, 1, 1);
-
-        label_178 = new QLabel(gridLayoutWidget_5);
-        label_178->setObjectName(QStringLiteral("label_178"));
-        label_178->setFont(font1);
-        label_178->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_178, 4, 0, 1, 1);
-
-        label_159 = new QLabel(gridLayoutWidget_5);
-        label_159->setObjectName(QStringLiteral("label_159"));
-        label_159->setFont(font1);
-        label_159->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_159, 9, 1, 1, 1);
-
-        label_179 = new QLabel(gridLayoutWidget_5);
-        label_179->setObjectName(QStringLiteral("label_179"));
-        label_179->setFont(font1);
-        label_179->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_179, 5, 0, 1, 1);
-
-        label_164 = new QLabel(gridLayoutWidget_5);
-        label_164->setObjectName(QStringLiteral("label_164"));
-        label_164->setFont(font1);
-        label_164->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_164, 6, 1, 1, 1);
-
-        label_208 = new QLabel(gridLayoutWidget_5);
-        label_208->setObjectName(QStringLiteral("label_208"));
-        label_208->setFont(font1);
-        label_208->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_208, 0, 0, 1, 1);
-
-        label_196 = new QLabel(gridLayoutWidget_5);
-        label_196->setObjectName(QStringLiteral("label_196"));
-        label_196->setFont(font1);
-        label_196->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_196, 3, 2, 1, 1);
-
-        label_160 = new QLabel(gridLayoutWidget_5);
-        label_160->setObjectName(QStringLiteral("label_160"));
-        label_160->setFont(font1);
-        label_160->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_160, 12, 1, 1, 1);
-
-        label_201 = new QLabel(gridLayoutWidget_5);
-        label_201->setObjectName(QStringLiteral("label_201"));
-        label_201->setFont(font1);
-        label_201->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_201, 5, 2, 1, 1);
-
-        label_167 = new QLabel(gridLayoutWidget_5);
-        label_167->setObjectName(QStringLiteral("label_167"));
-        label_167->setFont(font1);
-        label_167->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_167, 8, 1, 1, 1);
-
-        label_194 = new QLabel(gridLayoutWidget_5);
-        label_194->setObjectName(QStringLiteral("label_194"));
-        label_194->setFont(font1);
-        label_194->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_194, 11, 2, 1, 1);
-
-        label_198 = new QLabel(gridLayoutWidget_5);
-        label_198->setObjectName(QStringLiteral("label_198"));
-        label_198->setFont(font1);
-        label_198->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_198, 2, 2, 1, 1);
-
-        label_210 = new QLabel(gridLayoutWidget_5);
-        label_210->setObjectName(QStringLiteral("label_210"));
-        label_210->setFont(font1);
-        label_210->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_210, 10, 0, 1, 1);
-
-        label_166 = new QLabel(gridLayoutWidget_5);
-        label_166->setObjectName(QStringLiteral("label_166"));
-        label_166->setFont(font1);
-        label_166->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
-"border-color: rgb(0, 0, 0);"));
-
-        gridLayout_5->addWidget(label_166, 13, 1, 1, 1);
-
-        label_199 = new QLabel(gridLayoutWidget_5);
-        label_199->setObjectName(QStringLiteral("label_199"));
-        label_199->setFont(font1);
-        label_199->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_5->addWidget(label_199, 13, 2, 1, 1);
-
-        line_7 = new QFrame(tab_7);
-        line_7->setObjectName(QStringLiteral("line_7"));
-        line_7->setGeometry(QRect(580, 10, 20, 491));
-        line_7->setFrameShape(QFrame::VLine);
-        line_7->setFrameShadow(QFrame::Sunken);
-        tabWidget->addTab(tab_7, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QStringLiteral("tab_5"));
         label_33 = new QLabel(tab_5);
@@ -1895,6 +1601,300 @@ public:
         label_191->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
 "border-color: rgb(0, 0, 0);"));
         tabWidget->addTab(tab_5, QString());
+        tab_7 = new QWidget();
+        tab_7->setObjectName(QStringLiteral("tab_7"));
+        customPlot_10 = new QCustomPlot(tab_7);
+        customPlot_10->setObjectName(QStringLiteral("customPlot_10"));
+        customPlot_10->setGeometry(QRect(10, 10, 571, 151));
+        customPlot_10->setStyleSheet(QStringLiteral("background-color: rgb(230, 230, 230);"));
+        customPlot_11 = new QCustomPlot(tab_7);
+        customPlot_11->setObjectName(QStringLiteral("customPlot_11"));
+        customPlot_11->setGeometry(QRect(10, 170, 571, 161));
+        customPlot_11->setStyleSheet(QStringLiteral("background-color: rgb(230, 230, 230);"));
+        customPlot_12 = new QCustomPlot(tab_7);
+        customPlot_12->setObjectName(QStringLiteral("customPlot_12"));
+        customPlot_12->setGeometry(QRect(10, 350, 571, 151));
+        customPlot_12->setStyleSheet(QStringLiteral("background-color: rgb(230, 230, 230);"));
+        radarDDK = new QLabel(tab_7);
+        radarDDK->setObjectName(QStringLiteral("radarDDK"));
+        radarDDK->setGeometry(QRect(920, 40, 331, 311));
+        gridLayoutWidget_5 = new QWidget(tab_7);
+        gridLayoutWidget_5->setObjectName(QStringLiteral("gridLayoutWidget_5"));
+        gridLayoutWidget_5->setGeometry(QRect(600, 20, 311, 332));
+        gridLayout_5 = new QGridLayout(gridLayoutWidget_5);
+        gridLayout_5->setSpacing(6);
+        gridLayout_5->setContentsMargins(11, 11, 11, 11);
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        gridLayout_5->setContentsMargins(0, 0, 0, 0);
+        label_193 = new QLabel(gridLayoutWidget_5);
+        label_193->setObjectName(QStringLiteral("label_193"));
+        label_193->setFont(font1);
+        label_193->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_193, 9, 2, 1, 1);
+
+        label_162 = new QLabel(gridLayoutWidget_5);
+        label_162->setObjectName(QStringLiteral("label_162"));
+        label_162->setFont(font1);
+        label_162->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_162, 5, 1, 1, 1);
+
+        label_168 = new QLabel(gridLayoutWidget_5);
+        label_168->setObjectName(QStringLiteral("label_168"));
+        label_168->setFont(font1);
+        label_168->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_168, 3, 1, 1, 1);
+
+        label_173 = new QLabel(gridLayoutWidget_5);
+        label_173->setObjectName(QStringLiteral("label_173"));
+        label_173->setFont(font1);
+        label_173->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_173, 12, 0, 1, 1);
+
+        label_170 = new QLabel(gridLayoutWidget_5);
+        label_170->setObjectName(QStringLiteral("label_170"));
+        label_170->setFont(font1);
+        label_170->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_170, 8, 0, 1, 1);
+
+        label_174 = new QLabel(gridLayoutWidget_5);
+        label_174->setObjectName(QStringLiteral("label_174"));
+        label_174->setFont(font1);
+        label_174->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_174, 13, 0, 1, 1);
+
+        label_180 = new QLabel(gridLayoutWidget_5);
+        label_180->setObjectName(QStringLiteral("label_180"));
+        label_180->setFont(font1);
+        label_180->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_180, 6, 0, 1, 1);
+
+        label_202 = new QLabel(gridLayoutWidget_5);
+        label_202->setObjectName(QStringLiteral("label_202"));
+        label_202->setFont(font1);
+        label_202->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_202, 6, 2, 1, 1);
+
+        label_176 = new QLabel(gridLayoutWidget_5);
+        label_176->setObjectName(QStringLiteral("label_176"));
+        label_176->setFont(font1);
+        label_176->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_176, 2, 0, 1, 1);
+
+        label_209 = new QLabel(gridLayoutWidget_5);
+        label_209->setObjectName(QStringLiteral("label_209"));
+        label_209->setFont(font1);
+        label_209->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_209, 7, 0, 1, 1);
+
+        label_195 = new QLabel(gridLayoutWidget_5);
+        label_195->setObjectName(QStringLiteral("label_195"));
+        label_195->setFont(font1);
+        label_195->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_195, 12, 2, 1, 1);
+
+        label_200 = new QLabel(gridLayoutWidget_5);
+        label_200->setObjectName(QStringLiteral("label_200"));
+        label_200->setFont(font1);
+        label_200->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_200, 4, 2, 1, 1);
+
+        label_192 = new QLabel(gridLayoutWidget_5);
+        label_192->setObjectName(QStringLiteral("label_192"));
+        label_192->setFont(font1);
+        label_192->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_192, 8, 2, 1, 1);
+
+        label_175 = new QLabel(gridLayoutWidget_5);
+        label_175->setObjectName(QStringLiteral("label_175"));
+        label_175->setFont(font1);
+        label_175->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_175, 1, 0, 1, 1);
+
+        label_169 = new QLabel(gridLayoutWidget_5);
+        label_169->setObjectName(QStringLiteral("label_169"));
+        label_169->setFont(font1);
+        label_169->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_169, 1, 1, 1, 1);
+
+        label_171 = new QLabel(gridLayoutWidget_5);
+        label_171->setObjectName(QStringLiteral("label_171"));
+        label_171->setFont(font1);
+        label_171->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_171, 9, 0, 1, 1);
+
+        label_163 = new QLabel(gridLayoutWidget_5);
+        label_163->setObjectName(QStringLiteral("label_163"));
+        label_163->setFont(font1);
+        label_163->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_163, 2, 1, 1, 1);
+
+        label_165 = new QLabel(gridLayoutWidget_5);
+        label_165->setObjectName(QStringLiteral("label_165"));
+        label_165->setFont(font1);
+        label_165->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_165, 11, 1, 1, 1);
+
+        label_177 = new QLabel(gridLayoutWidget_5);
+        label_177->setObjectName(QStringLiteral("label_177"));
+        label_177->setFont(font1);
+        label_177->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_177, 3, 0, 1, 1);
+
+        label_197 = new QLabel(gridLayoutWidget_5);
+        label_197->setObjectName(QStringLiteral("label_197"));
+        label_197->setFont(font1);
+        label_197->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_197, 1, 2, 1, 1);
+
+        label_172 = new QLabel(gridLayoutWidget_5);
+        label_172->setObjectName(QStringLiteral("label_172"));
+        label_172->setFont(font1);
+        label_172->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_172, 11, 0, 1, 1);
+
+        label_161 = new QLabel(gridLayoutWidget_5);
+        label_161->setObjectName(QStringLiteral("label_161"));
+        label_161->setFont(font1);
+        label_161->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_161, 4, 1, 1, 1);
+
+        label_178 = new QLabel(gridLayoutWidget_5);
+        label_178->setObjectName(QStringLiteral("label_178"));
+        label_178->setFont(font1);
+        label_178->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_178, 4, 0, 1, 1);
+
+        label_159 = new QLabel(gridLayoutWidget_5);
+        label_159->setObjectName(QStringLiteral("label_159"));
+        label_159->setFont(font1);
+        label_159->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_159, 9, 1, 1, 1);
+
+        label_179 = new QLabel(gridLayoutWidget_5);
+        label_179->setObjectName(QStringLiteral("label_179"));
+        label_179->setFont(font1);
+        label_179->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_179, 5, 0, 1, 1);
+
+        label_164 = new QLabel(gridLayoutWidget_5);
+        label_164->setObjectName(QStringLiteral("label_164"));
+        label_164->setFont(font1);
+        label_164->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_164, 6, 1, 1, 1);
+
+        label_208 = new QLabel(gridLayoutWidget_5);
+        label_208->setObjectName(QStringLiteral("label_208"));
+        label_208->setFont(font1);
+        label_208->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_208, 0, 0, 1, 1);
+
+        label_196 = new QLabel(gridLayoutWidget_5);
+        label_196->setObjectName(QStringLiteral("label_196"));
+        label_196->setFont(font1);
+        label_196->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_196, 3, 2, 1, 1);
+
+        label_160 = new QLabel(gridLayoutWidget_5);
+        label_160->setObjectName(QStringLiteral("label_160"));
+        label_160->setFont(font1);
+        label_160->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_160, 12, 1, 1, 1);
+
+        label_201 = new QLabel(gridLayoutWidget_5);
+        label_201->setObjectName(QStringLiteral("label_201"));
+        label_201->setFont(font1);
+        label_201->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_201, 5, 2, 1, 1);
+
+        label_167 = new QLabel(gridLayoutWidget_5);
+        label_167->setObjectName(QStringLiteral("label_167"));
+        label_167->setFont(font1);
+        label_167->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_167, 8, 1, 1, 1);
+
+        label_194 = new QLabel(gridLayoutWidget_5);
+        label_194->setObjectName(QStringLiteral("label_194"));
+        label_194->setFont(font1);
+        label_194->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_194, 11, 2, 1, 1);
+
+        label_198 = new QLabel(gridLayoutWidget_5);
+        label_198->setObjectName(QStringLiteral("label_198"));
+        label_198->setFont(font1);
+        label_198->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_198, 2, 2, 1, 1);
+
+        label_210 = new QLabel(gridLayoutWidget_5);
+        label_210->setObjectName(QStringLiteral("label_210"));
+        label_210->setFont(font1);
+        label_210->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_210, 10, 0, 1, 1);
+
+        label_166 = new QLabel(gridLayoutWidget_5);
+        label_166->setObjectName(QStringLiteral("label_166"));
+        label_166->setFont(font1);
+        label_166->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+"border-color: rgb(0, 0, 0);"));
+
+        gridLayout_5->addWidget(label_166, 13, 1, 1, 1);
+
+        label_199 = new QLabel(gridLayoutWidget_5);
+        label_199->setObjectName(QStringLiteral("label_199"));
+        label_199->setFont(font1);
+        label_199->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(label_199, 13, 2, 1, 1);
+
+        line_7 = new QFrame(tab_7);
+        line_7->setObjectName(QStringLiteral("line_7"));
+        line_7->setGeometry(QRect(580, 10, 20, 491));
+        line_7->setFrameShape(QFrame::VLine);
+        line_7->setFrameShadow(QFrame::Sunken);
+        tabWidget->addTab(tab_7, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName(QStringLiteral("tab_6"));
         evalmFDA = new QLabel(tab_6);
@@ -2114,7 +2114,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1291, 21));
+        menuBar->setGeometry(QRect(0, 0, 1291, 22));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -2145,7 +2145,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -2163,14 +2163,14 @@ public:
         textEdit->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;\"><br /></p></body></html>", nullptr));
         textEdit->setPlaceholderText(QApplication::translate("MainWindow", "First name", nullptr));
         textEdit_2->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;\"><br /></p></body></html>", nullptr));
         textEdit_2->setPlaceholderText(QApplication::translate("MainWindow", "Last name", nullptr));
         label_7->setText(QApplication::translate("MainWindow", "Gender", nullptr));
         radioButton_2->setText(QApplication::translate("MainWindow", "Male", nullptr));
@@ -2184,8 +2184,8 @@ public:
         textEdit_3->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8.25pt;\"><br /></p></body></html>", nullptr));
         textEdit_3->setPlaceholderText(QApplication::translate("MainWindow", "Age", nullptr));
         pushButton_8->setText(QApplication::translate("MainWindow", "Create Report", nullptr));
         pushButton_9->setText(QString());
@@ -2287,44 +2287,6 @@ public:
         label_80->setText(QApplication::translate("MainWindow", "0", nullptr));
         label_112->setText(QApplication::translate("MainWindow", "->", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Prosody", nullptr));
-        radarDDK->setText(QString());
-        label_193->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_162->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_168->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_173->setText(QApplication::translate("MainWindow", "Energy variability [dB]", nullptr));
-        label_170->setText(QApplication::translate("MainWindow", "F0 variability [semitones]", nullptr));
-        label_174->setText(QApplication::translate("MainWindow", "Max Energy [dB]", nullptr));
-        label_180->setText(QApplication::translate("MainWindow", "Regularity pause [ms]", nullptr));
-        label_202->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_176->setText(QApplication::translate("MainWindow", "DDK regularity m[s]", nullptr));
-        label_209->setText(QApplication::translate("MainWindow", "Frequency Features", nullptr));
-        label_195->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_200->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_192->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_175->setText(QApplication::translate("MainWindow", "DDK rate [1/s]", nullptr));
-        label_169->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_171->setText(QApplication::translate("MainWindow", "F0 variability [Hz]", nullptr));
-        label_163->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_165->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_177->setText(QApplication::translate("MainWindow", "Avg. Duration DDK [ms]", nullptr));
-        label_197->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_172->setText(QApplication::translate("MainWindow", "Avg. Energy [dB]", nullptr));
-        label_161->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_178->setText(QApplication::translate("MainWindow", "Pause rate [1/s]", nullptr));
-        label_159->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_179->setText(QApplication::translate("MainWindow", "Avg. Duration pause [ms]", nullptr));
-        label_164->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_208->setText(QApplication::translate("MainWindow", "Duration Features", nullptr));
-        label_196->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_160->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_201->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_167->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_194->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_198->setText(QApplication::translate("MainWindow", "->", nullptr));
-        label_210->setText(QApplication::translate("MainWindow", "Energy Features", nullptr));
-        label_166->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_199->setText(QApplication::translate("MainWindow", "->", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "DDK", nullptr));
         label_33->setText(QApplication::translate("MainWindow", "Mi casa tiene tres cuartos", nullptr));
         label_34->setText(QString());
         label_35->setText(QApplication::translate("MainWindow", "Read Sentence", nullptr));
@@ -2386,6 +2348,44 @@ public:
         label_190->setText(QString());
         label_191->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Intelligibility", nullptr));
+        radarDDK->setText(QString());
+        label_193->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_162->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_168->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_173->setText(QApplication::translate("MainWindow", "Energy variability [dB]", nullptr));
+        label_170->setText(QApplication::translate("MainWindow", "F0 variability [semitones]", nullptr));
+        label_174->setText(QApplication::translate("MainWindow", "Max Energy [dB]", nullptr));
+        label_180->setText(QApplication::translate("MainWindow", "Regularity pause [ms]", nullptr));
+        label_202->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_176->setText(QApplication::translate("MainWindow", "DDK regularity m[s]", nullptr));
+        label_209->setText(QApplication::translate("MainWindow", "Frequency Features", nullptr));
+        label_195->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_200->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_192->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_175->setText(QApplication::translate("MainWindow", "DDK rate [1/s]", nullptr));
+        label_169->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_171->setText(QApplication::translate("MainWindow", "F0 variability [Hz]", nullptr));
+        label_163->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_165->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_177->setText(QApplication::translate("MainWindow", "Avg. Duration DDK [ms]", nullptr));
+        label_197->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_172->setText(QApplication::translate("MainWindow", "Avg. Energy [dB]", nullptr));
+        label_161->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_178->setText(QApplication::translate("MainWindow", "Pause rate [1/s]", nullptr));
+        label_159->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_179->setText(QApplication::translate("MainWindow", "Avg. Duration pause [ms]", nullptr));
+        label_164->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_208->setText(QApplication::translate("MainWindow", "Duration Features", nullptr));
+        label_196->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_160->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_201->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_167->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_194->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_198->setText(QApplication::translate("MainWindow", "->", nullptr));
+        label_210->setText(QApplication::translate("MainWindow", "Energy Features", nullptr));
+        label_166->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_199->setText(QApplication::translate("MainWindow", "->", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "DDK", nullptr));
         evalmFDA->setText(QString());
         label_127->setText(QApplication::translate("MainWindow", "0 -> 4", nullptr));
         label_129->setText(QApplication::translate("MainWindow", "0 -> 4", nullptr));
